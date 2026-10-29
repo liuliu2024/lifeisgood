@@ -1,0 +1,144 @@
+{
+  "review_date": "2026-10-29",
+  "scope": "Offline installed direct dependency, font notices, and selected lxml transitive notices; not a full SBOM or binary compliance audit",
+  "entries": [
+    {
+      "package": "fastapi-0.162.0",
+      "source": "apps/backend/.venv/Lib/site-packages/fastapi-0.162.0.dist-info/licenses/LICENSE",
+      "notice": "docs/research/open-source/notices/fastapi-0.162.0--LICENSE",
+      "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+    },
+    {
+      "package": "sqlalchemy-2.0.55",
+      "source": "apps/backend/.venv/Lib/site-packages/sqlalchemy-2.0.55.dist-info/licenses/AUTHORS",
+      "notice": "docs/research/open-source/notices/sqlalchemy-2.0.55--AUTHORS",
+      "sha256": "11c9de6af24a1ce9db33019364c1c2441509d7dda13dc0949f1a4b83621b2195"
+    },
+    {
+      "package": "sqlalchemy-2.0.55",
+      "source": "apps/backend/.venv/Lib/site-packages/sqlalchemy-2.0.55.dist-info/licenses/LICENSE",
+      "notice": "docs/research/open-source/notices/sqlalchemy-2.0.55--LICENSE",
+      "sha256": "9bb754071e711cf75728b9051b170bfb8f9e3b879c08386c96a36989c42cd5f1"
+    },
+    {
+      "package": "pillow-13.0.0",
+      "source": "apps/backend/.venv/Lib/site-packages/pillow-13.0.0.dist-info/licenses/LICENSE",
+      "notice": "docs/research/open-source/notices/pillow-13.0.0--LICENSE",
+      "sha256": "988ffe8ab3480b0f4e9a0ab2702bffd73d9fb6b47198043fb3ba101a62fac236"
+    },
+    {
+      "package": "python_docx-1.2.0",
+      "source": "apps/backend/.venv/Lib/site-packages/python_docx-1.2.0.dist-info/licenses/LICENSE",
+      "notice": "docs/research/open-source/notices/python_docx-1.2.0--LICENSE",
+      "sha256": "7652f271e46d0d533e9dc463f3b5fcbdcacf4d6a9c8d6b554d15efd0f37f6132"
+    },
+    {
+      "package": "python_multipart-0.0.32",
+      "source": "apps/backend/.venv/Lib/site-packages/python_multipart-0.0.32.dist-info/licenses/LICENSE.txt",
+      "notice": "docs/research/open-source/notices/python_multipart-0.0.32--LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "package": "uvicorn-0.54.0",
+      "source": "apps/backend/.venv/Lib/site-packages/uvicorn-0.54.0.dist-info/licenses/LICENSE.md",
+      "notice": "docs/research/open-source/notices/uvicorn-0.54.0--LICENSE.md",
+      "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+    },
+    {
+      "package": "httpx-0.28.1",
+      "source": "apps/backend/.venv/Lib/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.md",
+      "notice": "docs/research/open-source/notices/httpx-0.28.1--LICENSE.md",
+      "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+    },
+    {
+      "package": "pytest-9.2.0",
+      "source": "apps/backend/.venv/Lib/site-packages/pytest-9.2.0.dist-info/licenses/LICENSE",
+      "notice": "docs/research/open-source/notices/pytest-9.2.0--LICENSE",
+      "sha256": "ca836a5f9ecca3b2f350230faa20a48fb8b145653b5568d784862df864706b9b"
+    },
+    {
+      "package": "ruff-0.17.3",
+      "source": "apps/backend/.venv/Lib/site-packages/ruff-0.17.3.dist-info/licenses/LICENSE",
+      "notice": "docs/research/open-source/notices/ruff-0.17.3--LICENSE",
+      "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+    },
+    {
+      "package": "lxml-6.1.3",
+      "source": "apps/backend/.venv/Lib/site-packages/lxml-6.1.3.dist-info/licenses/LICENSE.txt",
+      "notice": "docs/research/open-source/notices/lxml-6.1.3--LICENSE.txt",
+      "sha256": "e7c3ce8d76331b0101cc46790ab43958ea90a364bcf962ed8763d5a818340e69"
+    },
+    {
+      "package": "lxml-6.1.3",
+      "source": "apps/backend/.venv/Lib/site-packages/lxml-6.1.3.dist-info/licenses/LICENSES.txt",
+      "notice": "docs/research/open-source/notices/lxml-6.1.3--LICENSES.txt",
+      "sha256": "df682c668de65321677b5e4861dca4128a8bad8067f230956e9da3f985b3d398"
+    },
+    {
+      "package": "next@16.4.3",
+      "source": "apps/web/node_modules/next/license.md",
+      "notice": "docs/research/open-source/notices/next-16.4.3--license.md",
+      "sha256": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+    },
+    {
+      "package": "react@19.3.0",
+      "source": "apps/web/node_modules/react/LICENSE",
+      "notice": "docs/research/open-source/notices/react-19.3.0--LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "package": "react-dom@19.3.0",
+      "source": "apps/web/node_modules/react-dom/LICENSE",
+      "notice": "docs/research/open-source/notices/react-dom-19.3.0--LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "package": "@fontsource/ibm-plex-sans@5.3.0",
+      "source": "apps/web/node_modules/@fontsource/ibm-plex-sans/LICENSE",
+      "notice": "docs/research/open-source/notices/fontsource-ibm-plex-sans-5.3.0--LICENSE",
+      "sha256": "d0283623ef57e722fd0eb688a8041589670c608ab780cd3612d06ba6f153d3fd"
+    },
+    {
+      "package": "playwright@1.62.1",
+      "source": "apps/web/node_modules/playwright/LICENSE",
+      "notice": "docs/research/open-source/notices/playwright-1.62.1--LICENSE",
+      "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb"
+    },
+    {
+      "package": "playwright@1.62.1",
+      "source": "apps/web/node_modules/playwright/NOTICE",
+      "notice": "docs/research/open-source/notices/playwright-1.62.1--NOTICE",
+      "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d"
+    },
+    {
+      "package": "prettier@3.6.2",
+      "source": "apps/web/node_modules/prettier/LICENSE",
+      "notice": "docs/research/open-source/notices/prettier-3.6.2--LICENSE",
+      "sha256": "b0f2417199889f1c0d28ec4e0244eacf1a15de5819d61f641dd7d8f45153ac9c"
+    },
+    {
+      "package": "typescript@5.9.3",
+      "source": "apps/web/node_modules/typescript/LICENSE.txt",
+      "notice": "docs/research/open-source/notices/typescript-5.9.3--LICENSE.txt",
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "package": "@types/node@24.19.2",
+      "source": "apps/web/node_modules/@types/node/LICENSE",
+      "notice": "docs/research/open-source/notices/types-node-24.19.2--LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "package": "@types/react@19.3.0",
+      "source": "apps/web/node_modules/@types/react/LICENSE",
+      "notice": "docs/research/open-source/notices/types-react-19.3.0--LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "package": "@types/react-dom@19.3.0",
+      "source": "apps/web/node_modules/@types/react-dom/LICENSE",
+      "notice": "docs/research/open-source/notices/types-react-dom-19.3.0--LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    }
+  ]
+}

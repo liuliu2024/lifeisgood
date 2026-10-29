@@ -1,0 +1,1 @@
+"""Lifeisgood local development slice."""
