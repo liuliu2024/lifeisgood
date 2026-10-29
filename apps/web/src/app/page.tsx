@@ -4,9 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { catalog, categories, stages, industries } from "@/lib/catalog";
 import type { CatalogItem } from "@/lib/catalog";
+import {
+  sceneCollections,
+  collectionCapabilityIds,
+  collectionIdeas,
+  getCollectionCopy,
+} from "@/lib/collections";
+import type { CollectionIdea } from "@/lib/collections";
 
 type View =
   | "home"
+  | "work"
+  | "life"
+  | "creative"
   | "public"
   | "industry"
   | "favorites"
@@ -114,6 +124,9 @@ function Icon({ name, size = 20 }: { name: string; size?: number }) {
         <path d="m8 9 8 9m-4-5v-5" />
       </>
     ),
+    spark: (
+      <path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z" />
+    ),
     back: <path d="M20 12H4m6-6-6 6 6 6" />,
   };
   return (
@@ -139,7 +152,9 @@ export default function Home() {
   const [industry, setIndustry] = useState("全部行业");
   const [category, setCategory] = useState("全部分类");
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [detail, setDetail] = useState<CatalogItem | null>(null);
+  const [detail, setDetail] = useState<CatalogItem | CollectionIdea | null>(
+    null,
+  );
   const [menu, setMenu] = useState(false);
   const [allStages, setAllStages] = useState(false);
   const [auth, setAuth] = useState<"login" | "register" | null>(null);
@@ -559,21 +574,43 @@ export default function Home() {
   }
   const visible = catalog.filter(
     (tool) =>
+      ((view !== "life" && view !== "creative") ||
+        collectionCapabilityIds[view].includes(tool.id)) &&
       (view !== "favorites" || favorites.includes(tool.id)) &&
       (category === "全部分类" || tool.category === category) &&
       (stage === "全部阶段" || tool.stage === stage) &&
       (industry === "全部行业" ||
         tool.industry.includes(industry) ||
         tool.industry.includes("通用")) &&
-      `${tool.title} ${tool.description} ${tool.category} ${tool.candidates.join(" ")}`
+      `${tool.title} ${tool.description} ${tool.category} ${tool.candidates.join(" ")} ${view === "life" || view === "creative" ? `${getCollectionCopy(tool.id)?.title || ""} ${getCollectionCopy(tool.id)?.description || ""}` : ""}`
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
   );
+  const visibleIdeas = collectionIdeas.filter(
+    (item) =>
+      (view === "home" || item.scene === view) &&
+      `${item.title} ${item.description} ${item.input} ${item.output}`.includes(
+        query.trim(),
+      ),
+  );
+  const detailIsIdea = detail !== null && "scene" in detail;
   const stageOptions = [...new Set(["全部阶段", ...stages])];
   const industryOptions = [...new Set(["全部行业", ...industries])];
-  const categoryOptions = [...new Set(["全部分类", ...categories])];
+  const categoryOptions = [
+    ...new Set([
+      "全部分类",
+      ...(view === "life" || view === "creative"
+        ? catalog
+            .filter((tool) => collectionCapabilityIds[view].includes(tool.id))
+            .map((tool) => tool.category)
+        : categories),
+    ]),
+  ];
   const nav: { id: View; label: string; icon: string }[] = [
     { id: "home", label: "办事首页", icon: "home" },
+    { id: "work", label: "开店与工作", icon: "shop" },
+    { id: "life", label: "生活小工具", icon: "leaf" },
+    { id: "creative", label: "创意与娱乐", icon: "spark" },
     { id: "public", label: "公共工具", icon: "grid" },
     { id: "industry", label: "行业专区", icon: "shop" },
     { id: "favorites", label: "我的收藏", icon: "star" },
@@ -581,6 +618,9 @@ export default function Home() {
   ];
   const title = {
     home: "今天，想办成什么事？",
+    work: "开店与工作",
+    life: "生活小工具",
+    creative: "创意与娱乐",
     public: "公共工具",
     industry: "行业专区",
     favorites: "我的收藏",
@@ -605,10 +645,10 @@ export default function Home() {
             <span className="site-name">
               {siteProfile.site_name || "生活小助手"}
             </span>
-            <small>把经营小事，办得顺一点</small>
+            <small>工作顺一点，生活有意思一点</small>
           </span>
         </button>
-        <div className="sidebar-label">你的经营工具箱</div>
+        <div className="sidebar-label">你的日常工具箱</div>
         <nav>
           {nav.map((item) => (
             <button
@@ -658,7 +698,7 @@ export default function Home() {
             <Icon name="menu" />
           </button>
           <span className="breadcrumb">
-            经营工具箱<span>/</span>
+            日常工具箱<span>/</span>
             {view === "home" ? "办事首页" : title}
           </span>
           <div className="account-actions">
@@ -697,18 +737,24 @@ export default function Home() {
               <h1>{title}</h1>
               <p>
                 {view === "home"
-                  ? "从筹备开店到日常经营，按你要办的事找工具。"
-                  : view === "public"
-                    ? "图片、文件、宣传与经营记录，跨行业都能找。"
-                    : view === "industry"
-                      ? "先选你的生意，再看可复用的公共工具。行业专业功能仍待核实。"
-                      : view === "favorites"
-                        ? account
-                          ? "把想了解的任务收在这里，收藏保存在你的账号。"
-                          : "把想了解的任务收在这里，游客收藏保存在当前浏览器。"
-                        : view === "workspace"
-                          ? "集中查看自己的文件、任务与账户状态。"
-                          : "由站长决定展示哪些工具，以及每个组件使用哪些服务。"}
+                  ? "工作要顺手，生活也要有点趣味。找到眼前用得上的小工具。"
+                  : view === "work"
+                    ? "从筹备开店到日常经营，把工作里的事情一件件理顺。"
+                    : view === "life"
+                      ? "照片、文件和日常琐事，不用为了一个小需求学一套大软件。"
+                      : view === "creative"
+                        ? "拼张图、做个表情包，给自己的照片和灵感一点新花样。"
+                        : view === "public"
+                          ? "图片、文件、宣传与经营记录，跨行业都能找。"
+                          : view === "industry"
+                            ? "先选你的生意，再看可复用的公共工具。行业专业功能仍待核实。"
+                            : view === "favorites"
+                              ? account
+                                ? "把想了解的任务收在这里，收藏保存在你的账号。"
+                                : "把想了解的任务收在这里，游客收藏保存在当前浏览器。"
+                              : view === "workspace"
+                                ? "集中查看自己的文件、任务与账户状态。"
+                                : "由站长决定展示哪些工具，以及每个组件使用哪些服务。"}
               </p>
             </div>
             <span className="phase-state">
@@ -730,9 +776,43 @@ export default function Home() {
               {message}
             </div>
           )}
-          {["home", "public", "industry", "favorites"].includes(view) ? (
+          {[
+            "home",
+            "work",
+            "life",
+            "creative",
+            "public",
+            "industry",
+            "favorites",
+          ].includes(view) ? (
             <>
-              <section className="search-section" aria-label="查找经营任务">
+              {view === "home" && (
+                <section className="scene-section" aria-label="按场景找工具">
+                  <div className="section-heading">
+                    <h2>今天，想做点什么？</h2>
+                    <span>工作、生活，也有一点好玩</span>
+                  </div>
+                  <div className="scene-grid">
+                    {sceneCollections.map((scene) => (
+                      <button
+                        key={scene.id}
+                        className={`scene-card scene-${scene.id}`}
+                        onClick={() => navigate(scene.id)}
+                        aria-label={`进入${scene.title}`}
+                      >
+                        <span className="scene-icon">
+                          <Icon name={scene.icon} size={25} />
+                        </span>
+                        <strong>{scene.title}</strong>
+                        <span>{scene.intro}</span>
+                        <small>{scene.examples}</small>
+                        <Icon name="arrow" size={19} />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
+              <section className="search-section" aria-label="查找工具和新点子">
                 <label className="search-field">
                   <Icon name="search" size={22} />
                   <span className="sr-only">搜索你想办的事</span>
@@ -754,7 +834,7 @@ export default function Home() {
                 </label>
                 <p className="search-hint">直接说要办的事，不用记软件名字。</p>
               </section>
-              {view === "home" && (
+              {view === "work" && (
                 <section
                   className="journey-section"
                   aria-labelledby="journey-title"
@@ -808,6 +888,65 @@ export default function Home() {
                   ))}
                 </div>
               )}
+              {["home", "life", "creative"].includes(view) && (
+                <section
+                  className="ideas-section"
+                  aria-labelledby="ideas-title"
+                >
+                  <div className="section-heading">
+                    <div>
+                      <h2 id="ideas-title">
+                        {view === "home"
+                          ? "生活和创意，还想加这些"
+                          : "新点子，先看看"}
+                      </h2>
+                      <p>
+                        这是独立的方向建议，尚待评估；不计入原有 89
+                        项研究候选，也不是已开通工具。
+                      </p>
+                    </div>
+                    <span className="result-count">
+                      {visibleIdeas.length} 项新建议
+                    </span>
+                  </div>
+                  {visibleIdeas.length ? (
+                    <div className="ideas-grid">
+                      {visibleIdeas.map((item) => (
+                        <article
+                          className={`idea-card idea-${item.scene}`}
+                          key={item.id}
+                        >
+                          <div className="tool-card-top">
+                            <span>
+                              {item.scene === "life"
+                                ? "生活小工具"
+                                : "创意与娱乐"}
+                            </span>
+                            <span className="idea-status">待评估</span>
+                          </div>
+                          <button
+                            className="tool-title"
+                            onClick={() => setDetail(item)}
+                          >
+                            {item.title}
+                          </button>
+                          <p>{item.description}</p>
+                          <button
+                            className="text-button"
+                            onClick={() => setDetail(item)}
+                          >
+                            查看建议 <Icon name="arrow" size={15} />
+                          </button>
+                        </article>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="collection-empty">
+                      没有匹配的新点子，换个关键词试试。
+                    </p>
+                  )}
+                </section>
+              )}
               <section
                 className="catalog-section"
                 aria-labelledby="catalog-title"
@@ -841,7 +980,7 @@ export default function Home() {
                       ))}
                     </select>
                   </label>
-                  {view !== "home" && (
+                  {!["home", "life", "creative"].includes(view) && (
                     <label>
                       经营阶段
                       <select
@@ -860,37 +999,46 @@ export default function Home() {
                 </div>
                 {visible.length ? (
                   <div className="tool-grid">
-                    {visible.map((tool) => (
-                      <article className="tool-card" key={tool.id}>
-                        <div className="tool-card-top">
-                          <span>{tool.category}</span>
+                    {visible.map((sourceTool) => {
+                      const copy =
+                        view === "life" || view === "creative"
+                          ? getCollectionCopy(sourceTool.id)
+                          : undefined;
+                      const tool = copy
+                        ? { ...sourceTool, ...copy }
+                        : sourceTool;
+                      return (
+                        <article className="tool-card" key={tool.id}>
+                          <div className="tool-card-top">
+                            <span>{tool.category}</span>
+                            <button
+                              className={`favorite-button ${favorites.includes(tool.id) ? "saved" : ""}`}
+                              aria-label={`${favorites.includes(tool.id) ? "取消收藏" : "收藏"}${tool.title}`}
+                              aria-pressed={favorites.includes(tool.id)}
+                              onClick={() => toggleFavorite(tool.id)}
+                            >
+                              <Icon name="star" size={18} />
+                            </button>
+                          </div>
                           <button
-                            className={`favorite-button ${favorites.includes(tool.id) ? "saved" : ""}`}
-                            aria-label={`${favorites.includes(tool.id) ? "取消收藏" : "收藏"}${tool.title}`}
-                            aria-pressed={favorites.includes(tool.id)}
-                            onClick={() => toggleFavorite(tool.id)}
-                          >
-                            <Icon name="star" size={18} />
-                          </button>
-                        </div>
-                        <button
-                          className="tool-title"
-                          onClick={() => setDetail(tool)}
-                        >
-                          {tool.title}
-                        </button>
-                        <p>{tool.description}</p>
-                        <div className="tool-card-bottom">
-                          <span className="status-pill">待接入</span>
-                          <button
-                            className="text-button"
+                            className="tool-title"
                             onClick={() => setDetail(tool)}
                           >
-                            查看详情 <Icon name="arrow" size={15} />
+                            {tool.title}
                           </button>
-                        </div>
-                      </article>
-                    ))}
+                          <p>{tool.description}</p>
+                          <div className="tool-card-bottom">
+                            <span className="status-pill">待接入</span>
+                            <button
+                              className="text-button"
+                              onClick={() => setDetail(tool)}
+                            >
+                              查看详情 <Icon name="arrow" size={15} />
+                            </button>
+                          </div>
+                        </article>
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="empty-state">
@@ -934,7 +1082,7 @@ export default function Home() {
                 <div>
                   <p>
                     <strong>找到任务</strong>
-                    <span>按经营阶段、行业或关键词浏览。</span>
+                    <span>按工作、生活、创意或关键词浏览。</span>
                   </p>
                   <p>
                     <strong>了解工具</strong>
@@ -1350,15 +1498,27 @@ export default function Home() {
               </div>
               <div>
                 <dt>候选开源项目</dt>
-                <dd>{detail.candidates.join("、") || "待评估"}</dd>
+                <dd>
+                  {"candidates" in detail
+                    ? detail.candidates.join("、") || "待评估"
+                    : "尚未选定；由站长评估后决定"}
+                </dd>
               </div>
               <div>
                 <dt>接入状态</dt>
-                <dd>待站长选择与接入；当前不能执行。</dd>
+                <dd>
+                  {detailIsIdea
+                    ? "新方向待评估；尚未接入，当前不能执行。"
+                    : "待站长选择与接入；当前不能执行。"}
+                </dd>
               </div>
               <div>
                 <dt>研究证据</dt>
-                <dd>{detail.evidence}（不代表已部署或验证通过）</dd>
+                <dd>
+                  {"evidence" in detail
+                    ? `${detail.evidence}（不代表已部署或验证通过）`
+                    : "来自本轮方向建议，尚未形成软件选型或实测结论。"}
+                </dd>
               </div>
             </dl>
             <h3>开始前需要了解</h3>
@@ -1368,12 +1528,14 @@ export default function Home() {
               ))}
             </ul>
             <div className="dialog-actions">
-              <button
-                className="button secondary"
-                onClick={() => toggleFavorite(detail.id)}
-              >
-                {favorites.includes(detail.id) ? "取消收藏" : "收藏这个任务"}
-              </button>
+              {!detailIsIdea && (
+                <button
+                  className="button secondary"
+                  onClick={() => toggleFavorite(detail.id)}
+                >
+                  {favorites.includes(detail.id) ? "取消收藏" : "收藏这个任务"}
+                </button>
+              )}
               <span>工具未接入，暂不接收文件或产生费用。</span>
             </div>
           </>

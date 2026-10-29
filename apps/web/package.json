@@ -8,7 +8,8 @@
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "test:browser": "node tests/portal-browser-smoke.mjs",
-    "test:account": "node tests/account-settings-browser.mjs"
+    "test:account": "node tests/account-settings-browser.mjs",
+    "test:collections": "node tests/collections-browser.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans": "^5.2.0",

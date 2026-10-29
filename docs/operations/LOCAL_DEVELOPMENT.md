@@ -82,6 +82,7 @@ npm run build
 npm run typecheck
 npm run test:browser
 npm run test:account
+npm run test:collections
 ```
 
 浏览器测试需要两个服务运行及本机Chrome/Edge；可用CHROME_PATH指定浏览器。仅生成合成图片和测试文案，不使用真实客户数据。测试使用的浏览器profile会由Playwright管理。
