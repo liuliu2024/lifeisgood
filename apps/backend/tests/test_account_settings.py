@@ -191,16 +191,23 @@ def test_site_profile_draft_publish_permissions_and_restart(private_app, monkeyp
             assert login(owner, email="owner@example.test").status_code == 200
             assert (
                 owner.put(
-                    "/api/foundation/admin/settings", json={"settings": published}
+                    "/api/foundation/admin/settings",
+                    json={"settings": published, "expected_revision": 0},
                 ).status_code
                 == 200
             )
             assert public.get("/api/site-profile").json() == defaults
-            assert owner.post("/api/foundation/admin/settings/publish").json() == published
+            assert (
+                owner.post(
+                    "/api/foundation/admin/settings/publish", json={"expected_revision": 1}
+                ).json()
+                == published
+            )
             assert public.get("/api/site-profile").json() == published
             assert (
                 owner.put(
-                    "/api/foundation/admin/settings", json={"settings": newer_draft}
+                    "/api/foundation/admin/settings",
+                    json={"settings": newer_draft, "expected_revision": 1},
                 ).status_code
                 == 200
             )

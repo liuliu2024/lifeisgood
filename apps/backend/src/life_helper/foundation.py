@@ -53,8 +53,12 @@ class Settings(BaseModel):
     announcement: str = Field(default="", max_length=2000)
 
 
-class SettingsInput(BaseModel):
+class SettingsRevision(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    expected_revision: int = Field(strict=True, ge=0)
+
+
+class SettingsInput(SettingsRevision):
     settings: Settings
 
 
@@ -125,10 +129,19 @@ def attach_foundation(app, root: Path):
               id TEXT PRIMARY KEY, workspace_id TEXT NOT NULL, name TEXT NOT NULL,
               size INTEGER NOT NULL, created_at TEXT NOT NULL, mime_type TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, value TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS settings_revision (
+              id INTEGER PRIMARY KEY CHECK(id=1), revision INTEGER NOT NULL CHECK(revision>=0));
             CREATE TABLE IF NOT EXISTS auth_attempts (
               bucket TEXT NOT NULL, created_at REAL NOT NULL);
             CREATE INDEX IF NOT EXISTS auth_attempts_bucket ON auth_attempts(bucket, created_at);
         """)
+        # An additive, idempotent migration preserves both existing draft and applied values.
+        # Serialize initialization with edits from other app processes.
+        db.execute("BEGIN IMMEDIATE")
+        db.execute(
+            "INSERT OR IGNORE INTO settings_revision(id, revision) "
+            "VALUES(1, CASE WHEN EXISTS(SELECT 1 FROM settings WHERE id=1) THEN 1 ELSE 0 END)"
+        )
         owner_email = os.getenv("LIFE_OWNER_EMAIL", "")
         owner_password = os.getenv("LIFE_OWNER_PASSWORD", "")
         if owner_email or owner_password:
@@ -456,11 +469,12 @@ def attach_foundation(app, root: Path):
     def jobs(user: User):
         return {"jobs": []}
 
-    def settings_result():
-        with database() as db:
-            row = db.execute("SELECT value FROM settings WHERE id=1").fetchone()
+    def settings_result(db):
+        row = db.execute("SELECT value FROM settings WHERE id=1").fetchone()
+        revision = db.execute("SELECT revision FROM settings_revision WHERE id=1").fetchone()[0]
         return {
             "settings": json.loads(row[0]) if row else Settings().model_dump(),
+            "revision": revision,
             "billable_calls_enabled": False,
             "tools_enabled": False,
             "mode": "draft",
@@ -468,19 +482,28 @@ def attach_foundation(app, root: Path):
 
     @app.get("/api/foundation/admin/settings", dependencies=[Depends(owner)])
     def get_settings():
-        return settings_result()
+        with database() as db:
+            # Keep the draft and its version in the same read snapshot.
+            db.execute("BEGIN")
+            return settings_result(db)
 
     @app.put("/api/foundation/admin/settings", dependencies=[Depends(owner)])
     def put_settings(payload: SettingsInput):
         if payload.settings.support_email:
             email_key(payload.settings.support_email)
         with database() as db:
+            db.execute("BEGIN IMMEDIATE")
+            revision = db.execute("SELECT revision FROM settings_revision WHERE id=1").fetchone()[0]
+            if revision != payload.expected_revision:
+                raise HTTPException(409, "配置已在其他页面修改，请先重新读取")
             db.execute(
                 "INSERT INTO settings VALUES(1,?) "
                 "ON CONFLICT(id) DO UPDATE SET value=excluded.value",
                 (json.dumps(payload.settings.model_dump(), ensure_ascii=False),),
             )
-        return settings_result()
+            db.execute("UPDATE settings_revision SET revision=revision+1 WHERE id=1")
+            # Build the response before releasing the transaction to prevent mixing versions.
+            return settings_result(db)
 
     @app.get("/api/site-profile")
     def site_profile():
@@ -490,9 +513,14 @@ def attach_foundation(app, root: Path):
         return profile.model_dump()
 
     @app.post("/api/foundation/admin/settings/publish", dependencies=[Depends(owner)])
-    def publish_settings():
+    def publish_settings(payload: SettingsRevision):
         with database() as db:
             db.execute("BEGIN IMMEDIATE")
+            revision = db.execute("SELECT revision FROM settings_revision WHERE id=1").fetchone()[0]
+            if revision != payload.expected_revision:
+                raise HTTPException(409, "配置已在其他页面修改，请先重新读取")
+            if revision == 0:
+                raise HTTPException(409, "请先保存草稿，再应用到网站")
             draft = db.execute("SELECT value FROM settings WHERE id=1").fetchone()
             profile = Settings.model_validate(json.loads(draft[0])) if draft else Settings()
             db.execute(

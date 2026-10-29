@@ -16,6 +16,19 @@ const errors = [];
 let owner;
 let originalDraft;
 let originalPublic;
+async function saveDraft(context, settings) {
+  const current = await (await context.request.get(`${base}/api/foundation/admin/settings`)).json();
+  const response = await context.request.put(`${base}/api/foundation/admin/settings`, {
+    headers, data: { settings, expected_revision: current.revision },
+  });
+  assert.ok(response.ok(), "Draft fixture update failed");
+  return response.json();
+}
+async function applyDraft(context, revision) {
+  return context.request.post(`${base}/api/foundation/admin/settings/publish`, {
+    headers, data: { expected_revision: revision },
+  });
+}
 try {
   const member = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   const page = await member.newPage();
@@ -109,14 +122,70 @@ try {
   assert.ok((await guestPage.title()).includes(newName));
   checks.push("explicit application reaches visitors as escaped text without mobile overflow");
   await guest.close();
+  const secondPage = await owner.newPage();
+  secondPage.on("pageerror", (e) => errors.push(e.message));
+  await secondPage.goto(base, { waitUntil: "networkidle" });
+  await secondPage.getByRole("button", { name: "站长后台", exact: true }).click();
+  await secondPage.getByLabel("网站名称", { exact: true }).waitFor();
+  await secondPage.waitForFunction(() => [...document.querySelectorAll("button")].some((button) => button.textContent.trim() === "保存草稿" && !button.disabled));
+  const firstName = "并发窗口甲草稿";
+  const secondName = "并发窗口乙保留编辑";
+  await ownerPage.getByLabel("网站名称", { exact: true }).fill(firstName);
+  const [firstSave] = await Promise.all([
+    ownerPage.waitForResponse((r) => r.url().endsWith("/api/foundation/admin/settings") && r.request().method() === "PUT"),
+    ownerPage.getByRole("button", { name: "保存草稿", exact: true }).click(),
+  ]);
+  assert.ok(firstSave.ok());
+  await secondPage.getByLabel("网站名称", { exact: true }).fill(secondName);
+  const [conflictingSave] = await Promise.all([
+    secondPage.waitForResponse((r) => r.url().endsWith("/api/foundation/admin/settings") && r.request().method() === "PUT"),
+    secondPage.getByRole("button", { name: "保存草稿", exact: true }).click(),
+  ]);
+  assert.equal(conflictingSave.status(), 409);
+  assert.equal(await secondPage.getByLabel("网站名称", { exact: true }).inputValue(), secondName);
+  assert.equal((await (await owner.request.get(`${base}/api/foundation/admin/settings`)).json()).settings.site_name, firstName);
+  checks.push("two-page save conflict preserves edits and does not overwrite newer draft");
+  secondPage.on("dialog", (dialog) => dialog.accept());
+  await Promise.all([
+    secondPage.waitForResponse((r) => r.url().endsWith("/api/foundation/admin/settings") && r.request().method() === "GET"),
+    secondPage.getByRole("button", { name: "重新读取草稿", exact: true }).click(),
+  ]);
+  await secondPage.waitForFunction((name) => [...document.querySelectorAll("input")].some((field) => field.value === name), firstName);
+  await secondPage.getByLabel("网站名称", { exact: true }).fill(secondName);
+  const [secondSave] = await Promise.all([
+    secondPage.waitForResponse((r) => r.url().endsWith("/api/foundation/admin/settings") && r.request().method() === "PUT"),
+    secondPage.getByRole("button", { name: "保存草稿", exact: true }).click(),
+  ]);
+  assert.ok(secondSave.ok());
+  const [conflictingApply] = await Promise.all([
+    ownerPage.waitForResponse((r) => r.url().endsWith("/api/foundation/admin/settings/publish")),
+    ownerPage.getByRole("button", { name: "应用到网站", exact: true }).click(),
+  ]);
+  assert.equal(conflictingApply.status(), 409);
+  assert.equal((await (await owner.request.get(`${base}/api/site-profile`)).json()).site_name, newName);
+  assert.equal(await ownerPage.getByLabel("网站名称", { exact: true }).inputValue(), firstName);
+  ownerPage.on("dialog", (dialog) => dialog.accept());
+  const [reloaded] = await Promise.all([
+    ownerPage.waitForResponse((r) => r.url().endsWith("/api/foundation/admin/settings") && r.request().method() === "GET"),
+    ownerPage.getByRole("button", { name: "重新读取草稿", exact: true }).click(),
+  ]);
+  assert.ok(reloaded.ok());
+  await ownerPage.waitForFunction((name) => [...document.querySelectorAll("input")].some((field) => field.value === name), secondName);
+  await ownerPage.getByRole("button", { name: "应用到网站", exact: true }).click();
+  await ownerPage.getByText("已将保存的名称、支持邮箱和公告应用到网站。工具与付费服务仍未启用。", { exact: true }).waitFor();
+  const finalProfile = await (await owner.request.get(`${base}/api/site-profile`)).json();
+  assert.equal(finalProfile.site_name, secondName);
+  assert.deepEqual(Object.keys(finalProfile).sort(), ["announcement", "site_name", "support_email"]);
+  checks.push("stale application is rejected; explicit reload permits application of the reviewed draft");
+  await secondPage.close();
   await other.close();
   await member.close();
   assert.deepEqual(errors, []);
 } finally {
   if (owner && originalDraft && originalPublic) {
-    assert.ok((await owner.request.put(`${base}/api/foundation/admin/settings`, { headers, data: { settings: originalPublic } })).ok());
-    assert.ok((await owner.request.post(`${base}/api/foundation/admin/settings/publish`, { headers })).ok());
-    assert.ok((await owner.request.put(`${base}/api/foundation/admin/settings`, { headers, data: { settings: originalDraft } })).ok());
+    const restore = await saveDraft(owner, originalPublic);
+    assert.ok((await applyDraft(owner, restore.revision)).ok());
+    await saveDraft(owner, originalDraft);
     assert.deepEqual(await (await owner.request.get(`${base}/api/site-profile`)).json(), originalPublic);
     await owner.request.post(`${base}/api/auth/logout`, { headers });
     checks.push("original public profile and independent draft restored after testing");

@@ -161,7 +161,9 @@ def test_owner_is_explicit_and_cannot_enable_providers(foundation, monkeypatch):
             "support_email": "help@example.test",
             "announcement": "仅底座预览",
         }
-        result = owner.put("/api/foundation/admin/settings", json={"settings": settings})
+        result = owner.put(
+            "/api/foundation/admin/settings", json={"settings": settings, "expected_revision": 0}
+        )
         assert result.status_code == 200
         assert result.json()["billable_calls_enabled"] is False
         assert result.json()["tools_enabled"] is False
@@ -170,6 +172,7 @@ def test_owner_is_explicit_and_cannot_enable_providers(foundation, monkeypatch):
                 "/api/foundation/admin/settings",
                 json={
                     "settings": {"api_key": "must-not-be-accepted"},
+                    "expected_revision": 1,
                 },
             ).status_code
             == 422

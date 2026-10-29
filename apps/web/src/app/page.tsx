@@ -23,6 +23,15 @@ type SiteProfile = {
   support_email: string;
   announcement: string;
 };
+type SettingsDraft = { settings: SiteProfile; revision: number };
+class RequestError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+  }
+}
 type PrivateFile = {
   id: string;
   name: string;
@@ -46,7 +55,7 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok)
-    throw new Error(
+    throw new RequestError(
       typeof data.detail === "string"
         ? data.detail
         : response.status === 401
@@ -54,6 +63,7 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
           : response.status === 403
             ? "当前账号没有此操作权限。"
             : "暂时无法完成，请稍后重试。",
+      response.status,
     );
   return data as T;
 }
@@ -146,6 +156,8 @@ export default function Home() {
   });
   const [settingsState, setSettingsState] = useState("");
   const [settingsReady, setSettingsReady] = useState(false);
+  const [settingsRevision, setSettingsRevision] = useState<number | null>(null);
+  const [settingsConflict, setSettingsConflict] = useState(false);
   const [savedSettings, setSavedSettings] = useState<SiteProfile | null>(null);
   const [siteProfile, setSiteProfile] = useState<SiteProfile>({
     site_name: "生活小助手",
@@ -165,6 +177,7 @@ export default function Home() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const authRef = useRef<HTMLDialogElement>(null);
   const passwordRef = useRef<HTMLDialogElement>(null);
+  const settingsRequestRef = useRef(0);
   useEffect(() => {
     request<SiteProfile>("/api/site-profile")
       .then(setSiteProfile)
@@ -204,19 +217,16 @@ export default function Home() {
       .finally(() => setAccountLoading(false));
   }, []);
   useEffect(() => {
+    resetSettings();
+  }, [account?.id, account?.role]);
+  useEffect(() => {
     if (view === "admin" && account?.role === "owner") {
-      setSettingsReady(false);
-      setSettingsState("正在读取设置…");
-      request<{ settings: typeof settings }>("/api/foundation/admin/settings")
-        .then((data) => {
-          setSettings(data.settings);
-          setSavedSettings(data.settings);
-          setSettingsReady(true);
-          setSettingsState("");
-        })
-        .catch((error) => setSettingsState(error.message));
+      void readSettings();
     }
-  }, [view, account]);
+    return () => {
+      settingsRequestRef.current += 1;
+    };
+  }, [view, account?.id, account?.role]);
   useEffect(() => {
     if (!account) {
       setFiles([]);
@@ -327,6 +337,7 @@ export default function Home() {
       }>("/api/account");
       if (!current.authenticated || !current.user)
         throw new Error("账号服务尚未确认登录，请重试。");
+      resetSettings();
       setAccount(current.user);
       setAuth(null);
       setMessage(
@@ -344,6 +355,7 @@ export default function Home() {
   }
   async function logout() {
     setBusy(true);
+    resetSettings();
     try {
       await request("/api/auth/logout", { method: "POST" });
       setAccount(null);
@@ -357,21 +369,72 @@ export default function Home() {
       setBusy(false);
     }
   }
+  function resetSettings() {
+    settingsRequestRef.current += 1;
+    setSettings({ site_name: "", support_email: "", announcement: "" });
+    setSavedSettings(null);
+    setSettingsRevision(null);
+    setSettingsReady(false);
+    setSettingsConflict(false);
+    setSettingsState("");
+  }
+  async function readSettings() {
+    if (account?.role !== "owner") return;
+    const requestId = ++settingsRequestRef.current;
+    setSettingsReady(false);
+    setSettingsState("正在读取设置…");
+    try {
+      const data = await request<SettingsDraft>(
+        "/api/foundation/admin/settings",
+      );
+      if (requestId !== settingsRequestRef.current) return;
+      if (!Number.isSafeInteger(data.revision) || data.revision < 0)
+        throw new Error("设置服务版本尚未匹配，请刷新页面或稍后重试。");
+      setSettings(data.settings);
+      setSavedSettings(data.settings);
+      setSettingsRevision(data.revision);
+      setSettingsConflict(false);
+      setSettingsReady(true);
+      setSettingsState("已读取最新草稿。保存或应用前，请确认下面的内容。");
+    } catch (error) {
+      if (requestId === settingsRequestRef.current)
+        setSettingsState(
+          error instanceof Error ? error.message : "读取失败，请重试。",
+        );
+    }
+  }
   async function saveSettings(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!settingsReady || settingsRevision === null || settingsConflict) return;
+    const requestId = settingsRequestRef.current;
     setBusy(true);
     setSettingsState("");
     try {
-      const data = await request<{ settings: typeof settings }>(
+      const data = await request<SettingsDraft>(
         "/api/foundation/admin/settings",
-        { method: "PUT", body: JSON.stringify({ settings }) },
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            settings,
+            expected_revision: settingsRevision,
+          }),
+        },
       );
+      if (requestId !== settingsRequestRef.current) return;
       setSettings(data.settings);
       setSavedSettings(data.settings);
+      setSettingsRevision(data.revision);
       setSettingsState("草稿已保存，网站当前展示未改变。确认后可应用到网站。");
     } catch (error) {
+      if (requestId !== settingsRequestRef.current) return;
+      if (error instanceof RequestError && error.status === 409)
+        setSettingsConflict(true);
       setSettingsState(
-        error instanceof Error ? error.message : "保存失败，请重试。",
+        error instanceof RequestError && error.status === 409
+          ? "配置已在其他页面修改，请先重新读取。当前编辑已保留。"
+          : error instanceof Error
+            ? error.message
+            : "保存失败，请重试。",
       );
     } finally {
       setBusy(false);
@@ -380,26 +443,39 @@ export default function Home() {
   async function publishSettings() {
     if (
       !settingsReady ||
+      settingsConflict ||
+      settingsRevision === null ||
+      settingsRevision === 0 ||
       !savedSettings ||
       JSON.stringify(settings) !== JSON.stringify(savedSettings)
     )
       return;
+    const requestId = settingsRequestRef.current;
     setBusy(true);
     setSettingsState("");
     try {
       const applied = await request<SiteProfile>(
         "/api/foundation/admin/settings/publish",
-        { method: "POST" },
+        {
+          method: "POST",
+          body: JSON.stringify({ expected_revision: settingsRevision }),
+        },
       );
+      if (requestId !== settingsRequestRef.current) return;
       setSiteProfile(applied);
       setSettingsState(
         "已将保存的名称、支持邮箱和公告应用到网站。工具与付费服务仍未启用。",
       );
     } catch (error) {
+      if (requestId !== settingsRequestRef.current) return;
+      if (error instanceof RequestError && error.status === 409)
+        setSettingsConflict(true);
       setSettingsState(
-        error instanceof Error
-          ? error.message
-          : "应用失败，网站展示未确认更新，请重试。",
+        error instanceof RequestError && error.status === 409
+          ? "配置已在其他页面修改，请先重新读取。当前编辑已保留。"
+          : error instanceof Error
+            ? error.message
+            : "应用失败，网站展示未确认更新，请重试。",
       );
     } finally {
       setBusy(false);
@@ -1101,6 +1177,7 @@ export default function Home() {
                       <input
                         required
                         maxLength={80}
+                        disabled={busy || !settingsReady}
                         value={settings.site_name}
                         onChange={(e) =>
                           setSettings({
@@ -1115,6 +1192,7 @@ export default function Home() {
                       <input
                         type="email"
                         maxLength={254}
+                        disabled={busy || !settingsReady}
                         value={settings.support_email}
                         onChange={(e) =>
                           setSettings({
@@ -1129,6 +1207,7 @@ export default function Home() {
                       <textarea
                         maxLength={1000}
                         rows={4}
+                        disabled={busy || !settingsReady}
                         value={settings.announcement}
                         onChange={(e) =>
                           setSettings({
@@ -1140,11 +1219,20 @@ export default function Home() {
                     </label>
                     <button
                       className="button"
-                      disabled={busy || !settingsReady}
+                      disabled={busy || !settingsReady || settingsConflict}
                       type="submit"
                     >
                       {busy ? "正在处理…" : "保存草稿"}
                     </button>
+                    <button
+                      className="button secondary"
+                      disabled={busy}
+                      type="button"
+                      onClick={() => void readSettings()}
+                    >
+                      重新读取草稿
+                    </button>
+                    <p>重新读取会替换当前编辑，请先复制需要保留的内容。</p>
                     <p role="status">{settingsState}</p>
                     <div className="publish-settings">
                       <h3>应用已保存的草稿</h3>
@@ -1157,6 +1245,9 @@ export default function Home() {
                         disabled={
                           busy ||
                           !settingsReady ||
+                          settingsConflict ||
+                          settingsRevision === null ||
+                          settingsRevision === 0 ||
                           !savedSettings ||
                           JSON.stringify(settings) !==
                             JSON.stringify(savedSettings)
