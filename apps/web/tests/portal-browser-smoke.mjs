@@ -20,12 +20,12 @@ page.on("pageerror", (error) => errors.push(error.message));
 try {
   await page.goto(base, { waitUntil: "networkidle" });
   await page.locator(".tool-card").first().waitFor();
-  assert.equal(await page.locator(".tool-card").count(), 89);
+  assert.equal(await page.locator(".tool-card").count(), 87);
   assert.ok((await page.locator("h1").innerText()).includes("想办成"));
-  checks.push("89 pending capabilities and customer-task homepage");
+  checks.push("87 website candidates after desktop and unconfirmed paths are filtered");
   const search = page.getByPlaceholder("想做什么？例如：整理报价单、处理商品图");
   await search.fill("报价");
-  await page.waitForFunction(() => document.querySelectorAll(".tool-card").length > 0 && document.querySelectorAll(".tool-card").length < 89);
+  await page.waitForFunction(() => document.querySelectorAll(".tool-card").length > 0 && document.querySelectorAll(".tool-card").length < 87);
   await page.getByRole("button", { name: "查看详情", exact: false }).first().click();
   await page.getByRole("button", { name: "关闭详情" }).waitFor();
   await page.keyboard.press("Escape");

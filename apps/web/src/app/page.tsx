@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
-import { catalog, categories, stages, industries } from "@/lib/catalog";
+import { catalog, stages, industries } from "@/lib/catalog";
 import type { CatalogItem } from "@/lib/catalog";
 import {
   sceneCollections,
@@ -11,6 +11,29 @@ import {
   getCollectionCopy,
 } from "@/lib/collections";
 import type { CollectionIdea } from "@/lib/collections";
+import {
+  WEB_EXCLUDED_CAPABILITY_IDS,
+  WEB_EXCLUDED_IDEA_IDS,
+  WEB_EXCLUDED_CANDIDATES,
+  WEB_LIMITATIONS,
+} from "@/lib/web-feasibility";
+
+// Keep the research snapshot intact; every public view uses this reviewed web subset.
+const excludedCandidateNames = new Set(
+  WEB_EXCLUDED_CANDIDATES.map((name) => name.trim().toLowerCase()),
+);
+const eligibleCatalog = catalog
+  .filter((tool) => !WEB_EXCLUDED_CAPABILITY_IDS.includes(tool.id))
+  .map((tool) => ({
+    ...tool,
+    candidates: tool.candidates.filter(
+      (name) => !excludedCandidateNames.has(name.trim().toLowerCase()),
+    ),
+  }));
+const eligibleCapabilityIds = new Set(eligibleCatalog.map((tool) => tool.id));
+const eligibleIdeas = collectionIdeas.filter(
+  (idea) => !WEB_EXCLUDED_IDEA_IDS.includes(idea.id),
+);
 
 type View =
   | "home"
@@ -305,6 +328,7 @@ export default function Home() {
     setIndustry("全部行业");
   }
   async function toggleFavorite(id: string) {
+    if (!eligibleCapabilityIds.has(id)) return;
     const selected = !favorites.includes(id);
     if (account) {
       try {
@@ -572,7 +596,7 @@ export default function Home() {
       setBusy(false);
     }
   }
-  const visible = catalog.filter(
+  const visible = eligibleCatalog.filter(
     (tool) =>
       ((view !== "life" && view !== "creative") ||
         collectionCapabilityIds[view].includes(tool.id)) &&
@@ -586,12 +610,12 @@ export default function Home() {
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
   );
-  const visibleIdeas = collectionIdeas.filter(
+  const visibleIdeas = eligibleIdeas.filter(
     (item) =>
       (view === "home" || item.scene === view) &&
-      `${item.title} ${item.description} ${item.input} ${item.output}`.includes(
-        query.trim(),
-      ),
+      `${item.title} ${item.description} ${item.input} ${item.output}`
+        .toLowerCase()
+        .includes(query.trim().toLowerCase()),
   );
   const detailIsIdea = detail !== null && "scene" in detail;
   const stageOptions = [...new Set(["全部阶段", ...stages])];
@@ -600,12 +624,15 @@ export default function Home() {
     ...new Set([
       "全部分类",
       ...(view === "life" || view === "creative"
-        ? catalog
+        ? eligibleCatalog
             .filter((tool) => collectionCapabilityIds[view].includes(tool.id))
             .map((tool) => tool.category)
-        : categories),
+        : eligibleCatalog.map((tool) => tool.category)),
     ]),
   ];
+  const eligibleFavoriteCount = favorites.filter((id) =>
+    eligibleCapabilityIds.has(id),
+  ).length;
   const nav: { id: View; label: string; icon: string }[] = [
     { id: "home", label: "办事首页", icon: "home" },
     { id: "work", label: "开店与工作", icon: "shop" },
@@ -659,8 +686,8 @@ export default function Home() {
             >
               <Icon name={item.icon} />
               <span>{item.label}</span>
-              {item.id === "favorites" && favorites.length > 0 && (
-                <span className="nav-count">{favorites.length}</span>
+              {item.id === "favorites" && eligibleFavoriteCount > 0 && (
+                <span className="nav-count">{eligibleFavoriteCount}</span>
               )}
             </button>
           ))}
@@ -901,8 +928,8 @@ export default function Home() {
                           : "新点子，先看看"}
                       </h2>
                       <p>
-                        这是独立的方向建议，尚待评估；不计入原有 89
-                        项研究候选，也不是已开通工具。
+                        这里只展示可继续评估网页流程的方向，不含本机目录操作；
+                        新建议单独统计，也不是已开通工具。
                       </p>
                     </div>
                     <span className="result-count">
@@ -961,7 +988,7 @@ export default function Home() {
                           : stage}
                     </h2>
                     <p>
-                      研究候选不等于已经开通。详情会说明输入、结果与接入状态。
+                      已按网页使用范围筛选，仍待选择与接入。详情会说明文件如何输入、处理和下载。
                     </p>
                   </div>
                   <span className="result-count" aria-live="polite">
@@ -1510,6 +1537,13 @@ export default function Home() {
                   {detailIsIdea
                     ? "新方向待评估；尚未接入，当前不能执行。"
                     : "待站长选择与接入；当前不能执行。"}
+                </dd>
+              </div>
+              <div>
+                <dt>网页使用方式</dt>
+                <dd>
+                  {WEB_LIMITATIONS[detail.id] ||
+                    "以网页填写资料、选择文件或查看结果为范围；需要计算的步骤可由平台后台处理，不要求安装桌面软件。具体实现仍待选择与验证。"}
                 </dd>
               </div>
               <div>

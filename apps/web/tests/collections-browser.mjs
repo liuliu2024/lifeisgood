@@ -39,13 +39,13 @@ try {
   await page.goto(base, { waitUntil: "networkidle" });
   await page.locator(".scene-card").first().waitFor();
   assert.equal(await page.locator(".scene-card").count(), 3);
-  assert.equal(await page.locator(".tool-card").count(), 89);
+  assert.equal(await page.locator(".tool-card").count(), 87);
   await page.screenshot({ path: resolve(output, "collections-home-desktop.png"), fullPage: false });
-  checks.push("three visible scene entrances preserve the original 89-capability snapshot");
+  checks.push("three scene entrances show 87 eligible capabilities and preserve historical research");
 
   await navigate("开店与工作");
   await page.getByRole("heading", { name: "从开店到经营", exact: true }).waitFor();
-  assert.equal(await page.locator(".tool-card").count(), 89);
+  assert.equal(await page.locator(".tool-card").count(), 87);
   await page.locator(".journey-list button").first().click();
   assert.equal(await page.locator(".tool-card").count(), 0);
   await navigate("生活小工具");
@@ -55,13 +55,13 @@ try {
   for (const scene of ["生活小工具", "创意与娱乐"]) {
     await navigate(scene);
     await page.getByRole("heading", { level: 1, name: scene, exact: true }).waitFor();
-    assert.equal(await page.locator(".idea-card").count(), 6);
+    assert.equal(await page.locator(".idea-card").count(), scene === "生活小工具" ? 5 : 6);
     assert.ok(await page.locator(".tool-card").count() > 0);
     assert.equal(await page.getByRole("heading", { name: "从开店到经营", exact: true }).count(), 0);
-    assert.equal(await page.locator(".idea-card").filter({ hasText: "待评估" }).count(), 6);
+    assert.equal(await page.locator(".idea-card").filter({ hasText: "待评估" }).count(), scene === "生活小工具" ? 5 : 6);
     await assertBounds();
   }
-  checks.push("everyday and creative collections reuse capabilities and separate six proposed ideas each");
+  checks.push("collections reuse eligible capabilities and show five everyday and six creative proposals");
 
   await search().fill("换脸");
   assert.equal(await page.locator(".idea-card").count(), 1);
@@ -106,12 +106,37 @@ try {
     if (width === 390) await page.screenshot({ path: resolve(output, "collections-home-mobile.png"), fullPage: false });
     for (const scene of ["生活小工具", "创意与娱乐"]) {
       await navigate(scene);
-      assert.equal(await page.locator(".idea-card").count(), 6);
+      assert.equal(await page.locator(".idea-card").count(), scene === "生活小工具" ? 5 : 6);
       await assertBounds();
     }
     if (width === 390) await page.screenshot({ path: resolve(output, "collections-creative-mobile.png"), fullPage: false });
   }
   checks.push("tablet and mobile navigation expose all scenes without horizontal overflow");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await navigate("办事首页");
+  assert.equal(await page.locator(".idea-card").count(), 11);
+  for (const scene of ["办事首页", "开店与工作", "生活小工具", "创意与娱乐", "公共工具", "行业专区"]) {
+    await navigate(scene);
+    for (const term of ["改个整齐", "长页面", "填充词", "Money Manager Ex", "eSearch"]) {
+      await search().fill(term);
+      assert.equal(await page.locator(".tool-card").count(), 0, `${scene}: excluded candidate visible for ${term}`);
+      assert.equal(await page.locator(".idea-card").count(), 0, `${scene}: excluded idea visible for ${term}`);
+    }
+  }
+  await page.evaluate(() => localStorage.setItem("lifeisgood-favorites", JSON.stringify(["FUN-070", "FUN-066"])));
+  await page.reload({ waitUntil: "networkidle" });
+  await navigate("我的收藏");
+  assert.equal(await page.locator(".tool-card").count(), 1);
+  assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem("lifeisgood-favorites"))), ["FUN-070", "FUN-066"]);
+  await navigate("开店与工作");
+  await search().fill("记录经营银行账户");
+  assert.equal(await page.locator(".tool-card").count(), 1);
+  await page.locator(".tool-card").getByRole("button", { name: "查看详情", exact: false }).click();
+  const eligibleDetail = page.locator("dialog[open]");
+  assert.ok(!(await eligibleDetail.innerText()).includes("Money Manager Ex"));
+  assert.ok((await eligibleDetail.innerText()).includes("ezBookkeeping"));
+  await page.keyboard.press("Escape");
+  checks.push("excluded paths stay absent across directories, search, historical favorites and candidate details without erasing stored favorites");
   assert.deepEqual(writes, []);
   assert.deepEqual(external, []);
   assert.deepEqual(errors, []);

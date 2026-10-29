@@ -23,7 +23,7 @@ export const sceneCollections = [
     id: "life",
     title: "生活小工具",
     intro: "让日常的琐事简单一点",
-    examples: "照片拼接 · 文件整理 · 生活清单",
+    examples: "照片拼接 · PDF 整理 · 日常计算",
     icon: "leaf",
   },
   {
