@@ -35,6 +35,12 @@ class Registration(Credentials):
     display_name: str = Field(default="", max_length=80)
 
 
+class PasswordChange(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    current_password: str = Field(min_length=12, max_length=128)
+    new_password: str = Field(min_length=12, max_length=128)
+
+
 class Favorite(BaseModel):
     model_config = ConfigDict(extra="forbid")
     selected: bool
@@ -205,10 +211,27 @@ def attach_foundation(app, root: Path):
             "workspace_id": user["workspace_id"] if user else None,
         }
 
+    def set_session_cookie(response, token):
+        response.set_cookie(
+            COOKIE,
+            token,
+            httponly=True,
+            samesite="lax",
+            max_age=SESSION_SECONDS,
+            secure=os.getenv("LIFE_COOKIE_SECURE", "false").lower() == "true",
+        )
+
     def establish(request, response, user):
         token = secrets.token_urlsafe(32)
         old = request.cookies.get(COOKIE, "")
         with database() as db:
+            db.execute("BEGIN IMMEDIATE")
+            live = db.execute("SELECT * FROM accounts WHERE id=?", (user["id"],)).fetchone()
+            # A login checked against an old hash cannot create a session after a password change.
+            if live is None or not hmac.compare_digest(
+                live["password_hash"], user["password_hash"]
+            ):
+                raise HTTPException(401, "账号凭据已变更，请重新登录")
             db.execute(
                 "DELETE FROM sessions WHERE token_hash=? OR expires_at<?",
                 (hashlib.sha256(old.encode()).hexdigest(), time.time()),
@@ -221,14 +244,7 @@ def attach_foundation(app, root: Path):
                     time.time() + SESSION_SECONDS,
                 ),
             )
-        response.set_cookie(
-            COOKIE,
-            token,
-            httponly=True,
-            samesite="lax",
-            max_age=SESSION_SECONDS,
-            secure=os.getenv("LIFE_COOKIE_SECURE", "false").lower() == "true",
-        )
+        set_session_cookie(response, token)
         return account(user)
 
     @app.get("/api/account")
@@ -278,6 +294,38 @@ def attach_foundation(app, root: Path):
             )
         response.delete_cookie(COOKIE, httponly=True, samesite="lax")
         return account(None)
+
+    @app.post("/api/auth/password")
+    def change_password(payload: PasswordChange, request: Request, response: Response, user: User):
+        throttle(request, user["email"])
+        if not password_matches(payload.current_password, user["password_hash"]):
+            raise HTTPException(401, "当前密码不正确")
+        updated_hash = password_hash(payload.new_password)
+        token = secrets.token_urlsafe(32)
+        old_token_hash = hashlib.sha256(request.cookies.get(COOKIE, "").encode()).hexdigest()
+        with database() as db:
+            db.execute("BEGIN IMMEDIATE")
+            live = db.execute(
+                "SELECT a.* FROM accounts a JOIN sessions s ON a.id=s.user_id "
+                "WHERE a.id=? AND s.token_hash=? AND s.expires_at>?",
+                (user["id"], old_token_hash, time.time()),
+            ).fetchone()
+            if live is None or not hmac.compare_digest(
+                live["password_hash"], user["password_hash"]
+            ):
+                raise HTTPException(401, "账号凭据已变更，请重新登录")
+            db.execute("UPDATE accounts SET password_hash=? WHERE id=?", (updated_hash, user["id"]))
+            db.execute("DELETE FROM sessions WHERE user_id=?", (user["id"],))
+            db.execute(
+                "INSERT INTO sessions VALUES(?,?,?)",
+                (
+                    hashlib.sha256(token.encode()).hexdigest(),
+                    user["id"],
+                    time.time() + SESSION_SECONDS,
+                ),
+            )
+        set_session_cookie(response, token)
+        return account(user)
 
     @app.get("/api/favorites")
     def favorites(user: User):
@@ -433,3 +481,23 @@ def attach_foundation(app, root: Path):
                 (json.dumps(payload.settings.model_dump(), ensure_ascii=False),),
             )
         return settings_result()
+
+    @app.get("/api/site-profile")
+    def site_profile():
+        with database() as db:
+            row = db.execute("SELECT value FROM settings WHERE id=2").fetchone()
+        profile = Settings.model_validate(json.loads(row[0])) if row else Settings()
+        return profile.model_dump()
+
+    @app.post("/api/foundation/admin/settings/publish", dependencies=[Depends(owner)])
+    def publish_settings():
+        with database() as db:
+            db.execute("BEGIN IMMEDIATE")
+            draft = db.execute("SELECT value FROM settings WHERE id=1").fetchone()
+            profile = Settings.model_validate(json.loads(draft[0])) if draft else Settings()
+            db.execute(
+                "INSERT INTO settings VALUES(2,?) "
+                "ON CONFLICT(id) DO UPDATE SET value=excluded.value",
+                (json.dumps(profile.model_dump(), ensure_ascii=False),),
+            )
+        return profile.model_dump()

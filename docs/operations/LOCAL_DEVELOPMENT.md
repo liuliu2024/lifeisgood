@@ -22,6 +22,8 @@ $env:LIFE_DATA_DIR='runtime/foundation-preview'
 
 登录时在本机私有文件中查看凭据。注册接口永远创建普通用户，已有普通账号不会因设置相同初始化邮箱而自动升为站长。三个站点文本配置为草稿，保存不会启用工具、模型或支付。`LIFE_ADMIN_TOKEN`仅属于旧试验API，当前门户不要求普通用户填写管理口令。
 
+账号设置可用当前密码更改密码；成功后所有旧会话失效，当前设备获得新会话。初始化文件只用于首次建立站长，改密后不会在重启时恢复旧密码，请使用自行设置的新密码。站长设置先保存草稿，再点击“应用到网站”使三个公开文本字段生效；它不会启用任何工具或付费服务。
+
 ## 安装
 
 ```powershell
@@ -77,6 +79,7 @@ Set-Location ../web
 npm run build
 npm run typecheck
 npm run test:browser
+npm run test:account
 ```
 
 浏览器测试需要两个服务运行及本机Chrome/Edge；可用CHROME_PATH指定浏览器。仅生成合成图片和测试文案，不使用真实客户数据。测试使用的浏览器profile会由Playwright管理。

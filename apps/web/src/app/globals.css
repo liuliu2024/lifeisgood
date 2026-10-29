@@ -806,7 +806,9 @@ dialog li {
   .sidebar {
     transform: translateX(-100%);
     visibility: hidden;
-    transition: transform 0.18s, visibility 0s 0.18s;
+    transition:
+      transform 0.18s,
+      visibility 0s 0.18s;
   }
   .sidebar.is-open {
     transform: translateX(0);
@@ -1188,4 +1190,45 @@ dialog li {
     display: inline-flex;
     margin-top: 4px;
   }
+}
+.site-name {
+  display: block;
+  max-width: 154px;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.public-announcement p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-top: 6px;
+}
+.public-announcement strong {
+  font-weight: 500;
+}
+.publish-settings {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: grid;
+  gap: 14px;
+}
+.publish-settings .button {
+  justify-self: start;
+}
+.support-email {
+  overflow-wrap: anywhere;
+}
+.page-footer {
+  flex-wrap: wrap;
+}
+.page-footer > span {
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.account-settings {
+  max-width: 600px;
+}
+.account-settings dd {
+  overflow-wrap: anywhere;
 }

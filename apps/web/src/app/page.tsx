@@ -18,6 +18,11 @@ type Account = {
   display_name?: string;
   role?: string;
 };
+type SiteProfile = {
+  site_name: string;
+  support_email: string;
+  announcement: string;
+};
 type PrivateFile = {
   id: string;
   name: string;
@@ -141,6 +146,15 @@ export default function Home() {
   });
   const [settingsState, setSettingsState] = useState("");
   const [settingsReady, setSettingsReady] = useState(false);
+  const [savedSettings, setSavedSettings] = useState<SiteProfile | null>(null);
+  const [siteProfile, setSiteProfile] = useState<SiteProfile>({
+    site_name: "生活小助手",
+    support_email: "",
+    announcement: "",
+  });
+  const [passwordOpen, setPasswordOpen] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordBusy, setPasswordBusy] = useState(false);
   const [files, setFiles] = useState<PrivateFile[]>([]);
   const [jobs, setJobs] = useState<
     { id: string; title?: string; status: string }[]
@@ -150,6 +164,28 @@ export default function Home() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const authRef = useRef<HTMLDialogElement>(null);
+  const passwordRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    request<SiteProfile>("/api/site-profile")
+      .then(setSiteProfile)
+      .catch(() => {
+        /* Keep the built-in name if profile is unavailable. */
+      });
+  }, []);
+  useEffect(() => {
+    document.title = `${siteProfile.site_name || "生活小助手"} · 经营工作台`;
+  }, [siteProfile.site_name]);
+  useEffect(() => {
+    if (passwordOpen) passwordRef.current?.showModal();
+    else {
+      passwordRef.current?.close();
+      passwordRef.current?.querySelector("form")?.reset();
+      setPasswordError("");
+    }
+  }, [passwordOpen]);
+  useEffect(() => {
+    if (!account) setPasswordOpen(false);
+  }, [account]);
   useEffect(() => {
     try {
       const saved = JSON.parse(
@@ -174,6 +210,7 @@ export default function Home() {
       request<{ settings: typeof settings }>("/api/foundation/admin/settings")
         .then((data) => {
           setSettings(data.settings);
+          setSavedSettings(data.settings);
           setSettingsReady(true);
           setSettingsState("");
         })
@@ -330,13 +367,80 @@ export default function Home() {
         { method: "PUT", body: JSON.stringify({ settings }) },
       );
       setSettings(data.settings);
-      setSettingsState("网站基础设置已保存；工具与付费服务仍未启用。");
+      setSavedSettings(data.settings);
+      setSettingsState("草稿已保存，网站当前展示未改变。确认后可应用到网站。");
     } catch (error) {
       setSettingsState(
         error instanceof Error ? error.message : "保存失败，请重试。",
       );
     } finally {
       setBusy(false);
+    }
+  }
+  async function publishSettings() {
+    if (
+      !settingsReady ||
+      !savedSettings ||
+      JSON.stringify(settings) !== JSON.stringify(savedSettings)
+    )
+      return;
+    setBusy(true);
+    setSettingsState("");
+    try {
+      const applied = await request<SiteProfile>(
+        "/api/foundation/admin/settings/publish",
+        { method: "POST" },
+      );
+      setSiteProfile(applied);
+      setSettingsState(
+        "已将保存的名称、支持邮箱和公告应用到网站。工具与付费服务仍未启用。",
+      );
+    } catch (error) {
+      setSettingsState(
+        error instanceof Error
+          ? error.message
+          : "应用失败，网站展示未确认更新，请重试。",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function changePassword(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const current = String(data.get("current_password") || "");
+    const next = String(data.get("new_password") || "");
+    if (next !== data.get("confirm_password")) {
+      setPasswordError("两次新密码不一致，请重新确认。");
+      return;
+    }
+    setPasswordBusy(true);
+    setPasswordError("");
+    try {
+      const result = await request<{
+        authenticated: boolean;
+        user: Account | null;
+      }>("/api/auth/password", {
+        method: "POST",
+        body: JSON.stringify({ current_password: current, new_password: next }),
+      });
+      if (!result.authenticated || !result.user)
+        throw new Error("服务尚未确认密码修改，请重新登录确认。");
+      setAccount(result.user);
+      form.reset();
+      setPasswordOpen(false);
+      setMessage(
+        "密码已修改，其他设备和旧会话已退出。当前设备保持登录。邮箱仍未验证。",
+      );
+    } catch (error) {
+      setPasswordError(
+        error instanceof Error
+          ? error.message
+          : "修改失败，请检查当前密码后重试。",
+      );
+    } finally {
+      setPasswordBusy(false);
     }
   }
   async function uploadFile(event: FormEvent<HTMLFormElement>) {
@@ -416,13 +520,16 @@ export default function Home() {
         <button
           className="brand"
           onClick={() => navigate("home")}
-          aria-label="生活小助手首页"
+          aria-label={`${siteProfile.site_name || "生活小助手"}首页`}
         >
           <span className="brand-mark">
             <Icon name="leaf" size={25} />
           </span>
           <span>
-            生活小助手<small>把经营小事，办得顺一点</small>
+            <span className="site-name">
+              {siteProfile.site_name || "生活小助手"}
+            </span>
+            <small>把经营小事，办得顺一点</small>
           </span>
         </button>
         <div className="sidebar-label">你的经营工具箱</div>
@@ -533,6 +640,15 @@ export default function Home() {
               工具待接入
             </span>
           </div>
+          {siteProfile.announcement && (
+            <section
+              className="notice public-announcement"
+              aria-label="网站公告"
+            >
+              <strong>网站公告</strong>
+              <p>{siteProfile.announcement}</p>
+            </section>
+          )}
           {message && (
             <div className="notice" role="status">
               {message}
@@ -758,17 +874,19 @@ export default function Home() {
           ) : view === "workspace" ? (
             <>
               <div className="tabs" role="tablist" aria-label="工作台内容">
-                {["我的任务", "我的文件", "账户与订单"].map((item) => (
-                  <button
-                    role="tab"
-                    aria-selected={workspaceTab === item}
-                    className={workspaceTab === item ? "active" : ""}
-                    key={item}
-                    onClick={() => setWorkspaceTab(item)}
-                  >
-                    {item}
-                  </button>
-                ))}
+                {["我的任务", "我的文件", "账号设置", "账户与订单"].map(
+                  (item) => (
+                    <button
+                      role="tab"
+                      aria-selected={workspaceTab === item}
+                      className={workspaceTab === item ? "active" : ""}
+                      key={item}
+                      onClick={() => setWorkspaceTab(item)}
+                    >
+                      {item}
+                    </button>
+                  ),
+                )}
               </div>
               <section className="workspace-panel">
                 <h2>{workspaceTab}</h2>
@@ -802,7 +920,35 @@ export default function Home() {
                         </button>
                       </div>
                     )}
-                    {workspaceTab === "我的文件" ? (
+                    {workspaceTab === "账号设置" ? (
+                      <section className="account-settings">
+                        <dl className="detail-facts">
+                          <div>
+                            <dt>邮箱账号</dt>
+                            <dd>{account.email}</dd>
+                          </div>
+                          <div>
+                            <dt>邮箱验证状态</dt>
+                            <dd>尚未验证；暂未开通验证邮件和邮件找回。</dd>
+                          </div>
+                          <div>
+                            <dt>密码安全</dt>
+                            <dd>
+                              修改密码后，其他设备和所有旧会话会退出；当前设备继续登录。
+                            </dd>
+                          </div>
+                        </dl>
+                        <button
+                          className="button"
+                          onClick={() => {
+                            setPasswordError("");
+                            setPasswordOpen(true);
+                          }}
+                        >
+                          修改密码
+                        </button>
+                      </section>
+                    ) : workspaceTab === "我的文件" ? (
                       <>
                         <form className="upload-form" onSubmit={uploadFile}>
                           <label>
@@ -944,8 +1090,11 @@ export default function Home() {
                 </div>
               ) : (
                 <>
-                  <h2>工具与服务配置</h2>
-                  <p>当前没有已启用的模型 API 或支付通道。</p>
+                  <h2>网站基础设置草稿</h2>
+                  <p>
+                    保存草稿不会改变公开页面。应用后仅更新网站名称、支持邮箱与公告；工具、模型
+                    API 和支付仍未开通。
+                  </p>
                   <form className="admin-form" onSubmit={saveSettings}>
                     <label>
                       网站名称
@@ -994,9 +1143,34 @@ export default function Home() {
                       disabled={busy || !settingsReady}
                       type="submit"
                     >
-                      {busy ? "正在保存…" : "保存基础设置"}
+                      {busy ? "正在处理…" : "保存草稿"}
                     </button>
                     <p role="status">{settingsState}</p>
+                    <div className="publish-settings">
+                      <h3>应用已保存的草稿</h3>
+                      <p>
+                        将上面已保存的三个文字字段展示给访客。文字按纯文本显示，不执行代码。
+                      </p>
+                      <button
+                        className="button secondary"
+                        type="button"
+                        disabled={
+                          busy ||
+                          !settingsReady ||
+                          !savedSettings ||
+                          JSON.stringify(settings) !==
+                            JSON.stringify(savedSettings)
+                        }
+                        onClick={publishSettings}
+                      >
+                        应用到网站
+                      </button>
+                      {savedSettings &&
+                        JSON.stringify(settings) !==
+                          JSON.stringify(savedSettings) && (
+                          <p>有尚未保存的修改，请先保存草稿。</p>
+                        )}
+                    </div>
                   </form>
                 </>
               )}
@@ -1023,7 +1197,12 @@ export default function Home() {
             </section>
           )}
           <footer className="page-footer">
-            <span>生活小助手</span>
+            <span>{siteProfile.site_name || "生活小助手"}</span>
+            {siteProfile.support_email && (
+              <span className="support-email">
+                支持邮箱：{siteProfile.support_email}
+              </span>
+            )}
             <p>工具尚未接入 · 模型 API 未开通 · 支付未开通</p>
             <button
               className="text-button"
@@ -1192,6 +1371,79 @@ export default function Home() {
         <p className="field-help">
           使用本地邮箱密码账号；邮箱未验证，暂未开通邮件找回。
         </p>
+      </dialog>
+      <dialog
+        ref={passwordRef}
+        className="auth-dialog"
+        aria-labelledby="password-title"
+        onCancel={() => setPasswordOpen(false)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) setPasswordOpen(false);
+        }}
+      >
+        <div className="dialog-heading">
+          <span>账号安全</span>
+          <button
+            className="icon-button"
+            aria-label="关闭修改密码"
+            onClick={() => setPasswordOpen(false)}
+          >
+            <Icon name="close" />
+          </button>
+        </div>
+        <h2 id="password-title">修改密码</h2>
+        <p>修改成功后退出其他设备和旧会话，当前设备继续登录。</p>
+        <form onSubmit={changePassword}>
+          <label>
+            当前密码
+            <input
+              name="current_password"
+              type="password"
+              autoComplete="current-password"
+              required
+              maxLength={128}
+            />
+          </label>
+          <label>
+            新密码
+            <input
+              name="new_password"
+              type="password"
+              autoComplete="new-password"
+              required
+              minLength={12}
+              maxLength={128}
+              aria-describedby="new-password-help"
+            />
+          </label>
+          <label>
+            确认新密码
+            <input
+              name="confirm_password"
+              type="password"
+              autoComplete="new-password"
+              required
+              minLength={12}
+              maxLength={128}
+            />
+          </label>
+          <p id="new-password-help" className="field-help">
+            新密码须为 12–128
+            位。不要使用与其他网站相同的密码。关闭后清空填写内容。
+          </p>
+          {passwordError && (
+            <p className="form-error" role="alert">
+              {passwordError}
+            </p>
+          )}
+          <button
+            className="button full-width"
+            type="submit"
+            disabled={passwordBusy}
+          >
+            {passwordBusy ? "正在修改…" : "确认修改密码"}
+          </button>
+        </form>
       </dialog>
     </div>
   );
