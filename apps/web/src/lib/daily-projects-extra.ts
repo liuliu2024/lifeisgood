@@ -450,5 +450,71 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "棋盘选格和合法落子操作",
     "output": "本局状态、PGN/JSON",
     "integration": "固定chess.js ESM本机执行，系统字体，无模型或网络对战"
+  },
+  {
+    "id": "DAILY-057",
+    "title": "把常用单位换算清楚",
+    "description": "换算有限长度、质量和温度，保存清楚的结果。",
+    "scene": "life",
+    "repo": "https://github.com/convert-units/convert-units",
+    "stars": 851,
+    "checkedAt": "2026-11-04",
+    "commit": "2e0feb0fc4d6201409144fb6e9a9c56ccf32cbd5",
+    "license": "MIT（实际原文iCopyright保留；零运行依赖）",
+    "chinese": "平台中文有限长度、质量、温度和容量换算。",
+    "maintenance": "未归档，仓库push2026-10-18；固定3.0.0-beta.8为测试版，不称稳定版。",
+    "limitations": [
+      "输入绝对值≤1e12/最多6位小数，显示最多6有效数字只是显示格式，不是准确度保证；原库跨制式常数存在近似。",
+      "原始raw保留，英寸1→厘米主结果约2.54；不支持负长度质量容量或低于绝对零度温度。",
+      "不是法定计量、交易结算或货币汇率工具；有限单位与样本容差不保证全范围误差界。"
+    ],
+    "status": "research",
+    "input": "有限普通十进制数字和同类单位",
+    "output": "近似换算预览及TXT/JSON",
+    "integration": "原beta8核心和四类定义七ESM闭包，本机无运行依赖"
+  },
+  {
+    "id": "DAILY-058",
+    "title": "看看照片里的拍摄信息",
+    "description": "本机查看有限照片信息并保存，不上传或展示定位。",
+    "scene": "life",
+    "repo": "https://github.com/MikeKovarik/exifr",
+    "stars": 1253,
+    "checkedAt": "2026-11-04",
+    "commit": "6cbf6e921688faf7723e1f2e0b9e672d1f0aa21c",
+    "license": "MIT（固定lite原制品，无运行依赖）",
+    "chinese": "中文JPEG拍摄信息，只投影六个有限EXIF标量及JPEG头部尺寸。",
+    "maintenance": "未归档，push2024-03-29；固定exifr7.1.3，维护低频不称近期活跃。",
+    "limitations": [
+      "JPEG≤5MiB、单边≤12000/4000万像素；JPEG段数及TIFF目录/偏移/循环预检，Worker5秒终止。",
+      "不含GPS、相机序列号、MakerNote或任意原始标签；没有EXIF时不编造，日期不验证真实性或时区。",
+      "仅读取和TXT/JSON≤16KiB，不修改照片、不删除元数据、不联网地图或上传。"
+    ],
+    "status": "research",
+    "input": "自己的有限JPEG照片",
+    "output": "有限拍摄标签、像素尺寸及TXT/JSON",
+    "integration": "原exifr lite在真实本机Worker处理白名单，平台先结构预检"
+  },
+  {
+    "id": "DAILY-059",
+    "title": "留下声音里想要的一小段",
+    "description": "本机查看有限WAV波形，播放并保存选中的片段。",
+    "scene": "creative",
+    "repo": "https://github.com/katspaugh/wavesurfer.js",
+    "stars": 10460,
+    "checkedAt": "2026-11-04",
+    "commit": "b0ce8810d564af06a60070b14a4a54901baabd48",
+    "license": "BSD-3-Clause（含TypeScript辅助原0BSD）",
+    "chinese": "中文本机WAV波形、主动播放与原PCM片段下载。",
+    "maintenance": "未归档，push2026-11-03；固定WaveSurfer8.0.5原ESM，无运行依赖。",
+    "limitations": [
+      "完整RIFF PCM16 WAV，单/双声道8–48kHz、≤120秒/24MiB；先校验头/chunk/帧与大小，再有限峰值交原库。",
+      "原库提供波形/播放，平台保留原PCM裁剪并生成WAV头；秒数按帧下取整，全长保留末帧。",
+      "不支持MP3、录音、降噪、后台播放保证；最大120秒/24MiB真实压力与所有真机未测。"
+    ],
+    "status": "research",
+    "input": "本机有限PCM16 WAV和片段起止秒数",
+    "output": "真实波形、主动播放暂停及WAV片段",
+    "integration": "原WaveSurfer本机渲染播放，平台头预检/峰值/PCM裁剪，无麦克风或外部资源"
   }
 ];

@@ -1,0 +1,15 @@
+/* Platform wrapper, MIT. Only local bounded ArrayBuffers are accepted. */
+function checkExif(v,base,end){const order=v.getUint16(base);if(![0x4949,0x4d4d].includes(order))throw Error('EXIF字节序无效');const le=order===0x4949;const u16=p=>v.getUint16(p,le),u32=p=>v.getUint32(p,le);if(base+8>end||u16(base+2)!==42)throw Error('EXIF头无效');const seen=new Set();let total=0;const sizes={1:1,2:1,3:2,4:4,5:8,6:1,7:1,8:2,9:4,10:8,11:4,12:8,13:4};function directory(off,depth){if(!off)return;if(depth>4||seen.has(off)||seen.size>=16)throw Error('EXIF目录循环或层级超限');seen.add(off);const p=base+off;if(p<base+8||p+2>end)throw Error('EXIF目录偏移无效');const n=u16(p);if(n>256||(total+=n)>512||p+2+12*n+4>end)throw Error('EXIF目录超过边界');for(let i=0;i<n;i++){const a=p+2+12*i,tag=u16(a),type=u16(a+2),count=u32(a+4),size=sizes[type];if(!size)throw Error('不支持的EXIF数据类型');const bytes=count*size,value=bytes>4?base+u32(a+8):a+8;if(value<base||value+bytes>end)throw Error('EXIF标签长度或偏移无效');if([271,272,36867].includes(tag)&&bytes>1024)throw Error('EXIF文字标签超过上限');if([0x8769,0xa005].includes(tag)){if(type!==4||count!==1)throw Error('EXIF子目录无效');directory(u32(a+8),depth+1);}if(tag===0x8825&&count===1&&(base+u32(a+8)<base+8||base+u32(a+8)+2>end))throw Error('GPS目录偏移无效');}directory(u32(p+2+12*n),depth+1);}directory(u32(base+4),0);}
+self.onmessage=async({data})=>{try{
+ const b=data.buffer;if(!(b instanceof ArrayBuffer)||b.byteLength>5*1024*1024)throw Error('文件超过5MiB或无法读取');
+ const v=new DataView(b);if(v.byteLength<4||v.getUint16(0)!==0xffd8)throw Error('请选择真正的JPEG照片');
+ const exifs=[];let p=2,count=0,width=0,height=0;while(p+4<=v.byteLength){if(++count>512)throw Error('JPEG段数超过上限');if(v.getUint8(p++)!==255)throw Error('JPEG结构无效');let marker=v.getUint8(p++);while(marker===255&&p<v.byteLength)marker=v.getUint8(p++);if(marker===0xda||marker===0xd9)break;if(marker===1||(marker>=0xd0&&marker<=0xd7))continue;const n=v.getUint16(p);if(n<2||p+n>v.byteLength)throw Error('JPEG段长度无效');if(marker===0xe1&&n>=14&&v.getUint32(p+2)===0x45786966&&v.getUint16(p+6)===0)exifs.push([p+8,p+n]);if([0xc0,0xc1,0xc2].includes(marker)){if(n<8)throw Error('JPEG尺寸段无效');height=v.getUint16(p+3);width=v.getUint16(p+5);}p+=n;}
+ if(!width||!height||width>12000||height>12000||width*height>40000000)throw Error('照片尺寸不支持或超过上限');
+ // APP1 EXIF data is structurally bounded before calling the upstream parser.
+ for(const [base,end] of exifs)checkExif(v,base,end);
+ importScripts('/vendor/exifr/lite.umd.js');if(typeof exifr?.parse!=='function')throw Error('本地照片组件未加载');
+ const keys=['Make','Model','DateTimeOriginal','ExifImageWidth','ExifImageHeight','Orientation'];
+ const raw=await exifr.parse(b,{ifd0:{pick:[271,272,274]},exif:{pick:[36867,40962,40963]},gps:false,makerNote:false,userComment:false,translateValues:false,reviveValues:false});const tags={};
+ for(const k of keys){const value=raw?.[k];if(typeof value==='number'&&Number.isFinite(value))tags[k]=value;else if(typeof value==='string')tags[k]=value.replace(/[\u0000-\u001f\u007f]/g,' ').slice(0,128);}
+ self.postMessage({ok:true,width,height,tags});
+ }catch(e){self.postMessage({ok:false,error:e instanceof Error?e.message:'照片信息读取失败'});}};

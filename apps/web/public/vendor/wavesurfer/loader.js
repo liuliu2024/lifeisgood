@@ -1,0 +1,1 @@
+import WaveSurfer from './wavesurfer.mjs'; window.LifeWaveSurfer=WaveSurfer;

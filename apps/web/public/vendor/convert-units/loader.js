@@ -1,0 +1,1 @@
+import {configureMeasurements as configure} from './convert.js';import length from './definitions/length.js';import mass from './definitions/mass.js';import temperature from './definitions/temperature.js';import volume from './definitions/volume.js';window.LifeUnits=configure({length,mass,temperature,volume});

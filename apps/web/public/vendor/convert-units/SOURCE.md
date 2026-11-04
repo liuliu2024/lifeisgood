@@ -1,0 +1,11 @@
+# convert-units bounded local source
+Repository https://github.com/convert-units/convert-units
+Published runtime 3.0.0-beta.8, **beta, not stable**. npm gitHead 2e0feb0fc4d6201409144fb6e9a9c56ccf32cbd5.
+Official npm tar SHA1 8565462d4a030f9fedac54669aeeffefe288dc97 verified before extraction. Downloaded raw official archive without running install/build/test scripts; no main dependency lock change. Stable2.3.4 was inspected but not shipped because it brings a legacy lodash chain. beta8 declares no runtime dependencies. Scripts compile TypeScript and test Jest; none executed.
+Unmodified original ESM convert/number_wrapper/wrapper and length/mass/temperature/volume definitions copied, hashes in SHA256SUMS. Local platform loader only imports this explicit closed graph. No external imports, eval, remote fonts, assets, runtime helpers or locale database. Original complete MIT permission/copyright retained, including original first-byte spelling iCopyright(c)2013 Ben Ng; not corrected or fabricated. GitHub API NOASSERTION is not substituted for actual package LICENSE. Source build was not reproduced or byte-compared to Git at this commit; gitHead is registry provenance, not a rebuild guarantee.
+Chinese platform wrapper accepts finite decimal ±1e12, at most6 fractional digits, finite named units in these four measures, output12 significant digits approximate IEEE754. Temperature -273.15C absolute-zero lower bound enforced by a conversion into Kelvin. No monetary exchange, legal metrology, trade settlement or tax advice. TXT/JSON local only, not a full upstream application.
+Research snapshot read2026-11-04:851Stars, repository push2026-10-18, unarchived; not a quality score.
+
+Observed original anchor approximation:1in→cm gives2.53999991872 rather than exact2.54. Output12 significant digits is formatting, not accuracy. Nine independent physical samples used max(1e-7 absolute,5e-7 relative) tolerance; not a full-unit accuracy guarantee. No source constants patched.
+
+Usability follow-up: original raw untouched; platform displayed result now at most6 significant digits (1in≈2.54cm). JSON raw keeps original IEEE754 value; display6 is formatting, not accuracy. Prior display12 outputs retained as history.

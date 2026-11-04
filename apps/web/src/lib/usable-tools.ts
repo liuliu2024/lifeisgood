@@ -32,9 +32,16 @@ export const usableTools = [
   {"key": "date-span", "path": "/tools/date-span", "title": "算算两个日期相隔几天", "description": "严格公历日期间隔与加减天数，保存结果。", "repo": "https://github.com/iamkun/dayjs", "accepted": true},
   {"key": "task-board", "path": "/tools/task-board", "title": "把待办事情排到小看板", "description": "本机三列整理短任务，拖动或按钮移动，保存清单。", "repo": "https://github.com/SortableJS/Sortable", "accepted": true},
   {"key": "chess", "path": "/tools/chess", "title": "一起下一盘国际象棋", "description": "离线同屏双人下棋，保存本次棋谱。", "repo": "https://github.com/jhlywa/chess.js", "accepted": true},
+  {"key": "units", "path": "/tools/units", "title": "把常用单位换算清楚", "description": "换算有限长度、质量和温度，保存清楚的结果。", "repo": "https://github.com/convert-units/convert-units", "accepted": true},
+  {"key": "photo-info", "path": "/tools/photo-info", "title": "看看照片里的拍摄信息", "description": "本机查看有限照片信息并保存，不上传或展示定位。", "repo": "https://github.com/MikeKovarik/exifr", "accepted": true},
+  {"key": "audio-wave", "path": "/tools/audio-wave", "title": "留下声音里想要的一小段", "description": "本机查看有限WAV波形，播放并保存选中的片段。", "repo": "https://github.com/katspaugh/wavesurfer.js", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "units": {"version": "convert-units 3.0.0-beta.8（测试版）", "license": "MIT（零运行依赖）", "source": "/vendor/convert-units/SOURCE.md", "scope": "有限四类单位、6位显示近似，不保证精密计量；原raw和TXT/JSON保留。"},
+  "photo-info": {"version": "exifr 7.1.3 lite", "license": "MIT（零运行依赖）", "source": "/vendor/exifr/SOURCE.md", "scope": "JPEG≤5MiB/4000万像素，六个有限EXIF标量与尺寸；不含定位，不去除元数据。"},
+  "audio-wave": {"version": "WaveSurfer.js 8.0.5", "license": "BSD-3-Clause（含TS辅助0BSD）", "source": "/vendor/wavesurfer/SOURCE.md", "scope": "PCM16 WAV单/双声道8–48kHz、120秒/24MiB；本机波形/播放/片段WAV，非MP3或录音。"},
+
   "date-span": {"version": "Day.js 1.11.23 + UTC", "license": "MIT（同项目核心和UTC插件）", "source": "/vendor/dayjs/SOURCE.md", "scope": "1901–2099公历日期/±36500整数天；TXT/JSON，不计算工作日调休或法律期限。"},
   "task-board": {"version": "SortableJS 1.15.6", "license": "MIT（含内联Babel原文）", "source": "/vendor/sortable/SOURCE.md", "scope": "三列最多50张120字符卡片，拖动/按钮移动与TXT/JSON；刷新离开丢失，非云协作。"},
   "chess": {"version": "chess.js 1.4.0", "license": "BSD-2-Clause（含Peggy解析器MIT）", "source": "/vendor/chessjs/SOURCE.md", "scope": "离线同屏双人，最多400半回合、PGN/JSON；非AI或联网、非比赛裁判。"},

@@ -260,6 +260,75 @@
           }
         }
       ]
+    },
+    {
+      "id": "daily-057-units-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "units",
+          "title": "把常用单位换算清楚",
+          "path": "/tools/units",
+          "item": {
+            "id": "DAILY-057",
+            "title": "把常用单位换算清楚",
+            "description": "换算有限长度、质量和温度，保存清楚的结果。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 161,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-058-photo-info-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "photo-info",
+          "title": "看看照片里的拍摄信息",
+          "path": "/tools/photo-info",
+          "item": {
+            "id": "DAILY-058",
+            "title": "看看照片里的拍摄信息",
+            "description": "本机查看有限照片信息并保存，不上传或展示定位。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 162,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-059-audio-wave-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "audio-wave",
+          "title": "留下声音里想要的一小段",
+          "path": "/tools/audio-wave",
+          "item": {
+            "id": "DAILY-059",
+            "title": "留下声音里想要的一小段",
+            "description": "本机查看有限WAV波形，播放并保存选中的片段。",
+            "module_ids": [
+              "life",
+              "creative"
+            ],
+            "sort_order": 163,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
     }
   ]
 }
