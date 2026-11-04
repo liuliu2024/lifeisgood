@@ -49,9 +49,16 @@ export const usableTools = [
   {"key": "text-image", "path": "/tools/text-image", "title": "把一段文字做成长图", "description": "把有限纯文字排成图片，预览并保存PNG。", "repo": "https://github.com/bubkoo/html-to-image", "accepted": true},
   {"key": "recipe-scale", "path": "/tools/recipe-scale", "title": "人多一点，食材怎么算？", "description": "按原人数和目标人数，精确缩放自己填写的原料份量。", "repo": "https://github.com/rawify/Fraction.js", "accepted": true},
   {"key": "phone-format", "path": "/tools/phone-format", "title": "把电话号码排整齐", "description": "本机整理自己的号码格式，保存结果，不查询或拨号。", "repo": "https://gitlab.com/catamphetamine/libphonenumber-js", "accepted": true},
+  {"key": "maze", "path": "/tools/maze", "title": "做张迷宫，换换脑筋", "description": "选择大小和种子，生成迷宫，保存图片和参考路线。", "repo": "https://github.com/bestguy/generate-maze", "accepted": true},
+  {"key": "morse-note", "path": "/tools/morse-note", "title": "把一句话变成点划音码", "description": "标准字符转摩尔斯点划，主动试听并保存短音频和文字。", "repo": "https://github.com/hustcc/xmorse", "accepted": true},
+  {"key": "pitch-check", "path": "/tools/pitch-check", "title": "看看这段单音大约多高", "description": "本机估算短WAV的单音频率与近似音名，保存CSV和JSON。", "repo": "https://github.com/ianprime0509/pitchy", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "maze": {"version": "generate-maze1.1.0", "license": "MIT，附原Babel辅助MIT通知", "source": "/vendor/generate-maze/SOURCE.md", "scope": "行列5–25/有限seed，真实PNG/SVG/JSON与参考路；本批样本树结构独立核，非所有seed或打印保证。"},
+  "morse-note": {"version": "xmorse1.0.0", "license": "MIT，附原Microsoft辅助0BSD通知", "source": "/vendor/xmorse/SOURCE.md", "scope": "1–40标准ASCII字符、10–20WPM、最多15秒700Hz WAV/TXT/JSON；无中文国际编码或应急通信保证。"},
+  "pitch-check": {"version": "Pitchy4.1.0 + fft.js4.0.4", "license": "双MIT（固定4.1.0原许可及FFT原README完整许可）", "source": "/vendor/pitchy/SOURCE.md", "scope": "PCM16 WAV≤5s/1MiB、最多20窗4096帧，80–1200Hz和近似音名、CSV/JSON，非专业调音或身份判断。"},
+
   "recipe-scale": {"version": "Fraction.js5.3.4", "license": "MIT（零运行依赖）", "source": "/vendor/fraction/SOURCE.md", "scope": "1–20原料、人数1–100、有限正数量，精确分数及6位近似、TXT/JSON；不换单位或提供食用/药剂安全建议。"},
   "phone-format": {"version": "libphonenumber-js1.13.15（官方GitLab）", "license": "MIT + Apache-2.0，附Google/Babel原版权通知", "source": "/vendor/libphonenumber/SOURCE.md", "scope": "最多30行/每行64/总4096UTF16，CN/US/GB/JP；规则格式不是可接通或身份验证，无查询拨号。"},
 

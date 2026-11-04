@@ -817,5 +817,68 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "自己的有限纯文本与受控参数",
     "output": "中文预览及真实TXT/JSON",
     "integration": "本机固定开源库及Worker，不调用收费API"
+  },
+  {
+    "id": "DAILY-075",
+    "title": "做张迷宫，换换脑筋",
+    "description": "选择大小和种子，生成迷宫，保存图片和参考路线。",
+    "scene": "creative",
+    "repo": "https://github.com/bestguy/generate-maze",
+    "stars": 29,
+    "checkedAt": "2026-11-05",
+    "commit": "17f0097ea74c3803f7f68b11b923b99cb8cf9290",
+    "license": "MIT，附原Babel辅助MIT通知",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2026-01-21；体量小不冒高Star或高频。",
+    "limitations": [
+      "行列5–25/有限seed，真实PNG/SVG/JSON与参考路；本批样本树结构独立核，非所有seed或打印保证。",
+      "种子仅本环境复现；图片开入口出口，JSON原外墙仍闭合；不自动打印。"
+    ],
+    "status": "research",
+    "input": "自己的有限文字、参数或短WAV",
+    "output": "本机真实预览与可下载文件",
+    "integration": "固定原开源库及有界Worker，无模型收费API"
+  },
+  {
+    "id": "DAILY-076",
+    "title": "把一句话变成点划音码",
+    "description": "标准字符转摩尔斯点划，主动试听并保存短音频和文字。",
+    "scene": "creative",
+    "repo": "https://github.com/hustcc/xmorse",
+    "stars": 326,
+    "checkedAt": "2026-11-05",
+    "commit": "12f804fc2d164e1597984de7a993bee9064c2117",
+    "license": "MIT，附原Microsoft辅助0BSD通知",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2022-06-05；旧维护不称活跃。",
+    "limitations": [
+      "1–40标准ASCII字符、10–20WPM、最多15秒700Hz WAV/TXT/JSON；无中文国际编码或应急通信保证。",
+      "只A–Z数字及. , ?和空格；原库编码，平台有限PCM合成，不录音或解码。"
+    ],
+    "status": "research",
+    "input": "自己的有限文字、参数或短WAV",
+    "output": "本机真实预览与可下载文件",
+    "integration": "固定原开源库及有界Worker，无模型收费API"
+  },
+  {
+    "id": "DAILY-077",
+    "title": "看看这段单音大约多高",
+    "description": "本机估算短WAV的单音频率与近似音名，保存CSV和JSON。",
+    "scene": "creative",
+    "repo": "https://github.com/ianprime0509/pitchy",
+    "stars": 139,
+    "checkedAt": "2026-11-05",
+    "commit": "d830636bdcd82b4a0648f65a5ebc182e231f8458",
+    "license": "双MIT（固定4.1.0原许可及FFT原README完整许可）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2026-11-01；固定4.1.0原MIT不以main0BSD替换。",
+    "limitations": [
+      "PCM16 WAV≤5s/1MiB、最多20窗4096帧，80–1200Hz和近似音名、CSV/JSON，非专业调音或身份判断。",
+      "双声道平均可反相抵消，clarity不是概率，噪声复调可能误判；无麦克风上传。"
+    ],
+    "status": "research",
+    "input": "自己的有限文字、参数或短WAV",
+    "output": "本机真实预览与可下载文件",
+    "integration": "固定原开源库及有界Worker，无模型收费API"
   }
 ];

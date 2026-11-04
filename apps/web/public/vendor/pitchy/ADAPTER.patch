@@ -1,0 +1,19 @@
+--- pitchy.original.js
++++ pitchy.js
+@@ -1,4 +1,4 @@
+-import FFT from "fft.js";
++import FFT from "./fft.js";
+ 
+ /**
+  * @typedef {Float32Array | Float64Array | number[]} Buffer One of the supported
+--- fft.original.js
++++ fft.js
+@@ -40,7 +40,7 @@
+   this._data = null;
+   this._inv = 0;
+ }
+-module.exports = FFT;
++export default FFT;
+ 
+ FFT.prototype.fromComplexArray = function fromComplexArray(complex, storage) {
+   var res = storage || new Array(complex.length >>> 1);
