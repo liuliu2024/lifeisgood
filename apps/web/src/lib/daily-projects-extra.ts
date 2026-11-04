@@ -318,5 +318,72 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "有限计时模式/时长与主动操作",
     "output": "计时显示及本次记录TXT/JSON",
     "integration": "固定本地UMD，无模型或外部运行API"
+  },
+  {
+    "id": "DAILY-051",
+    "title": "把数字写成中文金额",
+    "description": "将有限金额转换成中文数字和大写，保存结果。",
+    "scene": "life",
+    "repo": "https://github.com/digi3studio/number-to-chinese-words",
+    "stars": 35,
+    "checkedAt": "2026-11-04",
+    "commit": "528abc09ad35379d9b244d60d61234d4e8780a18",
+    "license": "MIT（digi3studio及内联Babel辅助原文分别保留）",
+    "chinese": "原库整数核心，平台新增四位分组、简体大写和元角分包装。",
+    "maintenance": "未归档，最近push2018-09-27；固定1.0.20，小型低频项目，不称高Star或近期活跃。",
+    "limitations": [
+      "最多12位整数、2位小数，不默默舍入；小数按字符串处理，不转浮点数。",
+      "原库整体跨亿万组合有已知缺陷；平台只调用0–9999原核，按字符串分组拼亿万并整值BigInt回读，未修改原UMD。",
+      "金额包装是平台新增功能，不承诺银行票据或法定格式合规。",
+      "原候选Nzh完整原授权未核清，未采用、不分发、不计数。"
+    ],
+    "status": "research",
+    "input": "有限普通十进制数字与中文数字/金额模式",
+    "output": "中文结果和真实TXT/JSON",
+    "integration": "本地固定MIT整数核心及平台有界字符串适配"
+  },
+  {
+    "id": "DAILY-052",
+    "title": "看看不同时区的时间",
+    "description": "换算当地时间与UTC，明确夏令时重复或缺失时刻。",
+    "scene": "life",
+    "repo": "https://github.com/moment/luxon",
+    "stars": 16456,
+    "checkedAt": "2026-11-04",
+    "commit": "4262a38ded7762e22608a9feb9f117b40d338ced",
+    "license": "MIT（Luxon与明确改编Moment部分原文分别保留）",
+    "chinese": "平台中文有限地区时区换算，不自动查用户位置。",
+    "maintenance": "未归档，最近push2026-08-09；固定3.7.2原始ESM，不分发Babel全局构建。",
+    "limitations": [
+      "9个有限IANA地区，输入当地日期2000–2035；不存在的DST时刻拒绝，重复时刻须明确选择UTC候选。",
+      "依赖宿主Intl时区数据；未逐年验证所有历史/未来政策，未来规则可能变化。",
+      "仅日期时区换算和TXT/JSON，不查询天气、位置或代订日程，不分发外部时区/locale数据库。"
+    ],
+    "status": "research",
+    "input": "当地日期时间、来源地区及必要UTC候选选择",
+    "output": "UTC与各地区对应时间、TXT/JSON",
+    "integration": "原始本地Luxon ESM与宿主Intl，无外部运行请求"
+  },
+  {
+    "id": "DAILY-053",
+    "title": "为小小的好事庆祝一下",
+    "description": "主动播放有限庆祝效果，保存自己的祝福静帧。",
+    "scene": "creative",
+    "repo": "https://github.com/catdad/canvas-confetti",
+    "stars": 12845,
+    "checkedAt": "2026-11-04",
+    "commit": "5f77cdeb0b9f6b69558e8369c63071fc9415f842",
+    "license": "ISC（完整原文，无运行依赖）",
+    "chinese": "中文主动庆祝画布和PNG静帧，不是视频/GIF编辑器。",
+    "maintenance": "未归档，最近push2025-10-25；固定1.9.4原始browser制品，Git提交已确认存在。",
+    "limitations": [
+      "960×640画布，单轮80粒/最多3秒，短祝福最多24字符；主动播放，可随时停止。",
+      "减少动态偏好使用静态替代；隐藏/切页停止，无自动声音、通知、照片或远程字体。",
+      "仅PNG静帧，不导出视频/GIF；系统字体和实际随机粒子画面不保证跨设备一致。"
+    ],
+    "status": "research",
+    "input": "短祝福、有限配色与主动播放操作",
+    "output": "真实庆祝动效与PNG静帧",
+    "integration": "原始本机canvas-confetti，平台背景文字合成和资源清理"
   }
 ];

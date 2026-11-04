@@ -167,6 +167,30 @@
         "key": "timer", "title": "给手头的事计个时", "path": "/tools/timer",
         "item": {"id": "DAILY-050", "title": "给手头的事计个时", "description": "使用本机秒表或倒计时，保存本次计时记录。", "module_ids": ["life","work"], "sort_order": 154, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-051-amount-words-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "amount-words", "title": "把数字写成中文金额", "path": "/tools/amount-words",
+        "item": {"id": "DAILY-051", "title": "把数字写成中文金额", "description": "将有限金额转换成中文数字和大写，保存结果。", "module_ids": ["work","life"], "sort_order": 155, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-052-world-time-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "world-time", "title": "看看不同时区的时间", "path": "/tools/world-time",
+        "item": {"id": "DAILY-052", "title": "看看不同时区的时间", "description": "换算当地时间与UTC，明确夏令时重复或缺失时刻。", "module_ids": ["work","life"], "sort_order": 156, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-053-celebrate-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "celebrate", "title": "为小小的好事庆祝一下", "path": "/tools/celebrate",
+        "item": {"id": "DAILY-053", "title": "为小小的好事庆祝一下", "description": "主动播放有限庆祝效果，保存自己的祝福静帧。", "module_ids": ["life","creative"], "sort_order": 157, "hidden": false, "archived": false}
+      }]
     }
   ]
 }
