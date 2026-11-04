@@ -904,5 +904,47 @@ export const dailyProjectsExtra: DailyProject[] = [
     "toolPath": "/tools/word-search",
     "readmeUrl": "https://github.com/bunkat/wordfind/blob/579ef5abb9e0e25f48f0fdb8fafda875296e692f/Readme.md",
     "licenseUrl": "https://github.com/bunkat/wordfind/blob/579ef5abb9e0e25f48f0fdb8fafda875296e692f/LICENSE"
+  },
+  {
+    "id": "DAILY-081",
+    "title": "从GIF里取出喜欢的一帧",
+    "description": "逐帧查看自己的动图，保存当前完整屏幕PNG和帧清单。",
+    "scene": "creative",
+    "repo": "https://github.com/matt-way/gifuct-js",
+    "stars": 519,
+    "checkedAt": "2026-11-05",
+    "commit": "c497192922d79acc537ec9f4796dfa2d89aaa13a",
+    "license": "MIT（含原LZW与反交错完整通知）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2024-11-12，不冒高频活跃。",
+    "limitations": [
+      "GIF≤2MiB/640边/24帧/完整屏累计400万像素，当前帧PNG+JSON；非GIF编码或完整性认证。",
+      "透明与处置0/1/2/3完整帧合成；原延时0保留。Worker3秒/native PNG8秒仅拒收，未settle不并发。"
+    ],
+    "status": "research",
+    "input": "用户自己选择的有限图片文件",
+    "output": "当前帧PNG与帧清单JSON",
+    "integration": "原开源库实际处理，平台有限预检及本机Worker，无上传模型API"
+  },
+  {
+    "id": "DAILY-082",
+    "title": "给JPEG清除Exif",
+    "description": "不重压地清除Exif，查看仍保留的其它元数据段说明。",
+    "scene": "life",
+    "repo": "https://github.com/hMatoba/Piexifjs",
+    "stars": 617,
+    "checkedAt": "2026-11-05",
+    "commit": "2180d60b8cdf638e236e0a6703b7c378bb4f5785",
+    "license": "MIT（原文件及脚本内两原通知保留）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2021-07-13，旧维护与内部版本差异透明保留。",
+    "limitations": [
+      "有限基线/渐进JPEG≤5MiB，方向缺失或1；仅清Exif，保留XMP/ICC/IPTC/COM与像素，不保证匿名。",
+      "首SOS后Exif、其它方向/特殊JPEG拒绝；原扫描数据逐字保持，不清图片内容。"
+    ],
+    "status": "research",
+    "input": "用户自己选择的有限图片文件",
+    "output": "不重压JPEG与处理说明JSON",
+    "integration": "原开源库实际处理，平台有限预检及本机Worker，无上传模型API"
   }
 ];

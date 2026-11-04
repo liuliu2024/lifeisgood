@@ -1,0 +1,33 @@
+--- gifuct.js.original
++++ gifuct.js
+@@ -1,8 +1,8 @@
+-import GIF from 'js-binary-schema-parser/lib/schemas/gif'
+-import { parse } from 'js-binary-schema-parser'
+-import { buildStream } from 'js-binary-schema-parser/lib/parsers/uint8'
+-import { deinterlace } from './deinterlace'
+-import { lzw } from './lzw'
++import GIF from './parser-schema.js'
++import { parse } from './parser.js'
++import { buildStream } from './parser-uint8.js'
++import { deinterlace } from './deinterlace.js'
++import { lzw } from './lzw.js'
+ 
+ export const parseGIF = arrayBuffer => {
+   const byteData = new Uint8Array(arrayBuffer)
+--- parser-schema.js.original
++++ parser-schema.js
+@@ -1,4 +1,4 @@
+-import { conditional, loop } from '../'
++import { conditional, loop } from './parser.js'
+ import {
+   readByte,
+   peekByte,
+@@ -8,7 +8,7 @@
+   readUnsigned,
+   readArray,
+   readBits,
+-} from '../parsers/uint8'
++} from './parser-uint8.js'
+ 
+ // a set of 0x00 terminated subblocks
+ var subBlocksSchema = {

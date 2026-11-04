@@ -53,9 +53,14 @@ export const usableTools = [
   {"key": "morse-note", "path": "/tools/morse-note", "title": "把一句话变成点划音码", "description": "标准字符转摩尔斯点划，主动试听并保存短音频和文字。", "repo": "https://github.com/hustcc/xmorse", "accepted": true},
   {"key": "pitch-check", "path": "/tools/pitch-check", "title": "看看这段单音大约多高", "description": "本机估算短WAV的单音频率与近似音名，保存CSV和JSON。", "repo": "https://github.com/ianprime0509/pitchy", "accepted": true},
   {"key": "word-search", "path": "/tools/word-search", "title": "把自己的词藏进格子里", "description": "输入自己的词语，生成找词格子，保存PNG、SVG和完整答案JSON。", "repo": "https://github.com/bunkat/wordfind", "accepted": true},
+  {"key": "gif-frames", "path": "/tools/gif-frames", "title": "从GIF里取出喜欢的一帧", "description": "逐帧查看自己的动图，保存当前完整屏幕PNG和帧清单。", "repo": "https://github.com/matt-way/gifuct-js", "accepted": true},
+  {"key": "jpeg-exif-clean", "path": "/tools/jpeg-exif-clean", "title": "给JPEG清除Exif", "description": "不重压地清除Exif，查看仍保留的其它元数据段说明。", "repo": "https://github.com/hMatoba/Piexifjs", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "gif-frames": {"version": "gifuct-js2.1.2 + js-binary-schema-parser2.0.3", "license": "MIT（含原LZW与反交错完整通知）", "source": "/vendor/gifuct/SOURCE.md", "scope": "GIF≤2MiB/640边/24帧/完整屏累计400万像素，当前帧PNG+JSON；非GIF编码或完整性认证。"},
+  "jpeg-exif-clean": {"version": "piexifjs npm1.0.6（内部字段1.0.4原样保留）", "license": "MIT（原文件及脚本内两原通知保留）", "source": "/vendor/piexifjs/SOURCE.md", "scope": "有限基线/渐进JPEG≤5MiB，方向缺失或1；仅清Exif，保留XMP/ICC/IPTC/COM与像素，不保证匿名。"},
+
   "word-search": {"version": "Wordfind.js固定源码579ef5a（原头0.0.1，非npm同名包）", "license": "MIT，保留BunKat2011根与2012原脚本通知", "source": "/vendor/wordfind/SOURCE.md", "scope": "2–8词/每词2–6字/总≤40，BMP汉字或A–Z不混局，8–16格，PNG/SVG/JSON；至少出现一次，非唯一答案或打印保证。"},
   "maze": {"version": "generate-maze1.1.0", "license": "MIT，附原Babel辅助MIT通知", "source": "/vendor/generate-maze/SOURCE.md", "scope": "行列5–25/有限seed，真实PNG/SVG/JSON与参考路；本批样本树结构独立核，非所有seed或打印保证。"},
   "morse-note": {"version": "xmorse1.0.0", "license": "MIT，附原Microsoft辅助0BSD通知", "source": "/vendor/xmorse/SOURCE.md", "scope": "1–40标准ASCII字符、10–20WPM、最多15秒700Hz WAV/TXT/JSON；无中文国际编码或应急通信保证。"},
