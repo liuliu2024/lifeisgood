@@ -44,9 +44,16 @@ export const usableTools = [
   {"key": "quote-sheet", "path": "/tools/quote-sheet", "title": "做一份整齐的报价表", "description": "本机生成静态报价XLSX，预览整数分合计。", "repo": "https://gitlab.com/catamphetamine/write-excel-file", "accepted": true},
   {"key": "word-note", "path": "/tools/word-note", "title": "把要点整理成Word文档", "description": "把有限纯文本说明与会议要点保存为Word文档。", "repo": "https://github.com/dolanmiu/docx", "accepted": true},
   {"key": "intro-slides", "path": "/tools/intro-slides", "title": "做三页简单的介绍", "description": "填写有限介绍文字，预览示意并保存三页PPTX。", "repo": "https://github.com/gitbrent/PptxGenJS", "accepted": true},
+  {"key": "distance", "path": "/tools/distance", "title": "看看两处相隔多远", "description": "手填两点经纬度，估算并保存近似球面直线距离。", "repo": "https://github.com/Turfjs/turf", "accepted": true},
+  {"key": "calendar-event", "path": "/tools/calendar-event", "title": "做一个可导入日历的事项", "description": "填写单个有限事项，预览并保存ICS与JSON。", "repo": "https://github.com/kewisch/ical.js", "accepted": true},
+  {"key": "text-image", "path": "/tools/text-image", "title": "把一段文字做成长图", "description": "把有限纯文字排成图片，预览并保存PNG。", "repo": "https://github.com/bubkoo/html-to-image", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "distance": {"version": "Turf distance/helpers/invariant7.4.0", "license": "MIT（各原包及源码根原文保留）", "source": "/vendor/turf/SOURCE.md", "scope": "手填纬度±90/经度±180、最多6小数；平均半径球面近似，TXT/JSON，非道路导航或法定测绘。"},
+  "calendar-event": {"version": "ICAL.js2.2.1", "license": "MPL-2.0（原库与preferred源码公开）", "source": "/vendor/icaljs/SOURCE.md", "scope": "UTC2000–2099、最长7天单事项，固定UTC+8或0，ICS/JSON，无通知邀请或自动DST。"},
+  "text-image": {"version": "html-to-image1.11.13", "license": "MIT，附tslib2.5.0 Microsoft0BSD原文", "source": "/vendor/html-to-image/SOURCE.md", "scope": "纯文本5000UTF16/32段、标题80，480/720宽及4096高、PNG8MiB；系统字体因浏览器而异。"},
+
   "quote-sheet": {"version": "write-excel-file4.1.1（GitLab）", "license": "MIT，附fflate与Babel MIT原文", "source": "/vendor/write-excel-file/SOURCE.md", "scope": "官方GitLab来源例外，GitHub Stars不适用，不是0。"},
   "word-note": {"version": "docx9.15.2", "license": "MIT，附fflate/nanoid/Oxc/Babel/Rolldown/Node原声明", "source": "/vendor/docx/SOURCE.md", "scope": "最多10000UTF16/50段，每段1000字符，DOCX<=1MiB。"},
   "intro-slides": {"version": "PptxGenJS4.0.1", "license": "MIT，附TS辅助0BSD和既有JSZip完整原声明", "source": "/vendor/pptxgenjs/SOURCE.md", "scope": "固定3页纯文字、两配色，标题60字/简介500/3–6要点每160/联系说明300，PPTX<=2MiB。"},

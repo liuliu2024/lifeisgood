@@ -1,0 +1,20 @@
+--- distance.original.js
++++ distance.js
+@@ -1,6 +1,6 @@
+ // index.ts
+-import { getCoord } from "@turf/invariant";
+-import { radiansToLength, degreesToRadians } from "@turf/helpers";
++import { getCoord } from "./invariant.js";
++import { radiansToLength, degreesToRadians } from "./helpers.js";
+ function distance(from, to, options = {}) {
+   var coordinates1 = getCoord(from);
+   var coordinates2 = getCoord(to);
+--- invariant.original.js
++++ invariant.js
+@@ -1,5 +1,5 @@
+ // index.ts
+-import { isNumber } from "@turf/helpers";
++import { isNumber } from "./helpers.js";
+ function getCoord(coord) {
+   if (!coord) {
+     throw new Error("coord is required");

@@ -709,5 +709,70 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "有限中文纯文本及受控参数",
     "output": "真实办公文件及网页示意",
     "integration": "本机固定原库及平台安全输入封装，无收费API"
+  },
+  {
+    "id": "DAILY-069",
+    "title": "看看两处相隔多远",
+    "description": "手填两点经纬度，估算并保存近似球面直线距离。",
+    "scene": "life",
+    "repo": "https://github.com/Turfjs/turf",
+    "stars": 10535,
+    "checkedAt": "2026-11-04",
+    "commit": "22acbd806adb80eece91b7fc43589d5d7788e815",
+    "license": "MIT（各原包及源码根原文保留）",
+    "chinese": "平台中文本机有限封装，非完整上游应用。",
+    "maintenance": "固定版本与维护快照见SOURCE，Stars不是质量评分。",
+    "limitations": [
+      "近似球面直线距离，非WGS84椭球、道路导航、地形或法定测绘。",
+      "4个手填坐标最多6小数，不申请定位、不地图API、不上传。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本或手填数值",
+    "output": "本机实际结果及可下载文件",
+    "integration": "本地固定开源制品，无收费API或外部资源"
+  },
+  {
+    "id": "DAILY-070",
+    "title": "做一个可导入日历的事项",
+    "description": "填写单个有限事项，预览并保存ICS与JSON。",
+    "scene": "life",
+    "repo": "https://github.com/kewisch/ical.js",
+    "stars": 1182,
+    "checkedAt": "2026-11-05",
+    "commit": "277d52c8db379f133a88957793e03997a65307f4",
+    "license": "MPL-2.0（原库与preferred源码公开）",
+    "chinese": "平台中文本机有限封装，非完整上游应用。",
+    "maintenance": "固定版本与维护快照见SOURCE，Stars不是质量评分。",
+    "limitations": [
+      "单事项UTC2000–2099且不超过7天；固定UTC+8或0，无自动夏令时。",
+      "标题100/说明1000/地点200UTF16，输出16KiB；未实测全部日历客户端导入，不通知邀请。",
+      "原MPL2库未修改，完整许可与preferred原源码同站提供。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本或手填数值",
+    "output": "本机实际结果及可下载文件",
+    "integration": "本地固定开源制品，无收费API或外部资源"
+  },
+  {
+    "id": "DAILY-071",
+    "title": "把一段文字做成长图",
+    "description": "把有限纯文字排成图片，预览并保存PNG。",
+    "scene": "life",
+    "repo": "https://github.com/bubkoo/html-to-image",
+    "stars": 7272,
+    "checkedAt": "2026-11-04",
+    "commit": "995728147e4459a58188af51b5fcc3f8a7010207",
+    "license": "MIT，附tslib2.5.0 Microsoft0BSD原文",
+    "chinese": "平台中文本机有限封装，非完整上游应用。",
+    "maintenance": "固定版本与维护快照见SOURCE，Stars不是质量评分。",
+    "limitations": [
+      "5000UTF16/32段、标题80，480/720宽、4096高、PNG8MiB，不接受HTML或远程图像。",
+      "8秒仅拒收旧结果，原生编码不能强杀，未settled不并发。",
+      "系统字体与浏览器SVG文字编码有差异，不保证全部设备像素一致。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本或手填数值",
+    "output": "本机实际结果及可下载文件",
+    "integration": "本地固定开源制品，无收费API或外部资源"
   }
 ];

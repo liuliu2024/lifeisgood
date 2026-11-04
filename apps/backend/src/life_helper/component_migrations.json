@@ -537,6 +537,9 @@
           }
         }
       ]
-    }
+    },
+    {"id": "daily-069-distance-v1", "enabled": true, "tools": [{"key": "distance", "title": "看看两处相隔多远", "path": "/tools/distance", "item": {"id": "DAILY-069", "title": "看看两处相隔多远", "description": "手填两点经纬度，估算球面直线距离。", "module_ids": ["life", "work"], "sort_order": 173, "hidden": false, "archived": false}}]},
+    {"id": "daily-070-calendar-event-v1", "enabled": true, "tools": [{"key": "calendar-event", "title": "做一个可导入日历的事项", "path": "/tools/calendar-event", "item": {"id": "DAILY-070", "title": "做一个可导入日历的事项", "description": "填写有限事项，预览并保存ICS文件。", "module_ids": ["life", "work"], "sort_order": 174, "hidden": false, "archived": false}}]},
+    {"id": "daily-071-text-image-v1", "enabled": true, "tools": [{"key": "text-image", "title": "把一段文字做成长图", "path": "/tools/text-image", "item": {"id": "DAILY-071", "title": "把一段文字做成长图", "description": "把有限纯文字排成图片，预览并保存PNG。", "module_ids": ["life", "work"], "sort_order": 175, "hidden": false, "archived": false}}]}
   ]
 }
