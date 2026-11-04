@@ -1,0 +1,5 @@
+Actual notices retained from original Tone15.1.22 sourcesContent (not a fabricated upstream NOTICE file):
+Tone/core/context/Param.ts: MIT License, copyright (c) 2014 Jordan Santell.
+Original author MIT grant from https://github.com/jsantell/web-audio-automation-timeline/blob/master/LICENSE retained separately. This is attribution-license evidence, not a claim of exact original derivation commit.
+Tone/effect/Reverb.ts: Inspiration from ReverbGen https://github.com/adelespinasse/reverbGen. Copyright (c) 2014 Alan deLespinasse Apache 2.0 License.
+Original author Apache2 LICENSE.txt retained. Original repository root has no NOTICE file (actual contents API checked); no original NOTICE was invented. Reverb is not used by platform UI but is in whole upstream bundle, so its notice remains distributed.

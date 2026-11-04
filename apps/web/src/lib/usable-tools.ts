@@ -38,9 +38,16 @@ export const usableTools = [
   {"key": "chinese-convert", "path": "/tools/chinese-convert", "title": "把文字转成简体或繁体", "description": "本机转换有限中文纯文本，保存转换结果。", "repo": "https://github.com/nk2028/opencc-js", "accepted": true},
   {"key": "repeat-dates", "path": "/tools/repeat-dates", "title": "列出每周或每月的几个日子", "description": "按有限重复规则列出日期，保存自己的安排。", "repo": "https://github.com/jkbrzt/rrule", "accepted": true},
   {"key": "file-check", "path": "/tools/file-check", "title": "看看文件的指纹是否一致", "description": "本机计算文件MD5指纹，与已有指纹比较。", "repo": "https://github.com/blueimp/JavaScript-MD5", "accepted": true},
+  {"key": "photo-effects", "path": "/tools/photo-effects", "title": "给照片加一点效果", "description": "本机处理有限照片效果，预览并保存PNG。", "repo": "https://github.com/evanw/glfx.js", "accepted": true},
+  {"key": "icons", "path": "/tools/icons", "title": "找一个清楚的小图标", "description": "从有限通用图标中查找，保存自己的SVG或PNG。", "repo": "https://github.com/tabler/tabler-icons", "accepted": true},
+  {"key": "beat", "path": "/tools/beat", "title": "做一段练习用的小节拍", "description": "主动生成有限节拍，预览并保存WAV。", "repo": "https://github.com/Tonejs/Tone.js", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "beat": {"version": "Tone15.1.22", "license": "MIT + Apache-2.0 + 0BSD（完整内嵌归属保留）", "source": "/vendor/tone/SOURCE.md", "scope": "40–200BPM/4–16拍，mono22050Hz、最多24秒；WAV/JSON。"},
+  "photo-effects": {"version": "glfx official gh-pages @1bf5f4e", "license": "MIT", "source": "/vendor/glfx/SOURCE.md", "scope": "静态PNG/JPEG≤5MiB/400万像素，输出≤1024边；依赖标准WebGL，不保证所有GPU。"},
+  "icons": {"version": "Tabler Icons3.50.0", "license": "MIT", "source": "/vendor/tabler-icons/SOURCE.md", "scope": "24个通用图标，24–1024尺寸/线宽1–4，派生SVG/PNG，非完整库。"},
+
   "chinese-convert": {"version": "OpenCC-JS 1.4.2", "license": "MIT算法 + Apache-2.0字典", "source": "/vendor/opencc/SOURCE.md", "scope": "常规简繁纯文本≤20000字符/64KiB；TXT/JSON，不含地区/JP或语义保证。"},
   "repeat-dates": {"version": "rrule 2.8.0", "license": "双BSD3 + 内联Microsoft0BSD/Webpack MIT", "source": "/vendor/rrule/SOURCE.md", "scope": "UTC1901–2099每日/周/月，间隔1–52、最多50日期；TXT/JSON，非通知或调休。"},
   "file-check": {"version": "blueimp-md5 2.19.0（已归档）", "license": "MIT，附Paul BSD及RSA派生归属", "source": "/vendor/blueimp-md5/SOURCE.md", "scope": "≤8MiB本机MD5/期望值比较，分块读取非增量；非防篡改或病毒检查。"},

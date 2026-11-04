@@ -1,0 +1,167 @@
+{
+  "version": "3.50.0",
+  "tagCommit": "6904efd245391ad396df17654738f52f6da8c40e",
+  "tarSHA1": "fb2bdeec8896e173c34789902aeb51ffda139753",
+  "rows": [
+    {
+      "name": "home",
+      "packagePath": "package/icons/outline/home.svg",
+      "bytes": 482,
+      "sha256": "cb742a3b1aa0007ec0c3f26f898e5833c6e67476e136b8eae3c52e2f2c751b5c"
+    },
+    {
+      "name": "building-store",
+      "packagePath": "package/icons/outline/building-store.svg",
+      "bytes": 578,
+      "sha256": "cd71cf844dcdf0ba2ce6f9df82d2619dc45e2225c84fa9bb70b6fb79aba0e112"
+    },
+    {
+      "name": "phone",
+      "packagePath": "package/icons/outline/phone.svg",
+      "bytes": 444,
+      "sha256": "e8e01c914ec201647affe477f597ac827e63d07b3a22b59043bd4adbdd48158b"
+    },
+    {
+      "name": "calendar",
+      "packagePath": "package/icons/outline/calendar.svg",
+      "bytes": 542,
+      "sha256": "349153065c0fcde52fbd0cab04220baa19be11fe53fb5454ebd6856a59af575c"
+    },
+    {
+      "name": "coffee",
+      "packagePath": "package/icons/outline/coffee.svg",
+      "bytes": 694,
+      "sha256": "49c0c32993ea538cca0135a80912dc84391c1d145d463f8cb4dab80c9333137d"
+    },
+    {
+      "name": "heart",
+      "packagePath": "package/icons/outline/heart.svg",
+      "bytes": 420,
+      "sha256": "792ee4a8e053991aba1552bbefae32a25cf60804f61e9cff7b575d34ab8682ce"
+    },
+    {
+      "name": "star",
+      "packagePath": "package/icons/outline/star.svg",
+      "bytes": 461,
+      "sha256": "9903f4359966f48225710d78088db8fdfbc30eb82596a4bb28bc49b56399465d"
+    },
+    {
+      "name": "sun",
+      "packagePath": "package/icons/outline/sun.svg",
+      "bytes": 482,
+      "sha256": "1753d34d4c09f4a0e32afbb417defeded055a88f8ac33963556570a53a76dfa9"
+    },
+    {
+      "name": "moon",
+      "packagePath": "package/icons/outline/moon.svg",
+      "bytes": 427,
+      "sha256": "57372c0f83966692ec9c8dfea4c28503df2d5a260825d24a230fab86bcbb3bdb"
+    },
+    {
+      "name": "umbrella",
+      "packagePath": "package/icons/outline/umbrella.svg",
+      "bytes": 411,
+      "sha256": "fba2d3b40e87087945c1fff79983751733e12d497cec2ca66d4412034caf1fd2"
+    },
+    {
+      "name": "shopping-cart",
+      "packagePath": "package/icons/outline/shopping-cart.svg",
+      "bytes": 504,
+      "sha256": "26d8fc190a20d614e1beafb2c2738bcb56ccc918ea8acf346a2490c97085934f"
+    },
+    {
+      "name": "gift",
+      "packagePath": "package/icons/outline/gift.svg",
+      "bytes": 605,
+      "sha256": "2d6e7bf8f1306d591082a4237f2540515fbad3f186c8468cfb73e92d67449482"
+    },
+    {
+      "name": "camera",
+      "packagePath": "package/icons/outline/camera.svg",
+      "bytes": 532,
+      "sha256": "e2d695f97f075ccab08d13595aeb3e86c351d3736372cb88e69153cbaf233984"
+    },
+    {
+      "name": "photo",
+      "packagePath": "package/icons/outline/photo.svg",
+      "bytes": 562,
+      "sha256": "9aa0bd44bef46e1b80445220ea04499ca145fb3339005e13f1da1b17ad8ac159"
+    },
+    {
+      "name": "music",
+      "packagePath": "package/icons/outline/music.svg",
+      "bytes": 483,
+      "sha256": "223cd6fb311bb378b525a88126b1f6620aecbceba6c0139b4cc06c7e072ad2d5"
+    },
+    {
+      "name": "scissors",
+      "packagePath": "package/icons/outline/scissors.svg",
+      "bytes": 500,
+      "sha256": "9776d5bf798f2a9832707929d2e16ac4279420b8ccdaa7501d0ece735e564c03"
+    },
+    {
+      "name": "clock",
+      "packagePath": "package/icons/outline/clock.svg",
+      "bytes": 407,
+      "sha256": "bb93c8284b6da432fafa0c9d210df3d43e4cc3b537aaf85cb4a2351933cd43b1"
+    },
+    {
+      "name": "map-pin",
+      "packagePath": "package/icons/outline/map-pin.svg",
+      "bytes": 475,
+      "sha256": "4ca0c252b79ea1dd51d6ad73e4187427a32db8b5d8b5225b40c3b5e132c4824c"
+    },
+    {
+      "name": "mail",
+      "packagePath": "package/icons/outline/mail.svg",
+      "bytes": 450,
+      "sha256": "9a4b0aa0ebf5959b9b097a9290412c53e6327bfc953ba49a515cf31b664a48ab"
+    },
+    {
+      "name": "notebook",
+      "packagePath": "package/icons/outline/notebook.svg",
+      "bytes": 483,
+      "sha256": "a45d86c493173f0129412077c89f6bb5d65c20fc9b02c73cd30e9f73c52f1688"
+    },
+    {
+      "name": "checklist",
+      "packagePath": "package/icons/outline/checklist.svg",
+      "bytes": 493,
+      "sha256": "b45866d7f9af810ca0245c91ed8476172616c4dcc6904f2a0f0812ea5002094e"
+    },
+    {
+      "name": "wallet",
+      "packagePath": "package/icons/outline/wallet.svg",
+      "bytes": 495,
+      "sha256": "de5c729db96bd38c4b37ad65c4f0e8ed7bf4f45b70352736d0d544ac54b6d71e"
+    },
+    {
+      "name": "plant",
+      "packagePath": "package/icons/outline/plant.svg",
+      "bytes": 535,
+      "sha256": "d7a2969400961b21f2139e489023938d6aa7335d60d7cd5284e49fe77fc49224"
+    },
+    {
+      "name": "cloud",
+      "packagePath": "package/icons/outline/cloud.svg",
+      "bytes": 603,
+      "sha256": "c4f9da1cdfa1ffe874580fce24905f42df1079fcaa56366911bde7d108a9e57e"
+    }
+  ],
+  "safeTags": [
+    "path",
+    "svg"
+  ],
+  "safeAttributes": [
+    "class",
+    "d",
+    "fill",
+    "height",
+    "stroke",
+    "stroke-linecap",
+    "stroke-linejoin",
+    "stroke-width",
+    "viewBox",
+    "width"
+  ]
+}

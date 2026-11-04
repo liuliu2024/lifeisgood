@@ -582,5 +582,66 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "本机有限文件及可选32位MD5",
     "output": "MD5/比较结果与TXT/JSON",
     "integration": "原Blueimp核心仅追加二进制接口导出，原字节/补丁/原许可均保留"
+  },
+  {
+    "id": "DAILY-063",
+    "title": "给照片加一点效果",
+    "description": "本机处理有限照片效果，预览并保存PNG。",
+    "scene": "creative",
+    "repo": "https://github.com/evanw/glfx.js",
+    "stars": 3459,
+    "checkedAt": "2026-11-04",
+    "commit": "1bf5f4ec7dfbd039da81d254fb1874cbb0e88228",
+    "license": "MIT（官方2022固定制品）",
+    "chinese": "平台中文本机封装；非完整上游应用。",
+    "maintenance": "固定版本，仓库维护快照见SOURCE。",
+    "limitations": [
+      "静态PNG/JPEG≤5MiB/400万像素，输出≤1024边；依赖标准WebGL，不保证所有GPU。"
+    ],
+    "status": "research",
+    "input": "有限本机输入和受控选项",
+    "output": "实际预览及图片下载",
+    "integration": "本地固定原制品与平台有限包装"
+  },
+  {
+    "id": "DAILY-064",
+    "title": "找一个清楚的小图标",
+    "description": "从有限通用图标中查找，保存自己的SVG或PNG。",
+    "scene": "creative",
+    "repo": "https://github.com/tabler/tabler-icons",
+    "stars": 22542,
+    "checkedAt": "2026-11-04",
+    "commit": "6904efd245391ad396df17654738f52f6da8c40e",
+    "license": "MIT（24非brand原SVG）",
+    "chinese": "平台中文本机封装；非完整上游应用。",
+    "maintenance": "固定版本，仓库维护快照见SOURCE。",
+    "limitations": [
+      "24个通用图标，24–1024尺寸/线宽1–4，派生SVG/PNG，非完整库。"
+    ],
+    "status": "research",
+    "input": "有限本机输入和受控选项",
+    "output": "实际预览及图片下载",
+    "integration": "本地固定原制品与平台有限包装"
+  },
+  {
+    "id": "DAILY-065",
+    "title": "做一段练习用的小节拍",
+    "description": "主动生成有限节拍，预览并保存WAV。",
+    "scene": "creative",
+    "repo": "https://github.com/Tonejs/Tone.js",
+    "stars": 14881,
+    "checkedAt": "2026-11-04",
+    "commit": "d2d52ffa8803b35debd9f19f2da08ad1c3540de0",
+    "license": "MIT + Apache-2.0 + 0BSD（完整内嵌归属保留）",
+    "chinese": "平台中文有限离线节拍合成，非完整上游应用。",
+    "maintenance": "未归档，push2026-11-01；固定15.1.22。",
+    "limitations": [
+      "40–200BPM/4–16拍，mono22050Hz、最多24秒；WAV/JSON。",
+      "原生OfflineAudioContext不能强制终止，8秒仅拒收旧结果，单个未settled任务门；不自动播放/录音/通知。"
+    ],
+    "status": "research",
+    "input": "有限速度与拍数",
+    "output": "主动预览及WAV/JSON",
+    "integration": "原Tone离线合成，平台PCM封装，无音源资产"
   }
 ];

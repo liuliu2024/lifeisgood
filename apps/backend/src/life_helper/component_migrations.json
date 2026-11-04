@@ -398,6 +398,76 @@
           }
         }
       ]
+    },
+    {
+      "id": "daily-063-photo-effects-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "photo-effects",
+          "title": "给照片加一点效果",
+          "path": "/tools/photo-effects",
+          "item": {
+            "id": "DAILY-063",
+            "title": "给照片加一点效果",
+            "description": "本机处理有限照片效果，预览并保存PNG。",
+            "module_ids": [
+              "life",
+              "creative"
+            ],
+            "sort_order": 167,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-064-icons-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "icons",
+          "title": "找一个清楚的小图标",
+          "path": "/tools/icons",
+          "item": {
+            "id": "DAILY-064",
+            "title": "找一个清楚的小图标",
+            "description": "从有限通用图标中查找，保存自己的SVG或PNG。",
+            "module_ids": [
+              "work",
+              "life",
+              "creative"
+            ],
+            "sort_order": 168,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-065-beat-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "beat",
+          "title": "做一段练习用的小节拍",
+          "path": "/tools/beat",
+          "item": {
+            "id": "DAILY-065",
+            "title": "做一段练习用的小节拍",
+            "description": "主动生成有限节拍，预览并保存WAV。",
+            "module_ids": [
+              "life",
+              "creative"
+            ],
+            "sort_order": 169,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
     }
   ]
 }
