@@ -946,5 +946,29 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "用户自己选择的有限图片文件",
     "output": "不重压JPEG与处理说明JSON",
     "integration": "原开源库实际处理，平台有限预检及本机Worker，无上传模型API"
+  },
+  {
+    "id": "DAILY-083",
+    "title": "把照片做成像素格小图",
+    "description": "用有限颜色做32或64格草图，保存PNG与每格色号JSON。",
+    "scene": "creative",
+    "repo": "https://github.com/giventofly/pixelit",
+    "stars": 1784,
+    "checkedAt": "2026-11-05",
+    "commit": "e19053e01ea07247cd2a3aa797572b7277f60f43",
+    "license": "双MIT（原Pixelit及based-on8bit原通知）",
+    "chinese": "平台中文有限本机封装，非上游完整应用。",
+    "maintenance": "未归档，push2026-11-03；固定官方commit，非npm语义版。",
+    "limitations": [
+      "PNG/JPEG≤5MiB/2048边/400万像素，先128平方再原像素与配色；32/64格4–16色、512PNG/色号JSON；透明先白底，原生编码不能强杀。",
+      "iframe只隔离DOM副作用非安全沙箱；先白底再配色，不保证专业印刷、拼豆材料或跨设备校色。"
+    ],
+    "status": "research",
+    "toolPath": "/tools/pixel-grid",
+    "input": "自己的静态PNG/JPEG、网格与有限HEX调色板",
+    "output": "真实像素预览和512PNG/逐格1起算色号JSON",
+    "integration": "原Pixelit有限Canvas调用，平台预检及单pending迟回调清理，无模型API",
+    "readmeUrl": "https://github.com/giventofly/pixelit/blob/e19053e01ea07247cd2a3aa797572b7277f60f43/README.md",
+    "licenseUrl": "https://github.com/giventofly/pixelit/blob/e19053e01ea07247cd2a3aa797572b7277f60f43/LICENSE"
   }
 ];

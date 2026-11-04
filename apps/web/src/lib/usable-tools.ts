@@ -55,9 +55,11 @@ export const usableTools = [
   {"key": "word-search", "path": "/tools/word-search", "title": "把自己的词藏进格子里", "description": "输入自己的词语，生成找词格子，保存PNG、SVG和完整答案JSON。", "repo": "https://github.com/bunkat/wordfind", "accepted": true},
   {"key": "gif-frames", "path": "/tools/gif-frames", "title": "从GIF里取出喜欢的一帧", "description": "逐帧查看自己的动图，保存当前完整屏幕PNG和帧清单。", "repo": "https://github.com/matt-way/gifuct-js", "accepted": true},
   {"key": "jpeg-exif-clean", "path": "/tools/jpeg-exif-clean", "title": "给JPEG清除Exif", "description": "不重压地清除Exif，查看仍保留的其它元数据段说明。", "repo": "https://github.com/hMatoba/Piexifjs", "accepted": true},
+  {"key": "pixel-grid", "path": "/tools/pixel-grid", "title": "把照片做成像素格小图", "description": "用有限颜色做32或64格草图，保存PNG与每格色号JSON。", "repo": "https://github.com/giventofly/pixelit", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "pixel-grid": {"version": "Pixelit固定源码e19053e（非npm语义版本）", "license": "双MIT（原Pixelit及based-on8bit原通知）", "source": "/vendor/pixelit/SOURCE.md", "scope": "PNG/JPEG≤5MiB/2048边/400万像素，先128平方再原像素与配色；32/64格4–16色、512PNG/色号JSON；透明先白底，原生编码不能强杀。"},
   "gif-frames": {"version": "gifuct-js2.1.2 + js-binary-schema-parser2.0.3", "license": "MIT（含原LZW与反交错完整通知）", "source": "/vendor/gifuct/SOURCE.md", "scope": "GIF≤2MiB/640边/24帧/完整屏累计400万像素，当前帧PNG+JSON；非GIF编码或完整性认证。"},
   "jpeg-exif-clean": {"version": "piexifjs npm1.0.6（内部字段1.0.4原样保留）", "license": "MIT（原文件及脚本内两原通知保留）", "source": "/vendor/piexifjs/SOURCE.md", "scope": "有限基线/渐进JPEG≤5MiB，方向缺失或1；仅清Exif，保留XMP/ICC/IPTC/COM与像素，不保证匿名。"},
 
