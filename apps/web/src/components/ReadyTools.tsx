@@ -8,7 +8,7 @@ export default function ReadyTools({ catalog, moduleId, query = "", error, retry
   const matches = (item: ComponentCatalog["items"][number]) => (!moduleId || item.module_ids.includes(moduleId)) && `${item.title} ${item.description}`.toLowerCase().includes(query.trim().toLowerCase());
   const ready = (catalog?.items || []).filter(item => item.kind === "tool" && acceptedTool(item.tool_key)?.path === item.path && matches(item)).sort((a,b)=>a.sort_order-b.sort_order || a.id.localeCompare(b.id));
   const custom = (catalog?.items || []).filter(item => item.id.startsWith("CUSTOM-") && item.kind === "candidate" && matches(item));
-  return <section className={styles.section} aria-label="可以直接使用的小工具">
+  return <section id="daily-tools" className={styles.section} aria-label="可以直接使用的小工具">
     <div className={styles.heading}><div><p className={styles.eyebrow}>不用安装，打开就能做</p><h2>现在就能用</h2></div><a href="/discover">看看新发现 ↗</a></div>
     {!catalog ? <p role="status">{error || "正在读取工具目录…"}{error && <button type="button" className={styles.retry} onClick={retry}>重新读取</button>}</p> : <>
       <p className={styles.intro}>照片、文字和文件都在当前浏览器处理。选一个小工具，先把眼前的事做好。</p>

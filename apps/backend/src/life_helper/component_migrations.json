@@ -47,6 +47,30 @@
         "key": "mindmap", "title": "把笔记变成思维导图", "path": "/tools/mindmap",
         "item": {"id": "DAILY-021", "title": "把笔记变成思维导图", "description": "输入标题和层级，把思路整理成一张图。", "module_ids": ["work","life","creative"], "sort_order": 118, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-036-wheel-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "wheel", "title": "今天选什么，转一下", "path": "/tools/wheel",
+        "item": {"id": "DAILY-036", "title": "今天选什么，转一下", "description": "把自己的几个选项放到转盘，帮自己做个小决定。", "module_ids": ["life","creative"], "sort_order": 140, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-037-csv-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "csv", "title": "把CSV表格整理清楚", "path": "/tools/csv",
+        "item": {"id": "DAILY-037", "title": "把CSV表格整理清楚", "description": "查看本机CSV行列，选择要保留的列，再保存CSV或JSON。", "module_ids": ["work","life"], "sort_order": 141, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-038-barcode-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "barcode", "title": "做一张清楚的条形码", "path": "/tools/barcode",
+        "item": {"id": "DAILY-038", "title": "做一张清楚的条形码", "description": "输入商品或资料编号，预览并下载条形码SVG和PNG。", "module_ids": ["work","life"], "sort_order": 142, "hidden": false, "archived": false}
+      }]
     }
   ]
 }

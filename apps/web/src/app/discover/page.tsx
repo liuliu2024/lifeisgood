@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { projectIntegrationNotes } from "@/lib/project-integration-notes";
 import { dailyProjectsCore } from "@/lib/daily-projects-core";
+import { dailyProjectsExtra } from "@/lib/daily-projects-extra";
 import { acceptedTool, toolRuntimeSources } from "@/lib/usable-tools";
 import { useComponentCatalog } from "@/lib/use-component-catalog";
 import styles from "@/components/ReadyTools.module.css";
@@ -10,7 +11,7 @@ import styles from "@/components/ReadyTools.module.css";
 export default function Discover() {
   const {catalog,error,refresh}=useComponentCatalog();
   const [query,setQuery]=useState("");const [scene,setScene]=useState("all");const [state,setState]=useState("all");
-  const projects=dailyProjectsCore.flatMap(project=>{const item=catalog?.items.find(x=>x.id===project.id);return item?[{...project,title:item.title,description:item.description,item,ready:item.kind==="tool"&&acceptedTool(item.tool_key)?.path===item.path}]:[];});
+  const projects=[...dailyProjectsCore,...dailyProjectsExtra].flatMap(project=>{const item=catalog?.items.find(x=>x.id===project.id);return item?[{...project,title:item.title,description:item.description,item,ready:item.kind==="tool"&&acceptedTool(item.tool_key)?.path===item.path}]:[];});
   const visible=projects.filter(p=>(scene==="all"||p.item.module_ids.includes(scene))&&(state==="all"||(state==="ready"?p.ready:!p.ready))&&`${p.title} ${p.description} ${p.repo}`.toLowerCase().includes(query.trim().toLowerCase())).sort((a,b)=>a.item.sort_order-b.item.sort_order);
   const readyCount=new Set(projects.filter(p=>p.ready).map(p=>p.item.tool_key)).size;
   return <main className={styles.shell}><nav className={styles.nav}><a href="/">生活小助手</a><a href="/">← 返回首页</a></nav><p className={styles.eyebrow}>日常，也可以有点新花样</p><h1 className={styles.title}>从一个小工具，发现新可能</h1><p className={styles.lead}>挑几个有趣、实用的开源项目，变成顺手的中文小工具。只有标为“可直接使用”的项目已经接通；研究记录保留来源与限制，等逐项试配。</p>

@@ -40,6 +40,8 @@
     ".next-build/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".cache",
+    "public/vendor"
   ]
 }

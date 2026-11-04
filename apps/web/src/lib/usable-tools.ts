@@ -12,6 +12,9 @@ export const usableTools = [
   { key: "contrast", path: "/tools/contrast", title: "让文字和背景更容易看清", description: "比较文字与背景的纯色对比，下载示例图和结果。", repo: "https://github.com/bgrins/TinyColor", accepted: true },
   { key: "collage", path: "/tools/collage", title: "把几张照片拼成一张", description: "本机选择照片、拖动缩放、保存拼贴PNG。", repo: "https://github.com/konvajs/konva", accepted: true },
   { key: "mindmap", path: "/tools/mindmap", title: "把笔记变成思维导图", description: "用标题层级整理想法，下载完整静态SVG。", repo: "https://github.com/markmap/markmap", accepted: true },
+  { key: "wheel", path: "/tools/wheel", title: "今天选什么，转一下", description: "用自己的选项转动选择，保存落点与结果JSON。", repo: "https://github.com/buuing/lucky-canvas", accepted: true },
+  { key: "csv", path: "/tools/csv", title: "把CSV表格整理清楚", description: "本机预览并选择保留列，保存CSV和二维JSON。", repo: "https://github.com/mholt/PapaParse", accepted: true },
+  { key: "barcode", path: "/tools/barcode", title: "做一张清楚的条形码", description: "生成CODE128或EAN13，下载条形码SVG和PNG。", repo: "https://github.com/lindell/JsBarcode", accepted: true },
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
@@ -20,6 +23,9 @@ export const toolRuntimeSources: Record<string, {version: string; license: strin
   contrast: {version: "TinyColor 1.6.0", license: "MIT", source: "/vendor/tinycolor/SOURCE.md"},
   collage: {version: "Konva 9.3.18", license: "MIT（保留KineticJS与Konva署名）", source: "/vendor/konva/SOURCE.md", scope: "2–6张自有照片拖动、缩放、拼贴PNG；文字和贴纸尚未接入。"},
   mindmap: {version: "markmap-view 0.18.12 + D3 7.9.0", license: "MIT、ISC、WTFPL2（各依赖原文保留）", source: "/vendor/markmap/SOURCE.md", scope: "标题层级的纯文字导图，最多80节点/6层；下载静态SVG，不提供AI总结或云同步。"},
+  wheel: {version: "lucky-canvas 1.7.26", license: "Apache-2.0（内嵌Microsoft辅助声明保留）", source: "/vendor/lucky-canvas/SOURCE.md", scope: "2–20个文字选项，本机生活小决定与结果JSON；不用于金钱奖品或营销开奖。"},
+  csv: {version: "PapaParse 5.5.3", license: "MIT", source: "/vendor/papaparse/SOURCE.md", scope: "UTF-8 CSV、2MiB/10000行；位置选列，危险公式前缀导出为文本，JSON保留字符串。"},
+  barcode: {version: "JsBarcode 3.12.1", license: "MIT；ZXing仅验收不随站点", source: "/vendor/jsbarcode/SOURCE.md", scope: "CODE128可打印ASCII或EAN13，PNG/SVG；独立回读已验，真机扫码和打印仍未验。"},
 };
 
 export function acceptedTool(key?: string | null) { return usableTools.find(tool => tool.key === key && tool.accepted); }
