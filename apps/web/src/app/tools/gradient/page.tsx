@@ -81,7 +81,7 @@ export default function GradientTool() {
   }
 
   return <main className={styles.shell}>
-    <nav className={styles.nav}><a className={styles.brand} href="/">生活小助手</a><a href="/tools">← 回到日常工具</a></nav>
+    <nav className={styles.nav}><a className={styles.brand} href="/">生活小助手</a><a href="/discover">← 回到日常工具</a></nav>
     <p className={styles.eyebrow}>给生活加一点颜色</p><h1>渐变配色工坊</h1>
     <p className={styles.intro}>从两种喜欢的颜色出发，为海报、店铺封面和日常创作搭一组配色。</p>
     <p className={styles.privacy}>全部在本机生成 · 无需上传照片或调用AI</p>

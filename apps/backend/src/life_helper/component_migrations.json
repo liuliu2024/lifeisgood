@@ -23,6 +23,30 @@
         "key": "gradient", "title": "做一组自然的渐变配色", "path": "/tools/gradient",
         "item": {"id": "DAILY-018", "title": "做一组自然的渐变配色", "description": "从几个喜欢的颜色生成过渡和配色。", "module_ids": ["creative"], "sort_order": 115, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-019-collage-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "collage", "title": "把几张照片拼成一张", "path": "/tools/collage",
+        "item": {"id": "DAILY-019", "title": "把几张照片拼成一张", "description": "选择自己的照片，拖动排布，再保存一张拼贴图。", "module_ids": ["life","creative"], "sort_order": 116, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-020-diagram-v1",
+      "enabled": false,
+      "tools": [{
+        "key": "diagram", "title": "把几步事情画成关系图", "path": "/tools/diagram",
+        "item": {"id": "DAILY-020", "title": "把几步事情画成关系图", "description": "用简单文字说明关系，生成可保存的图。", "module_ids": ["work","creative"], "sort_order": 117, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-021-mindmap-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "mindmap", "title": "把笔记变成思维导图", "path": "/tools/mindmap",
+        "item": {"id": "DAILY-021", "title": "把笔记变成思维导图", "description": "输入标题和层级，把思路整理成一张图。", "module_ids": ["work","life","creative"], "sort_order": 118, "hidden": false, "archived": false}
+      }]
     }
   ]
 }
