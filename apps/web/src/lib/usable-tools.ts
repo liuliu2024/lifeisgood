@@ -47,9 +47,14 @@ export const usableTools = [
   {"key": "distance", "path": "/tools/distance", "title": "看看两处相隔多远", "description": "手填两点经纬度，估算并保存近似球面直线距离。", "repo": "https://github.com/Turfjs/turf", "accepted": true},
   {"key": "calendar-event", "path": "/tools/calendar-event", "title": "做一个可导入日历的事项", "description": "填写单个有限事项，预览并保存ICS与JSON。", "repo": "https://github.com/kewisch/ical.js", "accepted": true},
   {"key": "text-image", "path": "/tools/text-image", "title": "把一段文字做成长图", "description": "把有限纯文字排成图片，预览并保存PNG。", "repo": "https://github.com/bubkoo/html-to-image", "accepted": true},
+  {"key": "recipe-scale", "path": "/tools/recipe-scale", "title": "人多一点，食材怎么算？", "description": "按原人数和目标人数，精确缩放自己填写的原料份量。", "repo": "https://github.com/rawify/Fraction.js", "accepted": true},
+  {"key": "phone-format", "path": "/tools/phone-format", "title": "把电话号码排整齐", "description": "本机整理自己的号码格式，保存结果，不查询或拨号。", "repo": "https://gitlab.com/catamphetamine/libphonenumber-js", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "recipe-scale": {"version": "Fraction.js5.3.4", "license": "MIT（零运行依赖）", "source": "/vendor/fraction/SOURCE.md", "scope": "1–20原料、人数1–100、有限正数量，精确分数及6位近似、TXT/JSON；不换单位或提供食用/药剂安全建议。"},
+  "phone-format": {"version": "libphonenumber-js1.13.15（官方GitLab）", "license": "MIT + Apache-2.0，附Google/Babel原版权通知", "source": "/vendor/libphonenumber/SOURCE.md", "scope": "最多30行/每行64/总4096UTF16，CN/US/GB/JP；规则格式不是可接通或身份验证，无查询拨号。"},
+
   "distance": {"version": "Turf distance/helpers/invariant7.4.0", "license": "MIT（各原包及源码根原文保留）", "source": "/vendor/turf/SOURCE.md", "scope": "手填纬度±90/经度±180、最多6小数；平均半径球面近似，TXT/JSON，非道路导航或法定测绘。"},
   "calendar-event": {"version": "ICAL.js2.2.1", "license": "MPL-2.0（原库与preferred源码公开）", "source": "/vendor/icaljs/SOURCE.md", "scope": "UTC2000–2099、最长7天单事项，固定UTC+8或0，ICS/JSON，无通知邀请或自动DST。"},
   "text-image": {"version": "html-to-image1.11.13", "license": "MIT，附tslib2.5.0 Microsoft0BSD原文", "source": "/vendor/html-to-image/SOURCE.md", "scope": "纯文本5000UTF16/32段、标题80，480/720宽及4096高、PNG8MiB；系统字体因浏览器而异。"},

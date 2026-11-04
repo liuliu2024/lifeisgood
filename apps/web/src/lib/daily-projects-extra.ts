@@ -774,5 +774,48 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "有限中文纯文本或手填数值",
     "output": "本机实际结果及可下载文件",
     "integration": "本地固定开源制品，无收费API或外部资源"
+  },
+  {
+    "id": "DAILY-073",
+    "title": "人多一点，食材怎么算？",
+    "description": "按原人数和目标人数，精确缩放自己填写的原料份量。",
+    "scene": "life",
+    "repo": "https://github.com/rawify/Fraction.js",
+    "stars": 695,
+    "checkedAt": "2026-11-05",
+    "commit": "32737c93d0aa669efc51b326e40b07eb1b934afc",
+    "license": "MIT（零运行依赖）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "固定5.3.4，push2025-09-26未归档，不冒高频活跃。",
+    "limitations": [
+      "1–20原料、人数1–100、有限正数量，精确分数及6位近似、TXT/JSON；不换单位或提供食用/药剂安全建议。",
+      "原生BigInt/真Worker2秒，精确值保留；无单位密度/营养推断。"
+    ],
+    "status": "research",
+    "input": "自己的有限纯文本与受控参数",
+    "output": "中文预览及真实TXT/JSON",
+    "integration": "本机固定开源库及Worker，不调用收费API"
+  },
+  {
+    "id": "DAILY-074",
+    "title": "把电话号码排整齐",
+    "description": "本机整理自己的号码格式，保存结果，不查询或拨号。",
+    "scene": "life",
+    "repo": "https://gitlab.com/catamphetamine/libphonenumber-js",
+    "stars": null,
+    "checkedAt": "2026-11-05",
+    "commit": "dab82d5b2b4cac5dfc78345061fa8d99a5b17c05",
+    "license": "MIT + Apache-2.0，附Google/Babel原版权通知",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "官方GitLab，GitHub镜像3003Stars于2026-11-05读取，非GitLabStar。",
+    "limitations": [
+      "最多30行/每行64/总4096UTF16，CN/US/GB/JP；规则格式不是可接通或身份验证，无查询拨号。",
+      "冻结metadata会过时，精确Google生成版本与Babel构建锁未知，不冒全重建。",
+      "不解析姓名联系人文件，不查询号码、外呼短信或定位。"
+    ],
+    "status": "research",
+    "input": "自己的有限纯文本与受控参数",
+    "output": "中文预览及真实TXT/JSON",
+    "integration": "本机固定开源库及Worker，不调用收费API"
   }
 ];
