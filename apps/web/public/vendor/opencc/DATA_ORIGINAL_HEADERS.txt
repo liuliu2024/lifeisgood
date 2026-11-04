@@ -1,0 +1,29 @@
+# Open Chinese Convert (OpenCC) Dictionary
+# File: CJK_Compatibility_Ideographs.txt
+# License: Apache-2.0 (see LICENSE)
+# Source: https://github.com/BYVoid/OpenCC
+
+# Open Chinese Convert (OpenCC) Dictionary
+# File: STCharacters.txt
+# License: Apache-2.0 (see LICENSE)
+# Source: https://github.com/BYVoid/OpenCC
+
+# Open Chinese Convert (OpenCC) Dictionary
+# File: STPhrases.txt
+# License: Apache-2.0 (see LICENSE)
+# Source: https://github.com/BYVoid/OpenCC
+
+# Open Chinese Convert (OpenCC) Dictionary
+# File: STPhrases_GeneratedFromRegionalPhrases.txt (Generated from: HKPhrases.txt, TWPhrases.txt)
+# License: Apache-2.0 (see LICENSE)
+# Source: https://github.com/BYVoid/OpenCC
+
+# Open Chinese Convert (OpenCC) Dictionary
+# File: TSCharacters.txt
+# License: Apache-2.0 (see LICENSE)
+# Source: https://github.com/BYVoid/OpenCC
+
+# Open Chinese Convert (OpenCC) Dictionary
+# File: TSPhrases.txt
+# License: Apache-2.0 (see LICENSE)
+# Source: https://github.com/BYVoid/OpenCC

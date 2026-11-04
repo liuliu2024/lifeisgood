@@ -35,9 +35,16 @@ export const usableTools = [
   {"key": "units", "path": "/tools/units", "title": "把常用单位换算清楚", "description": "换算有限长度、质量和温度，保存清楚的结果。", "repo": "https://github.com/convert-units/convert-units", "accepted": true},
   {"key": "photo-info", "path": "/tools/photo-info", "title": "看看照片里的拍摄信息", "description": "本机查看有限照片信息并保存，不上传或展示定位。", "repo": "https://github.com/MikeKovarik/exifr", "accepted": true},
   {"key": "audio-wave", "path": "/tools/audio-wave", "title": "留下声音里想要的一小段", "description": "本机查看有限WAV波形，播放并保存选中的片段。", "repo": "https://github.com/katspaugh/wavesurfer.js", "accepted": true},
+  {"key": "chinese-convert", "path": "/tools/chinese-convert", "title": "把文字转成简体或繁体", "description": "本机转换有限中文纯文本，保存转换结果。", "repo": "https://github.com/nk2028/opencc-js", "accepted": true},
+  {"key": "repeat-dates", "path": "/tools/repeat-dates", "title": "列出每周或每月的几个日子", "description": "按有限重复规则列出日期，保存自己的安排。", "repo": "https://github.com/jkbrzt/rrule", "accepted": true},
+  {"key": "file-check", "path": "/tools/file-check", "title": "看看文件的指纹是否一致", "description": "本机计算文件MD5指纹，与已有指纹比较。", "repo": "https://github.com/blueimp/JavaScript-MD5", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "chinese-convert": {"version": "OpenCC-JS 1.4.2", "license": "MIT算法 + Apache-2.0字典", "source": "/vendor/opencc/SOURCE.md", "scope": "常规简繁纯文本≤20000字符/64KiB；TXT/JSON，不含地区/JP或语义保证。"},
+  "repeat-dates": {"version": "rrule 2.8.0", "license": "双BSD3 + 内联Microsoft0BSD/Webpack MIT", "source": "/vendor/rrule/SOURCE.md", "scope": "UTC1901–2099每日/周/月，间隔1–52、最多50日期；TXT/JSON，非通知或调休。"},
+  "file-check": {"version": "blueimp-md5 2.19.0（已归档）", "license": "MIT，附Paul BSD及RSA派生归属", "source": "/vendor/blueimp-md5/SOURCE.md", "scope": "≤8MiB本机MD5/期望值比较，分块读取非增量；非防篡改或病毒检查。"},
+
   "units": {"version": "convert-units 3.0.0-beta.8（测试版）", "license": "MIT（零运行依赖）", "source": "/vendor/convert-units/SOURCE.md", "scope": "有限四类单位、6位显示近似，不保证精密计量；原raw和TXT/JSON保留。"},
   "photo-info": {"version": "exifr 7.1.3 lite", "license": "MIT（零运行依赖）", "source": "/vendor/exifr/SOURCE.md", "scope": "JPEG≤5MiB/4000万像素，六个有限EXIF标量与尺寸；不含定位，不去除元数据。"},
   "audio-wave": {"version": "WaveSurfer.js 8.0.5", "license": "BSD-3-Clause（含TS辅助0BSD）", "source": "/vendor/wavesurfer/SOURCE.md", "scope": "PCM16 WAV单/双声道8–48kHz、120秒/24MiB；本机波形/播放/片段WAV，非MP3或录音。"},

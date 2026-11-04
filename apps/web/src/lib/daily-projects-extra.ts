@@ -516,5 +516,71 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "本机有限PCM16 WAV和片段起止秒数",
     "output": "真实波形、主动播放暂停及WAV片段",
     "integration": "原WaveSurfer本机渲染播放，平台头预检/峰值/PCM裁剪，无麦克风或外部资源"
+  },
+  {
+    "id": "DAILY-060",
+    "title": "把文字转成简体或繁体",
+    "description": "本机转换有限中文纯文本，保存转换结果。",
+    "scene": "life",
+    "repo": "https://github.com/nk2028/opencc-js",
+    "stars": 363,
+    "checkedAt": "2026-11-04",
+    "commit": "ba20c6eda99e7ec385bcf706da2776372675b898",
+    "license": "MIT代码 AND Apache-2.0字典（原归属分别保留）",
+    "chinese": "平台中文常规s2t/t2s纯文本简繁转换。",
+    "maintenance": "未归档，push2026-09-21；固定opencc-js1.4.2与可追溯六字典。",
+    "limitations": [
+      "最多20000 UTF16字符/64KiB，真实Worker5秒终止；TXT/JSON结果不上传。",
+      "仅常规s2t/t2s最小预设，不含JP/地区词汇/TSCharactersExt，不保证所有人名、歧义或生僻字语义。",
+      "不是语言翻译、HTML转换或完整原生OpenCC扩展配置；MIT与Apache2数据分别归属。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本与简繁方向",
+    "output": "转换预览及TXT/JSON",
+    "integration": "原core+六原字典及平台最小预设，原许可/数据溯源保留"
+  },
+  {
+    "id": "DAILY-061",
+    "title": "列出每周或每月的几个日子",
+    "description": "按有限重复规则列出日期，保存自己的安排。",
+    "scene": "life",
+    "repo": "https://github.com/jkbrzt/rrule",
+    "stars": 3751,
+    "checkedAt": "2026-11-04",
+    "commit": "2480facc8ca903d8ab57ca41e40945d020e9c458",
+    "license": "双BSD-3-Clause，附内联Microsoft0BSD和Webpack MIT原文",
+    "chinese": "平台中文UTC重复日期，仅有限每日/周/月规则。",
+    "maintenance": "未归档，push2024-06-27；固定rrule2.8.0有明确源码对应，不称近期活跃。",
+    "limitations": [
+      "UTC真实日期1901–2099，间隔1–52、数量1–50，遇2099年界提前结束。",
+      "每月按起点日号，缺该日月份跳过；不是工作日、调休、法律期限或系统闹钟提醒。",
+      "受控规则和真实Worker2秒终止，不开放任意RRULE/TZID/NLP/秒级；TXT/JSON，不含ICS。"
+    ],
+    "status": "research",
+    "input": "UTC起点日期、有限重复方式间隔与数量",
+    "output": "日期清单及TXT/JSON",
+    "integration": "原rrule2.8.0单UMD闭包，在本机Worker执行并校验顺序和年界"
+  },
+  {
+    "id": "DAILY-062",
+    "title": "看看文件的指纹是否一致",
+    "description": "本机计算文件MD5指纹，与已有指纹比较。",
+    "scene": "life",
+    "repo": "https://github.com/blueimp/JavaScript-MD5",
+    "stars": 4547,
+    "checkedAt": "2026-11-04",
+    "commit": "458b6624c39df94cd938db3303ef77aa1e7a6800",
+    "license": "MIT，附Paul Johnston BSD与RSA派生算法归属原文",
+    "chinese": "中文本机文件MD5及可选期望值比较，原二进制核有限适配。",
+    "maintenance": "已归档archived=true，最后push2021-09-25；固定2.19.0老库，不称活跃。",
+    "limitations": [
+      "≤8MiB，Worker以1MiB分块读取后合并二进制串调用原核，不是增量散列，非64MiB。",
+      "MD5仅文件指纹/传输错误对照，一致不证明防篡改或安全；不是密码、签名或病毒检查。",
+      "总任务8秒截止，TXT/JSON≤8KiB，不上传文件/文件名路径；Spark原候选未采用、不分发、不计数。"
+    ],
+    "status": "research",
+    "input": "本机有限文件及可选32位MD5",
+    "output": "MD5/比较结果与TXT/JSON",
+    "integration": "原Blueimp核心仅追加二进制接口导出，原字节/补丁/原许可均保留"
   }
 ];

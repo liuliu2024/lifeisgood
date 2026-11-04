@@ -1,0 +1,12 @@
+--- md5.original.js
++++ md5-binary.js
+@@ -390,6 +390,9 @@
+     return rawHMACMD5(key, string)
+   }
+ 
++  // Platform MIT adapter: raw binary bytes, not the public UTF-8 string API.
++  $.fileMD5Binary = function (s) { return rstr2hex(rstrMD5(s)) }
++
+   if (typeof define === 'function' && define.amd) {
+     define(function () {
+       return md5

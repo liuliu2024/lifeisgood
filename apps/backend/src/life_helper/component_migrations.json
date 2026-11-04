@@ -329,6 +329,75 @@
           }
         }
       ]
+    },
+    {
+      "id": "daily-060-chinese-convert-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "chinese-convert",
+          "title": "把文字转成简体或繁体",
+          "path": "/tools/chinese-convert",
+          "item": {
+            "id": "DAILY-060",
+            "title": "把文字转成简体或繁体",
+            "description": "本机转换有限中文纯文本，保存转换结果。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 164,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-061-repeat-dates-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "repeat-dates",
+          "title": "列出每周或每月的几个日子",
+          "path": "/tools/repeat-dates",
+          "item": {
+            "id": "DAILY-061",
+            "title": "列出每周或每月的几个日子",
+            "description": "按有限重复规则列出日期，保存自己的安排。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 165,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-062-file-check-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "file-check",
+          "title": "看看文件的指纹是否一致",
+          "path": "/tools/file-check",
+          "item": {
+            "id": "DAILY-062",
+            "title": "看看文件的指纹是否一致",
+            "description": "本机计算文件MD5指纹，与已有指纹比较。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 166,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
     }
   ]
 }
