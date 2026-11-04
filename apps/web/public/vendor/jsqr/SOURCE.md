@@ -1,0 +1,15 @@
+# jsQR — DAILY-048 local image QR reader
+
+Reviewed2026-11-04. Chinese wrapper for one-shot local static-image QR reading, not a camera or barcode scanner and not the upstream full application.
+
+- Upstream https://github.com/cozmo/jsQR ; fixed npm **jsqr1.4.0**, gitHead **49a9633931fb8030ac2fc9cecc121d6e5a19f9a3**. No v1.4.0 tag found; no tag is invented.
+- Artifact https://registry.npmjs.org/jsqr/-/jsqr-1.4.0.tgz , downloaded with `npm pack jsqr@1.4.0 --ignore-scripts`. No install/build/test/lifecycle scripts run, no main dependency/lock changes.
+- Actual archive SHA512 computed and matched registry: `dxLob7q65Xg2DvstYkRpkYtmKm2sPJ9oFhrhmudT1dZvNFFTlroai3AWSpLey/w5vMcLBXRgOJsbXpdN9HzU/A==`.
+- `jsQR.js` is unmodified `dist/jsQR.js`, SHA256 **bc40c8a15196236b2314db0856f72ca0b49980cd5413b8c852a7349f5fee0859**. Actual browser artifact, README and package metadata read.
+- Full original Apache License2.0 retained in LICENSE (11358 bytes), read in full and byte-identical to LICENSE retrieved at fixed upstream commit. The published archive includes no NOTICE file and no separate runtime third-party dependency declarations. Original bundle is retained without stripping or adding any license/copyright notices. Package contributors list Cosmo Wolfe and Jefff Nelson. This wrapper is separate source, with no alteration to jsQR itself.
+- Published package has no runtime dependencies. Development-only dependencies include TypeScript/webpack/Jest/tslint/upng-js and type/helper packages; none installed or run. Scripts: prebuild rimraf dist, build/watch webpack, test Jest, lint tslint, generate-test-data ts-node. No install/postinstall hooks. Bundle contains no fetch/XMLHttpRequest/eval calls. No images, fonts, external data or model/API assets used at runtime.
+- Local wrapper `decoder-worker.js` imports only adjacent `./jsQR.js`, validates pixel buffer limits and returns one text/binary result or not-found. Each read uses a real dedicated Worker with8sec deadline; terminate on success/failure/cancel/replacement/pagehide/unmount. Image header dimensions are checked before browser bitmap decode. No image URL import, arbitrary script loading, camera/location request or outbound API.
+- Limits: staticPNG/JPEG/WebP,8MiB,4096 per side,8million pixels, decoded text≤6000 UTF16 units/raw bytes≤4000, one result maximum. Multi-code images may produce no result; no multi-code detection guarantee. Input image transparent pixels flattened to white. Reading/data-URL text never navigated or rendered as HTML.
+- Actual independent fixtures use previously reviewed node-qrcode1.5.4 only for acceptance, not runtime. Known original payloads, lossy/rotated synthetic photograph and real browser screenshot readback are new main-site tests. They do not imply physical camera/phone or all QR encodings verified. TXT/JSON actual downloads contain text plus original bytes in JSON.
+
+Original tarball/README/package/registry response remain ignored `.cache/jsqr-audit`, not public assets. Current evidence and failures: `docs/tasks/DAILY_SCAN_QR.md`.

@@ -23,9 +23,15 @@ export const usableTools = [
   { key: "text-diff", path: "/tools/text-diff", title: "看看两段文字哪里不同", description: "在本机对照文字增删，保存纯文本和JSON结果。", repo: "https://github.com/kpdecker/jsdiff", accepted: true },
   { key: "calculator", path: "/tools/calculator", title: "把日常小账算清楚", description: "精确计算折扣、单价或分摊，保存TXT和JSON。", repo: "https://github.com/MikeMcl/decimal.js", accepted: true },
   { key: "daylight", path: "/tools/daylight", title: "看看日出日落的时间", description: "手填日期与经纬度，估算并保存本机日光时段。", repo: "https://github.com/mourner/suncalc", accepted: true },
+  { key: "scan-qr", path: "/tools/scan-qr", title: "读出图片里的二维码", description: "选择自己的静态图片，本机读取并下载二维码文字。", repo: "https://github.com/cozmo/jsQR", accepted: true },
+  { key: "word-cloud", path: "/tools/word-cloud", title: "把词语排成一张词云图", description: "填入词语和权重，制作PNG、SVG及完整布局JSON。", repo: "https://github.com/jasondavies/d3-cloud", accepted: true },
+  { key: "timer", path: "/tools/timer", title: "给手头的事计个时", description: "本机秒表和倒计时，暂停或结束后保存本轮记录。", repo: "https://github.com/albert-gonzalez/easytimer.js", accepted: true },
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "scan-qr": {version: "jsQR 1.4.0", license: "Apache-2.0（无运行依赖）", source: "/vendor/jsqr/SOURCE.md", scope: "静态PNG/JPEG/WebP，8MiB/4096边长/800万像素；Worker可取消，只返回最多一码，也可能无结果。"},
+  "word-cloud": {version: "d3-cloud 2.0.0", license: "BSD-3-Clause（原始ESM，无运行包依赖）", source: "/vendor/d3-cloud/SOURCE.md", scope: "1–40个词与权重，有限画布横排SVG/PNG/JSON；未放词逐项列出，非中文分词。"},
+  timer: {version: "EasyTimer.js 4.6.0", license: "MIT（含内联Babel辅助函数原文）", source: "/vendor/easytimer/SOURCE.md", scope: "秒表/倒计时最多24小时、20读数，暂停/结束导出TXT/JSON；隐藏自动暂停，非后台闹钟。"},
   calculator: {version: "decimal.js 10.6.0", license: "MIT（无运行依赖）", source: "/vendor/decimal/SOURCE.md", scope: "有限四则/折扣/单价/1–100人分摊；80有效位，除不尽有界近似，TXT/JSON，不提供税务或交易建议。"},
   daylight: {version: "SunCalc 1.9.0", license: "BSD-2-Clause（无运行依赖）", source: "/vendor/suncalc/SOURCE.md", scope: "2000–2099手填经纬度/固定UTC偏移，近似日光时段TXT/JSON；无定位、地图或自动夏令时。"},
   signature: {version: "Signature Pad 5.1.3", license: "MIT（无运行依赖）", source: "/vendor/signature-pad/SOURCE.md", scope: "1000×500手迹PNG/SVG；100笔/每笔500点/总5000点，不提供身份验证或法律签章。"},

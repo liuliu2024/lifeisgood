@@ -143,6 +143,30 @@
         "key": "daylight", "title": "看看日出日落的时间", "path": "/tools/daylight",
         "item": {"id": "DAILY-047", "title": "看看日出日落的时间", "description": "输入日期与经纬度，估算当地的日光时段。", "module_ids": ["life","creative"], "sort_order": 151, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-048-scan-qr-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "scan-qr", "title": "读出图片里的二维码", "path": "/tools/scan-qr",
+        "item": {"id": "DAILY-048", "title": "读出图片里的二维码", "description": "选择自己的图片，在本机查看二维码里的文字。", "module_ids": ["work","life"], "sort_order": 152, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-049-word-cloud-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "word-cloud", "title": "把词语排成一张词云图", "path": "/tools/word-cloud",
+        "item": {"id": "DAILY-049", "title": "把词语排成一张词云图", "description": "输入词语和权重，制作并保存自己的文字云图。", "module_ids": ["work","creative"], "sort_order": 153, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-050-timer-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "timer", "title": "给手头的事计个时", "path": "/tools/timer",
+        "item": {"id": "DAILY-050", "title": "给手头的事计个时", "description": "使用本机秒表或倒计时，保存本次计时记录。", "module_ids": ["life","work"], "sort_order": 154, "hidden": false, "archived": false}
+      }]
     }
   ]
 }

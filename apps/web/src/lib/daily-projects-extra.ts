@@ -250,5 +250,73 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "有限日期、经纬度与明确UTC偏移",
     "output": "日光时段结果与真实下载",
     "integration": "本地原始SunCalc计算，无外部定位或运行API"
+  },
+  {
+    "id": "DAILY-048",
+    "title": "读出图片里的二维码",
+    "description": "选择自己的图片，在本机查看二维码里的文字。",
+    "scene": "life",
+    "repo": "https://github.com/cozmo/jsQR",
+    "stars": 4049,
+    "checkedAt": "2026-11-04",
+    "commit": "49a9633931fb8030ac2fc9cecc121d6e5a19f9a3",
+    "license": "Apache-2.0（无运行依赖，完整原文保留）",
+    "chinese": "中文本机图片读取封装，不是实时摄像头扫码应用。",
+    "maintenance": "未归档；最近push2026-05-15，固定运行jsqr1.4.0。",
+    "limitations": [
+      "只接受PNG/JPEG/WebP，8MiB/边长4096/800万像素；文件头先限额，Worker可停止，阶段有期限。",
+      "一次最多一条结果，也可能一条都读不到；实测双码图未读出，不承诺多码或所有模糊高密图片。",
+      "内容只作文字展示/下载，不自动访问网址，不判断内容安全；特殊编码可能不完整，JSON附原字节。",
+      "不申请摄像头或定位，不支持条形码实时读取；真机物理拍摄和全部编码未验。"
+    ],
+    "status": "research",
+    "input": "本机有限静态二维码图片",
+    "output": "结果预览及真实TXT/JSON",
+    "integration": "原始jsQR在同源可终止Worker中运行，不上传"
+  },
+  {
+    "id": "DAILY-049",
+    "title": "把词语排成一张词云图",
+    "description": "输入词语和权重，制作并保存自己的文字云图。",
+    "scene": "creative",
+    "repo": "https://github.com/jasondavies/d3-cloud",
+    "stars": 3951,
+    "checkedAt": "2026-11-04",
+    "commit": "5a7696bdcc3330aed91828b36e1651c4f8433a90",
+    "license": "BSD-3-Clause（原始2.0.0 ESM，无运行包依赖）",
+    "chinese": "平台中文有限词权重输入和SVG/PNG导出，不是中文分词器。",
+    "maintenance": "未归档，push2026-10-30；固定2.0.0真实新ESM接口，tag对象与剥离commit清楚区分。",
+    "limitations": [
+      "1–40词、每词20码点、权重1–100、输入4096字符/12KiB；两种有限画布与横排。",
+      "每词/总候选步及内部时间限额，主Worker期限5秒可终止；未放词逐项列出和JSON保留，不静默漏词。",
+      "全未放下时只给完整JSON，不生成假空白图片；PNG/SVG使用系统sans-serif字体，跨设备字形/布局未保证。",
+      "固定种子可在已测环境复现，不是全文语义分析或无限画布设计工具。"
+    ],
+    "status": "research",
+    "input": "用户手选词语、整数权重和种子",
+    "output": "词云SVG/PNG及含未放词的完整JSON",
+    "integration": "同源模块Worker+OffscreenCanvas，不加载外部字体/图片"
+  },
+  {
+    "id": "DAILY-050",
+    "title": "给手头的事计个时",
+    "description": "使用本机秒表或倒计时，保存本次计时记录。",
+    "scene": "life",
+    "repo": "https://github.com/albert-gonzalez/easytimer.js",
+    "stars": 780,
+    "checkedAt": "2026-11-04",
+    "commit": "7cc09eee8106fca60914c82bbfdc059d4bef5617",
+    "license": "MIT（含内联Babel辅助函数原MIT声明）",
+    "chinese": "中文本机秒表/倒计时及记录封装，一个来源项目。",
+    "maintenance": "未归档，最近push2023-10-19；固定4.6.0，低频维护不称近期活跃。",
+    "limitations": [
+      "浏览器前台的有限秒表/倒计时，支持暂停继续重置和记录下载，不是系统闹钟服务。",
+      "后台节流、休眠、改系统时间或关页会影响计时/回调，不承诺后台提醒和精密计量。",
+      "不申请通知权限、不自动音频、不上传或永久保存计时记录。"
+    ],
+    "status": "research",
+    "input": "有限计时模式/时长与主动操作",
+    "output": "计时显示及本次记录TXT/JSON",
+    "integration": "固定本地UMD，无模型或外部运行API"
   }
 ];
