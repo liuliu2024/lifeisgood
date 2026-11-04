@@ -970,5 +970,49 @@ export const dailyProjectsExtra: DailyProject[] = [
     "integration": "原Pixelit有限Canvas调用，平台预检及单pending迟回调清理，无模型API",
     "readmeUrl": "https://github.com/giventofly/pixelit/blob/e19053e01ea07247cd2a3aa797572b7277f60f43/README.md",
     "licenseUrl": "https://github.com/giventofly/pixelit/blob/e19053e01ea07247cd2a3aa797572b7277f60f43/LICENSE"
+  },
+  {
+    "id": "DAILY-084",
+    "title": "把自己的小图描成SVG",
+    "description": "有限小图减色描摹成真正的可缩放路径，保存SVG和说明。",
+    "scene": "creative",
+    "repo": "https://github.com/jankovicsandras/imagetracerjs",
+    "stars": 1547,
+    "checkedAt": "2026-11-05",
+    "commit": "f66099fe02592378013d434922bf9b162ed0eb75",
+    "license": "Unlicense（完整原文及原脚本通知保留）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2023-11-09，低频旧维护。",
+    "limitations": [
+      "静态PNG/JPEG≤2MiB/每边8–2048/100万像素，缩≤256边/2–8色，近似路径SVG/JSON，非无损或通用编辑器。",
+      "未保证真机/所有图片或联系人客户端兼容；输入留在本机。"
+    ],
+    "status": "research",
+    "toolPath": "/tools/image-trace",
+    "input": "自己的有限PNG/JPEG、2–8色",
+    "output": "实际路径SVG与近似描摹说明JSON",
+    "integration": "原开源库真实处理、平台限额与Worker终止，无上传模型API"
+  },
+  {
+    "id": "DAILY-086",
+    "title": "做一张自己的联系卡",
+    "description": "手填自己的单张联系卡，保存VCF和JSON，不发送或自动导入。",
+    "scene": "life",
+    "repo": "https://github.com/joaocarmo/vcard-creator",
+    "stars": 47,
+    "checkedAt": "2026-11-05",
+    "commit": "7a623ae976558d6887a56184ca328746b5162f1a",
+    "license": "双MIT（João Carmo及原PHP改编来源）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2026-07-30，npm无gitHead、固定官方发布提交。",
+    "limitations": [
+      "自己的单卡姓名50/组织职务80/电话32/邮箱100/备注300，VCF3/JSON，不自动导入或发送，不验证可达性。",
+      "未保证真机/所有图片或联系人客户端兼容；输入留在本机。"
+    ],
+    "status": "research",
+    "toolPath": "/tools/contact-card",
+    "input": "手填自己的六个有限联系字段",
+    "output": "实际单卡VCF3 UTF8与JSON",
+    "integration": "原开源库真实处理、平台限额与Worker终止，无上传模型API"
   }
 ];
