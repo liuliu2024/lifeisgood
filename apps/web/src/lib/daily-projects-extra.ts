@@ -643,5 +643,71 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "有限速度与拍数",
     "output": "主动预览及WAV/JSON",
     "integration": "原Tone离线合成，平台PCM封装，无音源资产"
+  },
+  {
+    "id": "DAILY-066",
+    "title": "做一份整齐的报价表",
+    "description": "本机生成静态报价XLSX，预览整数分合计。",
+    "scene": "life",
+    "repo": "https://gitlab.com/catamphetamine/write-excel-file",
+    "stars": null,
+    "checkedAt": "2026-11-04",
+    "commit": "cea8cff7c3b0f2a5bc55e3b5b5f9fa358cdb09d7",
+    "license": "MIT，附fflate与Babel MIT原文",
+    "chinese": "平台中文有限文档生成封装，非完整上游应用。",
+    "maintenance": "固定write-excel-file4.1.1；读取日期/完整来源及维护边界见原SOURCE。",
+    "limitations": [
+      "官方GitLab来源例外，GitHub Stars不适用，不是0。",
+      "1–30行/数量1–9999/价格0–999999.99，整数分静态总额，无自动联动公式或税费发票支付。",
+      "原包闭包核清；ExcelJS未采用不分发；不同办公软件排版不保证完全相同。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本及受控参数",
+    "output": "真实办公文件及网页示意",
+    "integration": "本机固定原库及平台安全输入封装，无收费API"
+  },
+  {
+    "id": "DAILY-067",
+    "title": "把要点整理成Word文档",
+    "description": "把有限纯文本说明与会议要点保存为Word文档。",
+    "scene": "life",
+    "repo": "https://github.com/dolanmiu/docx",
+    "stars": 5985,
+    "checkedAt": "2026-11-04",
+    "commit": "aa47895fe8c6e6ac4046092522528ff2dd229752",
+    "license": "MIT，附fflate/nanoid/Oxc/Babel/Rolldown/Node原声明",
+    "chinese": "平台中文有限文档生成封装，非完整上游应用。",
+    "maintenance": "固定docx9.15.2；读取日期/完整来源及维护边界见原SOURCE。",
+    "limitations": [
+      "最多10000UTF16/50段，每段1000字符，DOCX<=1MiB。",
+      "纯文本标题日期小节，无HTML/DOCX导入、外部图像或字体文件，不代写法律合同。",
+      "系统字体名仅作样式引用，Office/WPS渲染及真机全兼容未保证。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本及受控参数",
+    "output": "真实办公文件及网页示意",
+    "integration": "本机固定原库及平台安全输入封装，无收费API"
+  },
+  {
+    "id": "DAILY-068",
+    "title": "做三页简单的介绍",
+    "description": "填写有限介绍文字，预览示意并保存三页PPTX。",
+    "scene": "life",
+    "repo": "https://github.com/gitbrent/PptxGenJS",
+    "stars": 6349,
+    "checkedAt": "2026-11-04",
+    "commit": "3c9ec1b687c174952166f6a34b5e87ebf69fa469",
+    "license": "MIT，附TS辅助0BSD和既有JSZip完整原声明",
+    "chinese": "平台中文有限文档生成封装，非完整上游应用。",
+    "maintenance": "固定PptxGenJS4.0.1；读取日期/完整来源及维护边界见原SOURCE。",
+    "limitations": [
+      "固定3页纯文字、两配色，标题60字/简介500/3–6要点每160/联系说明300，PPTX<=2MiB。",
+      "无模板图片字体文件或外部资源，网页仅内容示意，不保证Office像素一致。",
+      "生成8秒仅拒收，原库ZIP不能强制终止，未settled前不能重复生成；三页计一个项目。"
+    ],
+    "status": "research",
+    "input": "有限中文纯文本及受控参数",
+    "output": "真实办公文件及网页示意",
+    "integration": "本机固定原库及平台安全输入封装，无收费API"
   }
 ];

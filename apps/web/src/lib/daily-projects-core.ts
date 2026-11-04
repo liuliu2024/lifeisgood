@@ -4,7 +4,7 @@ export type DailyProject = {
   description: string;
   scene: "life" | "creative";
   repo: string;
-  stars: number;
+  stars: number | null;
   checkedAt: string;
   commit: string;
   license: string;

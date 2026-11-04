@@ -41,9 +41,16 @@ export const usableTools = [
   {"key": "photo-effects", "path": "/tools/photo-effects", "title": "给照片加一点效果", "description": "本机处理有限照片效果，预览并保存PNG。", "repo": "https://github.com/evanw/glfx.js", "accepted": true},
   {"key": "icons", "path": "/tools/icons", "title": "找一个清楚的小图标", "description": "从有限通用图标中查找，保存自己的SVG或PNG。", "repo": "https://github.com/tabler/tabler-icons", "accepted": true},
   {"key": "beat", "path": "/tools/beat", "title": "做一段练习用的小节拍", "description": "主动生成有限节拍，预览并保存WAV。", "repo": "https://github.com/Tonejs/Tone.js", "accepted": true},
+  {"key": "quote-sheet", "path": "/tools/quote-sheet", "title": "做一份整齐的报价表", "description": "本机生成静态报价XLSX，预览整数分合计。", "repo": "https://gitlab.com/catamphetamine/write-excel-file", "accepted": true},
+  {"key": "word-note", "path": "/tools/word-note", "title": "把要点整理成Word文档", "description": "把有限纯文本说明与会议要点保存为Word文档。", "repo": "https://github.com/dolanmiu/docx", "accepted": true},
+  {"key": "intro-slides", "path": "/tools/intro-slides", "title": "做三页简单的介绍", "description": "填写有限介绍文字，预览示意并保存三页PPTX。", "repo": "https://github.com/gitbrent/PptxGenJS", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "quote-sheet": {"version": "write-excel-file4.1.1（GitLab）", "license": "MIT，附fflate与Babel MIT原文", "source": "/vendor/write-excel-file/SOURCE.md", "scope": "官方GitLab来源例外，GitHub Stars不适用，不是0。"},
+  "word-note": {"version": "docx9.15.2", "license": "MIT，附fflate/nanoid/Oxc/Babel/Rolldown/Node原声明", "source": "/vendor/docx/SOURCE.md", "scope": "最多10000UTF16/50段，每段1000字符，DOCX<=1MiB。"},
+  "intro-slides": {"version": "PptxGenJS4.0.1", "license": "MIT，附TS辅助0BSD和既有JSZip完整原声明", "source": "/vendor/pptxgenjs/SOURCE.md", "scope": "固定3页纯文字、两配色，标题60字/简介500/3–6要点每160/联系说明300，PPTX<=2MiB。"},
+
   "beat": {"version": "Tone15.1.22", "license": "MIT + Apache-2.0 + 0BSD（完整内嵌归属保留）", "source": "/vendor/tone/SOURCE.md", "scope": "40–200BPM/4–16拍，mono22050Hz、最多24秒；WAV/JSON。"},
   "photo-effects": {"version": "glfx official gh-pages @1bf5f4e", "license": "MIT", "source": "/vendor/glfx/SOURCE.md", "scope": "静态PNG/JPEG≤5MiB/400万像素，输出≤1024边；依赖标准WebGL，不保证所有GPU。"},
   "icons": {"version": "Tabler Icons3.50.0", "license": "MIT", "source": "/vendor/tabler-icons/SOURCE.md", "scope": "24个通用图标，24–1024尺寸/线宽1–4，派生SVG/PNG，非完整库。"},

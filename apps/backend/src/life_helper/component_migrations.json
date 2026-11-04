@@ -468,6 +468,75 @@
           }
         }
       ]
+    },
+    {
+      "id": "daily-066-quote-sheet-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "quote-sheet",
+          "title": "做一份整齐的报价表",
+          "path": "/tools/quote-sheet",
+          "item": {
+            "id": "DAILY-066",
+            "title": "做一份整齐的报价表",
+            "description": "填写有限商品和单价，预览并保存XLSX。",
+            "module_ids": [
+              "work",
+              "life"
+            ],
+            "sort_order": 170,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-067-word-note-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "word-note",
+          "title": "把说明和要点做成Word",
+          "path": "/tools/word-note",
+          "item": {
+            "id": "DAILY-067",
+            "title": "把说明和要点做成Word",
+            "description": "把有限纯文本小节整理成可下载Word文档。",
+            "module_ids": [
+              "work",
+              "life"
+            ],
+            "sort_order": 171,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-068-intro-slides-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "intro-slides",
+          "title": "做三页简单介绍",
+          "path": "/tools/intro-slides",
+          "item": {
+            "id": "DAILY-068",
+            "title": "做三页简单介绍",
+            "description": "填写有限要点，预览并保存三页PPTX。",
+            "module_ids": [
+              "work",
+              "life"
+            ],
+            "sort_order": 172,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
     }
   ]
 }
