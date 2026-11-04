@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
 
 import pytest
@@ -45,6 +46,7 @@ def registry(tmp_path, monkeypatch):
     seed_path = tmp_path / "component-seed.json"
     seed_path.write_text(json.dumps(seed), encoding="utf-8")
     monkeypatch.setattr(component_registry, "SEED_PATH", seed_path)
+    monkeypatch.setattr(component_registry, "MIGRATIONS_PATH", tmp_path / "migrations.json")
     monkeypatch.setenv("LIFE_OWNER_EMAIL", OWNER_EMAIL)
     monkeypatch.setenv("LIFE_OWNER_PASSWORD", PASSWORD)
     app_root = tmp_path / "data"
@@ -269,6 +271,199 @@ def test_two_owner_windows_cannot_both_commit_same_revision(registry):
         assert codes == [200, 409]
         snapshot = first.get(ADMIN).json()
         assert snapshot["revision"] == 1 and len(snapshot["items"]) == 3
+
+
+def write_migration(enabled=True, item_id="FUN-001"):
+    manifest = {
+        "migrations": [
+            {
+                "id": "synthetic-gallery-v1",
+                "enabled": enabled,
+                "tools": [
+                    {
+                        "key": "gallery",
+                        "title": "合成相册",
+                        "path": "/tools/gallery",
+                        "item": {
+                            "id": item_id,
+                            "title": "迁移默认标题",
+                            "description": "迁移默认说明",
+                            "module_ids": ["creative"],
+                            "sort_order": 9,
+                            "hidden": False,
+                            "archived": False,
+                        },
+                    }
+                ],
+            }
+        ]
+    }
+    component_registry.MIGRATIONS_PATH.write_text(json.dumps(manifest), encoding="utf-8")
+    return manifest
+
+
+def owner_snapshot(app):
+    with TestClient(app) as owner:
+        login_owner(owner)
+        return owner.get(ADMIN).json()
+
+
+def test_disabled_migration_does_not_expose_tool(registry):
+    _, root, _ = registry
+    write_migration(enabled=False)
+    app = create_app(root)
+    snapshot = owner_snapshot(app)
+    assert snapshot["revision"] == 0
+    assert [tool["key"] for tool in snapshot["tool_options"]] == ["avatar"]
+    candidate = next(item for item in snapshot["items"] if item["id"] == "FUN-001")
+    assert candidate["kind"] == "candidate" and "path" not in candidate
+    with TestClient(app) as owner:
+        login_owner(owner)
+        assert (
+            owner.post(ADMIN, json=component_payload(kind="tool", tool_key="gallery")).status_code
+            == 422
+        )
+
+
+@pytest.mark.parametrize("archived", [False, True])
+def test_migration_preserves_owner_display_fields_and_old_revision(registry, archived):
+    app, root, _ = registry
+    with TestClient(app) as owner:
+        login_owner(owner)
+        item = next(item for item in owner.get(ADMIN).json()["items"] if item["id"] == "FUN-001")
+        changed = owner.put(
+            ADMIN + "/FUN-001",
+            json=edit_payload(
+                item,
+                0,
+                title="站长改名",
+                description="保留站长说明",
+                module_ids=["life"],
+                sort_order=17,
+                hidden=True,
+                archived=archived,
+            ),
+        )
+        assert changed.status_code == 200
+    write_migration()
+    updated = create_app(root)
+    snapshot = owner_snapshot(updated)
+    assert snapshot["revision"] == 2
+    item = next(item for item in snapshot["items"] if item["id"] == "FUN-001")
+    assert item == {
+        "id": "FUN-001",
+        "title": "站长改名",
+        "description": "保留站长说明",
+        "module_ids": ["life"],
+        "sort_order": 17,
+        "hidden": True,
+        "archived": archived,
+        "kind": "tool",
+        "tool_key": "gallery",
+        "path": "/tools/gallery",
+    }
+    with TestClient(updated) as owner:
+        login_owner(owner)
+        assert not any(item["id"] == "FUN-001" for item in owner.get(PUBLIC).json()["items"])
+        assert owner.post(ADMIN, json=component_payload(revision=1)).status_code == 409
+    assert owner_snapshot(create_app(root)) == snapshot
+
+
+def test_new_component_migration_runs_once_across_concurrent_startups(registry):
+    _, root, _ = registry
+    write_migration(item_id="NEW-001")
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        apps = list(pool.map(lambda _: create_app(root), range(2)))
+    snapshots = [owner_snapshot(app) for app in apps]
+    assert snapshots[0] == snapshots[1]
+    assert snapshots[0]["revision"] == 1
+    assert len(snapshots[0]["items"]) == 3
+    assert (
+        next(item for item in snapshots[0]["items"] if item["id"] == "NEW-001")["path"]
+        == "/tools/gallery"
+    )
+    assert owner_snapshot(create_app(root)) == snapshots[0]
+
+
+@pytest.mark.parametrize("revert", [False, True])
+def test_migration_does_not_override_owner_tool_selection(registry, revert):
+    app, root, _ = registry
+    with TestClient(app) as owner:
+        login_owner(owner)
+        item = next(item for item in owner.get(ADMIN).json()["items"] if item["id"] == "FUN-001")
+        response = owner.put(
+            ADMIN + "/FUN-001", json=edit_payload(item, 0, kind="tool", tool_key="avatar")
+        )
+        assert response.status_code == 200
+        if revert:
+            item = next(item for item in response.json()["items"] if item["id"] == "FUN-001")
+            assert (
+                owner.put(
+                    ADMIN + "/FUN-001", json=edit_payload(item, 1, kind="candidate", tool_key=None)
+                ).status_code
+                == 200
+            )
+    write_migration()
+    snapshot = owner_snapshot(create_app(root))
+    item = next(item for item in snapshot["items"] if item["id"] == "FUN-001")
+    assert item["kind"] == ("candidate" if revert else "tool")
+    assert item["tool_key"] == (None if revert else "avatar")
+    with sqlite3.connect(root / "foundation.sqlite3") as db:
+        outcome = json.loads(
+            db.execute("SELECT result FROM component_registry_migrations").fetchone()[0]
+        )
+    assert outcome == [{"id": "FUN-001", "status": "skipped-owner-binding"}]
+
+
+def test_applied_migration_is_immutable_and_atomic(registry):
+    _, root, _ = registry
+    manifest = write_migration()
+    snapshot = owner_snapshot(create_app(root))
+    manifest["migrations"][0]["tools"][0]["title"] = "被修改的旧迁移"
+    component_registry.MIGRATIONS_PATH.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(ValueError, match="不可修改"):
+        create_app(root)
+    with sqlite3.connect(root / "foundation.sqlite3") as db:
+        assert (
+            db.execute("SELECT revision FROM component_registry_state").fetchone()[0]
+            == snapshot["revision"]
+        )
+
+
+def test_legacy_binding_without_edit_audit_is_preserved(registry):
+    _, root, _ = registry
+    with sqlite3.connect(root / "foundation.sqlite3") as db:
+        value = json.loads(
+            db.execute("SELECT value FROM component_registry_items WHERE id='FUN-001'").fetchone()[
+                0
+            ]
+        )
+        value.update(kind="tool", tool_key="avatar")
+        db.execute(
+            "UPDATE component_registry_items SET value=? WHERE id='FUN-001'", (json.dumps(value),)
+        )
+    write_migration()
+    item = next(
+        item for item in owner_snapshot(create_app(root))["items"] if item["id"] == "FUN-001"
+    )
+    assert item["kind"] == "tool" and item["tool_key"] == "avatar"
+
+
+def test_invalid_later_migration_rolls_back_entire_startup(registry):
+    _, root, _ = registry
+    manifest = write_migration(item_id="NEW-001")
+    second = json.loads(json.dumps(manifest["migrations"][0]))
+    second["id"] = "synthetic-invalid-v1"
+    second["tools"][0].update(key="contrast", path="/tools/contrast")
+    second["tools"][0]["item"].update(id="NEW-002", module_ids=["unknown"])
+    manifest["migrations"].append(second)
+    component_registry.MIGRATIONS_PATH.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(Exception, match="有效模块"):
+        create_app(root)
+    with sqlite3.connect(root / "foundation.sqlite3") as db:
+        assert db.execute("SELECT revision FROM component_registry_state").fetchone()[0] == 0
+        assert db.execute("SELECT count(*) FROM component_registry_migrations").fetchone()[0] == 0
+        assert db.execute("SELECT count(*) FROM component_registry_items").fetchone()[0] == 2
 
 
 def test_cross_site_writes_are_rejected(registry):

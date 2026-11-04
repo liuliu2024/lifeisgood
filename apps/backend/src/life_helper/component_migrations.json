@@ -1,0 +1,28 @@
+{
+  "migrations": [
+    {
+      "id": "daily-014-gallery-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "gallery", "title": "把一组照片放大慢慢看", "path": "/tools/gallery",
+        "item": {"id": "DAILY-014", "title": "把一组照片放大慢慢看", "description": "在网页相册里放大、旋转和逐张浏览。", "module_ids": ["life"], "sort_order": 111, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-017-contrast-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "contrast", "title": "让文字和背景更容易看清", "path": "/tools/contrast",
+        "item": {"id": "DAILY-017", "title": "让文字和背景更容易看清", "description": "调整颜色，寻找更易读的文字与背景组合。", "module_ids": ["creative"], "sort_order": 114, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-018-gradient-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "gradient", "title": "做一组自然的渐变配色", "path": "/tools/gradient",
+        "item": {"id": "DAILY-018", "title": "做一组自然的渐变配色", "description": "从几个喜欢的颜色生成过渡和配色。", "module_ids": ["creative"], "sort_order": 115, "hidden": false, "archived": false}
+      }]
+    }
+  ]
+}

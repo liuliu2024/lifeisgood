@@ -1,5 +1,6 @@
 """Owner-managed component metadata; executable paths stay in a reviewed source allowlist."""
 
+import hashlib
 import json
 import re
 import uuid
@@ -10,6 +11,7 @@ from fastapi import Depends, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 SEED_PATH = Path(__file__).with_name("component_seed.json")
+MIGRATIONS_PATH = Path(__file__).with_name("component_migrations.json")
 
 
 class StrictInput(BaseModel):
@@ -55,6 +57,35 @@ def attach_component_registry(app, database, owner_dependency):
     modules = seed["modules"] if seed else []
     module_ids = {module["id"] for module in modules}
     paths = seed.get("ready_tool_paths", {}) if seed else {}
+    paths = dict(paths)
+    manifest = (
+        json.loads(MIGRATIONS_PATH.read_text(encoding="utf-8"))
+        if MIGRATIONS_PATH.is_file()
+        else {"migrations": []}
+    )
+    migrations = []
+    seen_migrations = set()
+    for migration in manifest["migrations"]:
+        migration_id = migration["id"]
+        if (
+            not isinstance(migration_id, str)
+            or not re.fullmatch(r"[a-z0-9-]{1,100}", migration_id)
+            or migration_id in seen_migrations
+        ):
+            raise ValueError("组件迁移编号无效或重复")
+        seen_migrations.add(migration_id)
+        if type(migration["enabled"]) is not bool:
+            raise ValueError("组件迁移开关必须是布尔值")
+        if not migration["enabled"]:
+            continue
+        if not migration["tools"]:
+            raise ValueError("组件迁移不能没有工具")
+        for tool in migration["tools"]:
+            key = tool["key"]
+            if key in paths:
+                raise ValueError("组件迁移工具不能重复")
+            paths[key] = tool["path"]
+        migrations.append(migration)
     if len(module_ids) != len(modules) or not all(
         isinstance(key, str)
         and re.fullmatch(r"[a-z0-9-]{1,64}", key)
@@ -68,6 +99,9 @@ def attach_component_registry(app, database, owner_dependency):
     for item in (seed or {}).get("items", []):
         if item.get("kind") == "tool" and item.get("tool_key") in paths:
             tool_titles.setdefault(item["tool_key"], item["title"])
+    for migration in migrations:
+        for tool in migration["tools"]:
+            tool_titles[tool["key"]] = tool["title"]
     tool_options = [
         {"key": key, "title": tool_titles.get(key, key), "path": path}
         for key, path in paths.items()
@@ -90,6 +124,10 @@ def attach_component_registry(app, database, owner_dependency):
               seeded INTEGER NOT NULL CHECK(seeded IN (0,1)));
             CREATE TABLE IF NOT EXISTS component_registry_items (
               id TEXT PRIMARY KEY, value TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS component_registry_migrations (
+              id TEXT PRIMARY KEY, checksum TEXT NOT NULL, result TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS component_registry_binding_overrides (
+              item_id TEXT PRIMARY KEY);
         """)
         db.execute("BEGIN IMMEDIATE")
         db.execute(
@@ -125,6 +163,68 @@ def attach_component_registry(app, database, owner_dependency):
                     (item_id, json.dumps(value, ensure_ascii=False)),
                 )
             db.execute("UPDATE component_registry_state SET seeded=1 WHERE id=1")
+
+        for migration in migrations:
+            checksum = hashlib.sha256(
+                json.dumps(migration, sort_keys=True, ensure_ascii=False).encode()
+            ).hexdigest()
+            applied = db.execute(
+                "SELECT checksum FROM component_registry_migrations WHERE id=?",
+                (migration["id"],),
+            ).fetchone()
+            if applied:
+                if applied[0] != checksum:
+                    raise ValueError("已执行的组件迁移不可修改，请使用新编号")
+                continue
+            outcomes = []
+            for tool in migration["tools"]:
+                item = tool["item"]
+                item_id = item["id"]
+                if not isinstance(item_id, str) or not re.fullmatch(
+                    r"[A-Za-z0-9_-]{1,100}", item_id
+                ):
+                    raise ValueError("组件迁移目标编号无效")
+                payload = ComponentUpdate.model_validate(
+                    {
+                        **{k: v for k, v in item.items() if k != "id"},
+                        "expected_revision": 0,
+                        "kind": "tool",
+                        "tool_key": tool["key"],
+                    }
+                )
+                validate_component(payload)
+                row = db.execute(
+                    "SELECT value FROM component_registry_items WHERE id=?", (item_id,)
+                ).fetchone()
+                protected = db.execute(
+                    "SELECT 1 FROM component_registry_binding_overrides WHERE item_id=?",
+                    (item_id,),
+                ).fetchone()
+                if row is None:
+                    value = payload.model_dump(exclude={"expected_revision"})
+                    db.execute(
+                        "INSERT INTO component_registry_items(id,value) VALUES(?,?)",
+                        (item_id, json.dumps(value, ensure_ascii=False)),
+                    )
+                    status = "inserted"
+                else:
+                    value = json.loads(row[0])
+                    if protected or value["kind"] != "candidate" or value.get("tool_key"):
+                        status = "skipped-owner-binding"
+                    else:
+                        value.update(kind="tool", tool_key=tool["key"])
+                        db.execute(
+                            "UPDATE component_registry_items SET value=? WHERE id=?",
+                            (json.dumps(value, ensure_ascii=False), item_id),
+                        )
+                        status = "upgraded"
+                outcomes.append({"id": item_id, "status": status})
+            db.execute(
+                "INSERT INTO component_registry_migrations(id,checksum,result) VALUES(?,?,?)",
+                (migration["id"], checksum, json.dumps(outcomes)),
+            )
+            # Activation also changes the allowed tool options, even for protected rows.
+            db.execute("UPDATE component_registry_state SET revision=revision+1 WHERE id=1")
 
     def result(db, admin=False):
         revision = db.execute(
@@ -190,11 +290,21 @@ def attach_component_registry(app, database, owner_dependency):
         value = payload.model_dump(exclude={"expected_revision"})
         with database() as db:
             db.execute("BEGIN IMMEDIATE")
-            if not db.execute(
-                "SELECT 1 FROM component_registry_items WHERE id=?", (component_id,)
-            ).fetchone():
+            row = db.execute(
+                "SELECT value FROM component_registry_items WHERE id=?", (component_id,)
+            ).fetchone()
+            if not row:
                 raise HTTPException(404, "组件不存在")
             check_revision(db, payload.expected_revision)
+            previous = json.loads(row[0])
+            if (previous["kind"], previous.get("tool_key")) != (
+                value["kind"],
+                value.get("tool_key"),
+            ):
+                db.execute(
+                    "INSERT OR IGNORE INTO component_registry_binding_overrides(item_id) VALUES(?)",
+                    (component_id,),
+                )
             db.execute(
                 "UPDATE component_registry_items SET value=? WHERE id=?",
                 (json.dumps(value, ensure_ascii=False), component_id),

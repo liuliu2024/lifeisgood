@@ -7,6 +7,15 @@ export const usableTools = [
   { key: "compress", path: "/tools/compress", title: "让照片小一点、更好发送", description: "调整图片体积和尺寸，查看真实压缩结果。", repo: "https://github.com/Donaldcwl/browser-image-compression", accepted: true },
   { key: "zip", path: "/tools/zip", title: "把几份文件打包发出去", description: "本机选择文件，整理成一个ZIP下载。", repo: "https://github.com/Stuk/jszip", accepted: true },
   { key: "notes", path: "/tools/notes", title: "把小便签排得清清楚楚", description: "用简单标记写清单和笔记，预览后保存。", repo: "https://github.com/markdown-it/markdown-it", accepted: true },
+  { key: "gallery", path: "/tools/gallery", title: "把一组照片放大慢慢看", description: "在本机相册放大、拖动、旋转，下载转正后的照片。", repo: "https://github.com/fengyuanchen/viewerjs", accepted: true },
+  { key: "gradient", path: "/tools/gradient", title: "做一组自然的渐变配色", description: "指定颜色，生成渐变色卡，下载PNG、CSS和JSON。", repo: "https://github.com/gka/chroma.js", accepted: true },
+  { key: "contrast", path: "/tools/contrast", title: "让文字和背景更容易看清", description: "比较文字与背景的纯色对比，下载示例图和结果。", repo: "https://github.com/bgrins/TinyColor", accepted: true },
 ] as const;
+
+export const toolRuntimeSources: Record<string, {version: string; license: string; source: string}> = {
+  gallery: {version: "Viewer.js 1.11.7", license: "MIT", source: "/vendor/viewer/SOURCE.md"},
+  gradient: {version: "chroma.js 3.2.0", license: "BSD-3-Clause AND Apache-2.0", source: "/vendor/chroma/SOURCE.md"},
+  contrast: {version: "TinyColor 1.6.0", license: "MIT", source: "/vendor/tinycolor/SOURCE.md"},
+};
 
 export function acceptedTool(key?: string | null) { return usableTools.find(tool => tool.key === key && tool.accepted); }
