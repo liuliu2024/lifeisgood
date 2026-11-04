@@ -1,0 +1,11 @@
+{
+  "project": "browser-image-compression",
+  "version": "2.0.2",
+  "commit": "d933bc8e483a9853ed2b57338e035e8c45e40dc7",
+  "source": "https://github.com/Donaldcwl/browser-image-compression/tree/v2.0.2",
+  "license": "MIT",
+  "runtimeBundleDependency": "uzip 0.20201231.0, bundled UPNG and CanvasToBMP; included notices",
+  "worker": false,
+  "remoteScripts": false,
+  "integration": "Local browser bundle, Chinese wrapper by Lifeisgood"
+}

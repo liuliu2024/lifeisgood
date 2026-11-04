@@ -1,0 +1,9 @@
+{
+  "project": "cropperjs",
+  "version": "1.6.2",
+  "commit": "da3f6f7d4b9c29c7234ddf114c71a27a269855f0",
+  "source": "https://github.com/fengyuanchen/cropperjs/tree/v1.6.2",
+  "license": "MIT",
+  "runtimeDependencies": [],
+  "integration": "Local browser assets, Chinese wrapper by Lifeisgood"
+}

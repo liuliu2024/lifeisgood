@@ -11,6 +11,10 @@ import {
   getCollectionCopy,
 } from "@/lib/collections";
 import type { CollectionIdea } from "@/lib/collections";
+import ReadyTools from "@/components/ReadyTools";
+import ComponentManager from "@/components/ComponentManager";
+import { useComponentCatalog } from "@/lib/use-component-catalog";
+import { acceptedTool } from "@/lib/usable-tools";
 import {
   WEB_EXCLUDED_CAPABILITY_IDS,
   WEB_EXCLUDED_IDEA_IDS,
@@ -22,7 +26,7 @@ import {
 const excludedCandidateNames = new Set(
   WEB_EXCLUDED_CANDIDATES.map((name) => name.trim().toLowerCase()),
 );
-const eligibleCatalog = catalog
+const baseCatalog = catalog
   .filter((tool) => !WEB_EXCLUDED_CAPABILITY_IDS.includes(tool.id))
   .map((tool) => ({
     ...tool,
@@ -30,8 +34,7 @@ const eligibleCatalog = catalog
       (name) => !excludedCandidateNames.has(name.trim().toLowerCase()),
     ),
   }));
-const eligibleCapabilityIds = new Set(eligibleCatalog.map((tool) => tool.id));
-const eligibleIdeas = collectionIdeas.filter(
+const baseIdeas = collectionIdeas.filter(
   (idea) => !WEB_EXCLUDED_IDEA_IDS.includes(idea.id),
 );
 
@@ -169,6 +172,17 @@ function Icon({ name, size = 20 }: { name: string; size?: number }) {
   );
 }
 export default function Home() {
+  const { catalog: componentCatalog, error: componentError, refresh: refreshComponents } = useComponentCatalog();
+  const componentRecords = new Map(componentCatalog?.items.map(item => [item.id, item]) || []);
+  const eligibleCatalog = baseCatalog.filter(tool => componentRecords.has(tool.id)).map(tool => ({...tool, title:componentRecords.get(tool.id)!.title, description:componentRecords.get(tool.id)!.description})).sort((a,b)=>componentRecords.get(a.id)!.sort_order-componentRecords.get(b.id)!.sort_order);
+  const eligibleCapabilityIds = new Set(eligibleCatalog.map(tool => tool.id));
+  const eligibleIdeas = baseIdeas.filter(item => componentRecords.has(item.id)).map(item => ({...item,title:componentRecords.get(item.id)!.title,description:componentRecords.get(item.id)!.description})).sort((a,b)=>componentRecords.get(a.id)!.sort_order-componentRecords.get(b.id)!.sort_order);
+  const inModule = (id:string,module:string) => componentRecords.get(id)?.module_ids.includes(module) ?? false;
+  const managedCopy = (id:string) => {
+    const original=baseCatalog.find(tool=>tool.id===id),copy=getCollectionCopy(id),record=componentRecords.get(id);
+    return record?{title:record.title!==original?.title?record.title:copy?.title||record.title,description:record.description!==original?.description?record.description:copy?.description||record.description}:copy;
+  };
+  const readyCount = new Set((componentCatalog?.items || []).filter(item=>item.kind==='tool' && acceptedTool(item.tool_key)?.path===item.path).map(item=>item.tool_key)).size;
   const [view, setView] = useState<View>("home");
   const [query, setQuery] = useState("");
   const [stage, setStage] = useState("全部阶段");
@@ -178,6 +192,7 @@ export default function Home() {
   const [detail, setDetail] = useState<CatalogItem | CollectionIdea | null>(
     null,
   );
+  useEffect(() => { if (detail && componentCatalog && !componentCatalog.items.some(item=>item.id===detail.id)) setDetail(null); },[componentCatalog,detail]);
   const [menu, setMenu] = useState(false);
   const [allStages, setAllStages] = useState(false);
   const [auth, setAuth] = useState<"login" | "register" | null>(null);
@@ -503,7 +518,7 @@ export default function Home() {
       if (requestId !== settingsRequestRef.current) return;
       setSiteProfile(applied);
       setSettingsState(
-        "已将保存的名称、支持邮箱和公告应用到网站。工具与付费服务仍未启用。",
+        "已将保存的名称、支持邮箱和公告应用到网站。已接入工具可直接使用，付费服务仍未启用。",
       );
     } catch (error) {
       if (requestId !== settingsRequestRef.current) return;
@@ -598,21 +613,19 @@ export default function Home() {
   }
   const visible = eligibleCatalog.filter(
     (tool) =>
-      ((view !== "life" && view !== "creative") ||
-        collectionCapabilityIds[view].includes(tool.id)) &&
+      (view === "home" || view === "favorites" || (view === "industry" ? componentRecords.get(tool.id)?.module_ids.some(id=>id.startsWith("industry-")) : inModule(tool.id,view))) &&
       (view !== "favorites" || favorites.includes(tool.id)) &&
       (category === "全部分类" || tool.category === category) &&
-      (stage === "全部阶段" || tool.stage === stage) &&
+      (stage === "全部阶段" || inModule(tool.id,"stage-"+stages.indexOf(stage))) &&
       (industry === "全部行业" ||
-        tool.industry.includes(industry) ||
-        tool.industry.includes("通用")) &&
-      `${tool.title} ${tool.description} ${tool.category} ${tool.candidates.join(" ")} ${view === "life" || view === "creative" ? `${getCollectionCopy(tool.id)?.title || ""} ${getCollectionCopy(tool.id)?.description || ""}` : ""}`
+        inModule(tool.id,"industry-"+industries.indexOf(industry))) &&
+      `${tool.title} ${tool.description} ${tool.category} ${tool.candidates.join(" ")} ${view === "life" || view === "creative" ? `${managedCopy(tool.id)?.title || ""} ${managedCopy(tool.id)?.description || ""}` : ""}`
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
   );
   const visibleIdeas = eligibleIdeas.filter(
     (item) =>
-      (view === "home" || item.scene === view) &&
+      (view === "home" || inModule(item.id,view)) &&
       `${item.title} ${item.description} ${item.input} ${item.output}`
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
@@ -625,7 +638,7 @@ export default function Home() {
       "全部分类",
       ...(view === "life" || view === "creative"
         ? eligibleCatalog
-            .filter((tool) => collectionCapabilityIds[view].includes(tool.id))
+            .filter((tool) => inModule(tool.id,view))
             .map((tool) => tool.category)
         : eligibleCatalog.map((tool) => tool.category)),
     ]),
@@ -694,8 +707,8 @@ export default function Home() {
         </nav>
         <div className="sidebar-bottom">
           <div className="foundation-note">
-            <strong>网站基础搭建中</strong>
-            <p>先找到要办的事，再选择合适的工具。工具与付费服务尚未开通。</p>
+            <strong>工具分批接入中</strong>
+            <p>已接入的小工具可直接使用；待接入项目会标清范围。付费服务尚未开通。</p>
           </div>
           <button
             className={`nav-item ${view === "admin" ? "active" : ""}`}
@@ -786,7 +799,7 @@ export default function Home() {
             </div>
             <span className="phase-state">
               <span />
-              工具待接入
+              {componentCatalog ? `${readyCount}个工具已接入` : "正在读取工具目录"}
             </span>
           </div>
           {siteProfile.announcement && (
@@ -861,6 +874,7 @@ export default function Home() {
                 </label>
                 <p className="search-hint">直接说要办的事，不用记软件名字。</p>
               </section>
+              {["home","work","life","creative","public","industry"].includes(view) && <ReadyTools catalog={componentCatalog} error={componentError} retry={()=>void refreshComponents()} query={query} moduleId={view==="home"?undefined:view==="industry"?(industry==="全部行业"?"public":"industry-"+industries.indexOf(industry)):view} />}
               {view === "work" && (
                 <section
                   className="journey-section"
@@ -1029,7 +1043,7 @@ export default function Home() {
                     {visible.map((sourceTool) => {
                       const copy =
                         view === "life" || view === "creative"
-                          ? getCollectionCopy(sourceTool.id)
+                          ? managedCopy(sourceTool.id)
                           : undefined;
                       const tool = copy
                         ? { ...sourceTool, ...copy }
@@ -1295,7 +1309,7 @@ export default function Home() {
                         !privateState && (
                           <div className="empty-state">
                             <h3>还没有提交过任务</h3>
-                            <p>工具尚未接入，当前不会创建工具执行任务。</p>
+                            <p>浏览器小工具在本机处理，不创建后台任务；需要后台处理的工具另行接入。</p>
                             <button
                               className="button secondary"
                               onClick={() => navigate("home")}
@@ -1440,6 +1454,7 @@ export default function Home() {
                   </form>
                 </>
               )}
+              {account?.role === "owner" && <ComponentManager onChanged={()=>void refreshComponents()} />}
               <div className="settings-rows">
                 {[
                   [

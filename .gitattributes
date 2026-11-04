@@ -1,0 +1,2 @@
+# Preserve upstream artifacts and license bytes on all platforms.
+apps/web/public/vendor/** -text

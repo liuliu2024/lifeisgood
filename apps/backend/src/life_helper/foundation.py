@@ -19,6 +19,8 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
+from life_helper.component_registry import attach_component_registry
+
 COOKIE = "life_account"
 MAX_FILE = 10 * 1024 * 1024
 SESSION_SECONDS = 7 * 24 * 3600
@@ -214,6 +216,8 @@ def attach_foundation(app, root: Path):
         if user["role"] != "owner":
             raise HTTPException(403, "仅站长可以查看或编辑配置")
         return user
+
+    attach_component_registry(app, database, owner)
 
     def account(user):
         return {

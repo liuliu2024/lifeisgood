@@ -1,0 +1,2430 @@
+{
+  "modules": [
+    {
+      "id": "work",
+      "title": "开店与工作"
+    },
+    {
+      "id": "life",
+      "title": "生活小工具"
+    },
+    {
+      "id": "creative",
+      "title": "创意与娱乐"
+    },
+    {
+      "id": "public",
+      "title": "公共工具"
+    },
+    {
+      "id": "industry-0",
+      "title": "行业 · 通用"
+    },
+    {
+      "id": "industry-1",
+      "title": "行业 · 餐饮"
+    },
+    {
+      "id": "industry-2",
+      "title": "行业 · 服装零售"
+    },
+    {
+      "id": "industry-3",
+      "title": "行业 · 汽修"
+    },
+    {
+      "id": "industry-4",
+      "title": "行业 · 本地服务"
+    },
+    {
+      "id": "industry-5",
+      "title": "行业 · 小型加工"
+    },
+    {
+      "id": "stage-0",
+      "title": "阶段 · 起名与筹备"
+    },
+    {
+      "id": "stage-1",
+      "title": "阶段 · 选址与开店预算"
+    },
+    {
+      "id": "stage-2",
+      "title": "阶段 · 登记与开业准备"
+    },
+    {
+      "id": "stage-3",
+      "title": "阶段 · 门店信息与地图入驻"
+    },
+    {
+      "id": "stage-4",
+      "title": "阶段 · 商品与服务准备"
+    },
+    {
+      "id": "stage-5",
+      "title": "阶段 · 宣传与获客"
+    },
+    {
+      "id": "stage-6",
+      "title": "阶段 · 接单与履约"
+    },
+    {
+      "id": "stage-7",
+      "title": "阶段 · 收款与经营记录"
+    },
+    {
+      "id": "stage-8",
+      "title": "阶段 · 团队与日常运营"
+    },
+    {
+      "id": "stage-9",
+      "title": "阶段 · 复购与经营复盘"
+    }
+  ],
+  "items": [
+    {
+      "id": "FUN-001",
+      "title": "整理商品和服务目录",
+      "description": "商品/服务资料→统一目录；不要求把服务当库存品",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 0,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-002",
+      "title": "维护供应商和联系人",
+      "description": "供应商及联系人→可查的供应商档案",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 1,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-003",
+      "title": "向供应商整理询价",
+      "description": "待购项目→供应商价格请求",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 2,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-004",
+      "title": "跟踪采购订单",
+      "description": "采购清单与供应商→采购单及状态",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 3,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-005",
+      "title": "登记到货与收货",
+      "description": "采购到货信息→接收记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 4,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-006",
+      "title": "管仓库与盘点库存",
+      "description": "商品、仓库、盘点量→库存记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 5,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-007",
+      "title": "用条码标识管理商品",
+      "description": "商品与条码→可关联的商品标识",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 6,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-008",
+      "title": "追踪批次和序列号",
+      "description": "商品批次/序列→追溯记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 7,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-009",
+      "title": "管理同商品的规格变体",
+      "description": "规格组合→商品变体目录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 8,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-010",
+      "title": "整理生产用料清单",
+      "description": "产品和材料→BOM",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 9,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-011",
+      "title": "记录生产工单",
+      "description": "生产任务与BOM→制造订单",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 10,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-012",
+      "title": "管理经营固定资产",
+      "description": "设备等资产资料→资产管理记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 11,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-013",
+      "title": "整理客户及联系记录",
+      "description": "客户/联系人→CRM档案",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 12,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-014",
+      "title": "跟踪商机与线索",
+      "description": "线索和机会→商机管理",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 13,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-015",
+      "title": "制作可交付报价单",
+      "description": "客户、条目和价格→报价/PDF或ODT",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 14,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-016",
+      "title": "跟踪客户订单进度",
+      "description": "已确认需求→客户订单状态",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 15,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-017",
+      "title": "管理服务合同与订阅",
+      "description": "合同或周期服务→合同/订阅记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 16,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-018",
+      "title": "登记上门或现场服务工作",
+      "description": "客户服务事项→intervention记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 17,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-019",
+      "title": "记录发货与交付",
+      "description": "销售单与发货内容→shipping记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 18,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-020",
+      "title": "整理客户账单及贷项调整",
+      "description": "销售金额、收款/冲销→客户单据记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-7"
+      ],
+      "sort_order": 19,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-021",
+      "title": "整理供应商应付款",
+      "description": "供应商账单与支付→应付记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-7"
+      ],
+      "sort_order": 20,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-022",
+      "title": "记录经营银行账户",
+      "description": "账户与资金信息→账户管理记录；轻账本可选收入/支出/转账和分类流水",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-7"
+      ],
+      "sort_order": 21,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-023",
+      "title": "查看毛利与经营报表",
+      "description": "已记录销售与成本→margin/report",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-7"
+      ],
+      "sort_order": 22,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-024",
+      "title": "记录门店POS销售",
+      "description": "柜台销售→POS业务记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-7"
+      ],
+      "sort_order": 23,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-025",
+      "title": "整理售后问题工单",
+      "description": "客户问题→ticket与处理记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 24,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-026",
+      "title": "把商品分类、品牌和专题上架",
+      "description": "商品展示资料→商城分类/专题/详情",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 25,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-027",
+      "title": "让客户自助选购下单",
+      "description": "商品选择/购物车→在线订单",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 26,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-028",
+      "title": "做优惠券与团购活动",
+      "description": "活动规则→优惠券/团购入口",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 27,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-029",
+      "title": "处理商城订单和售后申请",
+      "description": "自助订单及售后请求→订单售后状态",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-4"
+      ],
+      "sort_order": 28,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-030",
+      "title": "安排可预约的服务和员工",
+      "description": "服务项目与提供者→预约资源目录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 29,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-031",
+      "title": "设置营业时间和预约规则",
+      "description": "员工工时/规则→可预约计划",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 30,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-032",
+      "title": "让客户按时间预约服务",
+      "description": "客户、服务、时间→预约记录",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 31,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-033",
+      "title": "将预约与日历、邮件联动",
+      "description": "预约变化→日历同步及邮件通知",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-6"
+      ],
+      "sort_order": 32,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-034",
+      "title": "用表单收集多人填写结果",
+      "description": "表单字段与填报→结构化数据；可补字段联动/验证/子表单",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 33,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-035",
+      "title": "建立可多人维护的经营台账",
+      "description": "业务字段与记录→表格式数据库；Excelize可补工作簿文件读写/样式",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 34,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-036",
+      "title": "编写团队手册和操作说明",
+      "description": "文字/图片→项目化知识文档",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 35,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-037",
+      "title": "受控分享内部经营手册",
+      "description": "项目成员/公开状态→访问范围",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 36,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-038",
+      "title": "将纸质材料OCR归档并检索",
+      "description": "扫描件/PDF→可检索档案；Umi/Paddle补图片/扫描PDF识别路径",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 37,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-039",
+      "title": "分派团队项目任务和日程",
+      "description": "项目、任务、负责人→任务/共享日程",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 38,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-040",
+      "title": "整理员工请假、工时和费用申报",
+      "description": "人员事项→HR记录/报告",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 39,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-041",
+      "title": "看经营网站访问情况",
+      "description": "网站追踪数据→traffic分析",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 40,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-042",
+      "title": "看活动来源与转化表现",
+      "description": "campaigns/行为/转化事件→活动分析",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 41,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-043",
+      "title": "用经营资料建立问答助手",
+      "description": "自有文档→知识库检索问答",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 42,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-044",
+      "title": "编排多步骤AI处理流程",
+      "description": "流程节点与条件→工作流",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 43,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-045",
+      "title": "给知识助手接入指定工具",
+      "description": "站长选定工具/端点→可调用工具链",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 44,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-046",
+      "title": "用自有素材组织镜头",
+      "description": "自有图片/原片→画面分析及镜头编排",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 45,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-047",
+      "title": "按说出来的文字选段成片",
+      "description": "原片转录与选段文字→拼接片段",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5"
+      ],
+      "sort_order": 46,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-048",
+      "title": "只保留某位说话人的片段",
+      "description": "ASR说话人标签→对应剪辑片段",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5"
+      ],
+      "sort_order": 47,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-050",
+      "title": "自动剪掉静音并调整片段速度",
+      "description": "音视频与规则→规则粗剪",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 48,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-051",
+      "title": "转录音视频并交付时间轴字幕",
+      "description": "音视频→转录/完整或片段SRT",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life",
+        "creative"
+      ],
+      "sort_order": 49,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-052",
+      "title": "做双语翻译字幕",
+      "description": "原字幕/视频→翻译与双语字幕",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life",
+        "creative"
+      ],
+      "sort_order": 50,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-053",
+      "title": "统一字幕术语、分句与长度",
+      "description": "字幕及术语约束→整理后的字幕",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5"
+      ],
+      "sort_order": 51,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-054",
+      "title": "修改字幕并烧录到画面",
+      "description": "字幕文字/位置/字体→硬字幕视频",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 52,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-055",
+      "title": "根据主题或原片写解说脚本",
+      "description": "主题/画面信息→解说稿",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 53,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-056",
+      "title": "把解说稿变成配音并混合原声",
+      "description": "文字与声音设置→配音音轨/视频",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 54,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-057",
+      "title": "为视频选配音乐并调整混音",
+      "description": "合法音乐或生成设置→循环/裁短/音量混音",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 55,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-058",
+      "title": "让画面按音乐节奏卡点",
+      "description": "音乐与片段→节奏编排",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 56,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-059",
+      "title": "按平台画幅导出成片；工程格式按项目另列",
+      "description": "成片→横/竖/方形视频；Narrato另有剪映草稿、Auto-Editor另有NLE工程",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 57,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-060",
+      "title": "按项目选择批量制作或局部重做（跨项目组合）",
+      "description": "V01批量复用生成设置；V07技能复用/多轮修改；V03暂停恢复为可比较子路径",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5"
+      ],
+      "sort_order": 58,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-061",
+      "title": "将几份经营材料合成一个PDF",
+      "description": "多PDF及顺序→一个有序文件",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 59,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-062",
+      "title": "只取需要的PDF页交材料",
+      "description": "页码选择→独立PDF",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 60,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-063",
+      "title": "整理扫描PDF页序和方向",
+      "description": "错序/倒页与人工选择→整理PDF",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 61,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-064",
+      "title": "填好已有交互PDF表格",
+      "description": "AcroForm字段与资料→填表PDF",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 62,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-065",
+      "title": "给资料副本加店名、水印或页码",
+      "description": "PDF与文字→有标记副本",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 63,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-066",
+      "title": "压缩图片并比较清晰度",
+      "description": "原图/质量设置→压缩图与前后对照",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life",
+        "creative"
+      ],
+      "sort_order": 64,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-067",
+      "title": "改成上传平台接受的图片格式",
+      "description": "原图与格式要求→指定格式文件",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life",
+        "creative"
+      ],
+      "sort_order": 65,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-068",
+      "title": "按指定像素准备证件或材料图片",
+      "description": "原图与用户给定规格→尺寸文件",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life"
+      ],
+      "sort_order": 66,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-069",
+      "title": "排可再编辑的海报或价目表",
+      "description": "自有图文→PNG/SVG与可再编辑JSON",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 67,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-071",
+      "title": "读出图片中的二维码内容",
+      "description": "图片/截图→原始文字或网址",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 68,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-072",
+      "title": "为店铺资料生成二维码",
+      "description": "文本/URL→node-qrcode生成PNG/SVG；Umi替代路径生成JPEG Base64",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life"
+      ],
+      "sort_order": 69,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-073",
+      "title": "按商品表批量排可打印标签",
+      "description": "表格、标签尺寸→标签页/PDF",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5"
+      ],
+      "sort_order": 70,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-074",
+      "title": "清理表格空白并规范类型",
+      "description": "杂乱列→预览确认的规范明细",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 71,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-075",
+      "title": "找相似客户或供应商名称供确认",
+      "description": "名称列→候选聚类及确认后结果",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 72,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-076",
+      "title": "拆开格子里的多项内容",
+      "description": "明确分隔符的列→多行/多列",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 73,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-077",
+      "title": "将指定工作表转为要求的CSV",
+      "description": "XLSX所选表与列序→CSV",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 74,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-078",
+      "title": "将多份日报并成同一列结构总表",
+      "description": "多XLSX与映射规则→合并XLSX",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 75,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-079",
+      "title": "将票据或账单表格变成可核对明细",
+      "description": "图片/PDF→表格结构和草稿",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-7"
+      ],
+      "sort_order": 76,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-080",
+      "title": "在网页修改Word材料并下载可继续编辑的文档",
+      "description": "自有DOCX→改文字/表格/图片后保存并下载DOCX；中文分页/字体差异待样本核对",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 77,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-081",
+      "title": "在网页修改Excel数据和公式后下载工作簿",
+      "description": "自有XLSX→交互改值/公式/工作表并保存XLSX；日期/前导零/公式/多表兼容待验",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8",
+        "life"
+      ],
+      "sort_order": 78,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-082",
+      "title": "在网页修改演示稿并下载可继续编辑的文件",
+      "description": "自有PPTX→修改幻灯片文字/图文排版并保存PPTX；母版/字体/动画兼容范围未测",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-8"
+      ],
+      "sort_order": 79,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-083",
+      "title": "自动去商品照片背景并检查透明边缘",
+      "description": "自有原图→透明PNG、遮罩和原图对照；白底/自有底图为输出选项，不另计任务",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 80,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-084",
+      "title": "圈出局部杂物并擦除补齐背景",
+      "description": "自有图＋用户画笔mask→局部修补候选图，保留原图/撤销；不自动决定删除对象，不保证还原遮挡处真实结构",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "creative"
+      ],
+      "sort_order": 81,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-085",
+      "title": "将小图清晰放大并对照下载",
+      "description": "自有低分辨率图＋倍率→超分辨率候选图与对照；保留原件，不是普通插值缩放，也不声称恢复真实细节",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-5",
+        "life",
+        "creative"
+      ],
+      "sort_order": 82,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-086",
+      "title": "检查自有网站页面/链接并整理修复清单",
+      "description": "授权URL/站点范围→带页面URL、规则、时间和失败状态的标题/描述/状态/死链等报告；单页/全站同一任务",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 83,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-087",
+      "title": "观察限定Google关键词名次变化",
+      "description": "自有域名、词、国家/设备/可选城市、周期→Google位置历史与采样条件/失败状态；不承诺上升",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 84,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-088",
+      "title": "为自有公开页生成sitemap与robots草稿",
+      "description": "已确认公开URL、真实更新日期和规则→XML/TXT与排除项预览；生成草稿不自动部署/提交",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 85,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "FUN-089",
+      "title": "将真实企业/商品信息整理为JSON-LD草稿",
+      "description": "已确认字段与可见页面内容→可预览JSON/HTML片段、校验错误；用户核对后自行决定发布",
+      "module_ids": [
+        "work",
+        "public",
+        "industry-0",
+        "industry-1",
+        "industry-2",
+        "industry-3",
+        "industry-4",
+        "industry-5",
+        "stage-9"
+      ],
+      "sort_order": 86,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "LIFE-001",
+      "title": "把两张照片拼在一起",
+      "description": "横着拼、竖着拼，也可以把多张照片排成网格。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 87,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "LIFE-002",
+      "title": "给照片上的私人信息打码",
+      "description": "分享前，遮住手机号、地址或其他不想公开的文字。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 88,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "LIFE-004",
+      "title": "整理一段乱糟糟的文字",
+      "description": "去掉多余空行、重复内容，顺便看看字数。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 89,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "LIFE-005",
+      "title": "算算两个日子相隔多久",
+      "description": "出行、生日或纪念日，把日期算清楚。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 90,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "LIFE-006",
+      "title": "把常用单位换算一下",
+      "description": "长度、重量和温度，换成自己熟悉的单位。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 91,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "PLAY-001",
+      "title": "像图层一样合成几张图片",
+      "description": "移动、缩放和叠放图片，做出有趣的新画面。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 92,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "PLAY-002",
+      "title": "给图片加字做个表情包",
+      "description": "配一句话，做一张属于自己的小表情。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 93,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "PLAY-003",
+      "title": "给照片换一种有趣的画风",
+      "description": "试试漫画头像或复古氛围，找到喜欢的感觉。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 94,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "PLAY-004",
+      "title": "用授权照片试试趣味换脸",
+      "description": "为本人或已获授权的照片探索趣味合成。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 95,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "PLAY-005",
+      "title": "把几张图片做成小动图",
+      "description": "让照片连起来动一下，做个简单的循环动画。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 96,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "PLAY-006",
+      "title": "把旅行照片做成回忆小片",
+      "description": "照片加字幕和音乐，留下一个小故事。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 97,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-001",
+      "title": "做一个专属几何头像",
+      "description": "用昵称生成可保存的几何图案头像。",
+      "module_ids": [
+        "life",
+        "creative",
+        "public"
+      ],
+      "sort_order": 98,
+      "hidden": false,
+      "archived": false,
+      "kind": "tool",
+      "tool_key": "avatar"
+    },
+    {
+      "id": "DAILY-002",
+      "title": "从照片提取好看的配色",
+      "description": "从自己的照片中找主色和配色灵感。",
+      "module_ids": [
+        "life",
+        "creative",
+        "public"
+      ],
+      "sort_order": 99,
+      "hidden": false,
+      "archived": false,
+      "kind": "tool",
+      "tool_key": "palette"
+    },
+    {
+      "id": "DAILY-003",
+      "title": "把照片裁成想要的比例",
+      "description": "为头像、相册或分享图裁剪合适画面。",
+      "module_ids": [
+        "life",
+        "creative",
+        "public",
+        "work"
+      ],
+      "sort_order": 100,
+      "hidden": false,
+      "archived": false,
+      "kind": "tool",
+      "tool_key": "crop"
+    },
+    {
+      "id": "DAILY-004",
+      "title": "让照片变小一点",
+      "description": "压缩照片，方便保存和分享。",
+      "module_ids": [
+        "life",
+        "creative",
+        "public",
+        "work"
+      ],
+      "sort_order": 101,
+      "hidden": false,
+      "archived": false,
+      "kind": "tool",
+      "tool_key": "compress"
+    },
+    {
+      "id": "DAILY-005",
+      "title": "把几份文件打成一个包",
+      "description": "选中零散文件，打包后一次下载。",
+      "module_ids": [
+        "life",
+        "creative",
+        "public",
+        "work"
+      ],
+      "sort_order": 102,
+      "hidden": false,
+      "archived": false,
+      "kind": "tool",
+      "tool_key": "zip"
+    },
+    {
+      "id": "DAILY-006",
+      "title": "把笔记排版得清楚一点",
+      "description": "边写简单标记边看排版后的笔记。",
+      "module_ids": [
+        "life",
+        "creative",
+        "public",
+        "work"
+      ],
+      "sort_order": 103,
+      "hidden": false,
+      "archived": false,
+      "kind": "tool",
+      "tool_key": "notes"
+    },
+    {
+      "id": "DAILY-007",
+      "title": "随手画一张手绘风草图",
+      "description": "画个布置图、流程或灵感小草图。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 104,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-008",
+      "title": "记住家里还有什么",
+      "description": "管理食材、保质期和购物清单。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 105,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-009",
+      "title": "把家常菜和一周菜单存起来",
+      "description": "收藏食谱，安排菜单并整理采购食材。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 106,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-010",
+      "title": "把复杂事情画成一张图",
+      "description": "整理搬家、活动或家庭事项的流程。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 107,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-011",
+      "title": "设计邀请卡和页面草稿",
+      "description": "用画布安排图片、文字和界面构想。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 108,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-012",
+      "title": "画一个可缩放的小图标",
+      "description": "在网页里编辑简单矢量图和装饰图案。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 109,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-013",
+      "title": "给分享照片省一点空间",
+      "description": "在浏览器里调整照片体积和质量。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 110,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-014",
+      "title": "把一组照片放大慢慢看",
+      "description": "在网页相册里放大、旋转和逐张浏览。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 111,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-015",
+      "title": "把照片缩成清晰的小图",
+      "description": "为相册或分享生成合适尺寸的图片。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 112,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-016",
+      "title": "对比不同图片格式和体积",
+      "description": "一边看画质，一边选更合适的图片格式。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 113,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-017",
+      "title": "让文字和背景更容易看清",
+      "description": "调整颜色，寻找更易读的文字与背景组合。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 114,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-018",
+      "title": "做一组自然的渐变配色",
+      "description": "从几个喜欢的颜色生成过渡和配色。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 115,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-019",
+      "title": "做一个可拖动的小画布",
+      "description": "组合照片、贴纸和文字，制作简单创意图。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 116,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-020",
+      "title": "用简单文字画出关系图",
+      "description": "把步骤和关系写下来，自动排成图。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 117,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-021",
+      "title": "把笔记变成思维导图",
+      "description": "用标题层级整理想法，展开成一张图。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 118,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-022",
+      "title": "整理一张自己的思绪导图",
+      "description": "把旅行、学习或活动计划分成清楚的分支。",
+      "module_ids": [
+        "creative"
+      ],
+      "sort_order": 119,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-023",
+      "title": "和家人朋友一起写一份清单",
+      "description": "共同整理活动笔记、旅行安排或会议记录。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 120,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-024",
+      "title": "把草稿整理成排版笔记",
+      "description": "写下文字，实时查看Markdown排版。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 121,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-025",
+      "title": "离线也能整理自己的笔记",
+      "description": "在浏览器中写作、预览并管理Markdown笔记。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 122,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-026",
+      "title": "像写文档一样编辑Markdown",
+      "description": "在富文本和Markdown之间切换，整理文章。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 123,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-027",
+      "title": "用中文习惯写好一篇笔记",
+      "description": "在熟悉的中文操作和Markdown排版间写作。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 124,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-028",
+      "title": "把零散资料整理成个人知识库",
+      "description": "用块、笔记和链接整理长期资料。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 125,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-029",
+      "title": "为家里或小团队建一个资料站",
+      "description": "把说明、步骤和共同资料整理成页面。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 126,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-030",
+      "title": "把经验整理成一本电子手册",
+      "description": "按书、章节和页面保存说明与经验。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 127,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-031",
+      "title": "为自己的资料建一个百科",
+      "description": "整理常用知识、说明和互相链接的页面。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 128,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-032",
+      "title": "随手记下今天的想法",
+      "description": "把短笔记、照片和日常记录放在时间线上。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 129,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-033",
+      "title": "用普通文件保存简洁笔记",
+      "description": "用Markdown文件记录内容，减少管理负担。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 130,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-034",
+      "title": "整理一个自己的家庭相册",
+      "description": "给照片分相册，按需要私密保存或分享。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 131,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    },
+    {
+      "id": "DAILY-035",
+      "title": "把许多照片整理成分类图库",
+      "description": "为照片加分类和标签，方便浏览与分享。",
+      "module_ids": [
+        "life"
+      ],
+      "sort_order": 132,
+      "hidden": false,
+      "archived": false,
+      "kind": "candidate"
+    }
+  ],
+  "ready_tool_paths": {
+    "avatar": "/tools/avatar",
+    "palette": "/tools/palette",
+    "crop": "/tools/crop",
+    "compress": "/tools/compress",
+    "zip": "/tools/zip",
+    "notes": "/tools/notes"
+  }
+}

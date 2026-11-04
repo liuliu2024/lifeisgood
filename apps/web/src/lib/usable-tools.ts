@@ -1,0 +1,12 @@
+// Only entries with actual input/output browser evidence are accepted here.
+// Library-backed Chinese tools are platform wrappers, not whole upstream apps.
+export const usableTools = [
+  { key: "avatar", path: "/tools/avatar", title: "做一个专属几何头像", description: "输入昵称，生成自己的图案，下载PNG或SVG。", repo: "https://github.com/dmester/jdenticon", accepted: true },
+  { key: "palette", path: "/tools/palette", title: "从照片提取好看的配色", description: "从自己的照片取色，保存色卡和颜色清单。", repo: "https://github.com/lokesh/color-thief", accepted: true },
+  { key: "crop", path: "/tools/crop", title: "把照片裁成合适的大小", description: "拖动裁剪框、选比例、旋转，再下载图片。", repo: "https://github.com/fengyuanchen/cropperjs", accepted: true },
+  { key: "compress", path: "/tools/compress", title: "让照片小一点、更好发送", description: "调整图片体积和尺寸，查看真实压缩结果。", repo: "https://github.com/Donaldcwl/browser-image-compression", accepted: true },
+  { key: "zip", path: "/tools/zip", title: "把几份文件打包发出去", description: "本机选择文件，整理成一个ZIP下载。", repo: "https://github.com/Stuk/jszip", accepted: true },
+  { key: "notes", path: "/tools/notes", title: "把小便签排得清清楚楚", description: "用简单标记写清单和笔记，预览后保存。", repo: "https://github.com/markdown-it/markdown-it", accepted: true },
+] as const;
+
+export function acceptedTool(key?: string | null) { return usableTools.find(tool => tool.key === key && tool.accepted); }
