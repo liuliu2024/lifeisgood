@@ -880,5 +880,29 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "自己的有限文字、参数或短WAV",
     "output": "本机真实预览与可下载文件",
     "integration": "固定原开源库及有界Worker，无模型收费API"
+  },
+  {
+    "id": "DAILY-079",
+    "title": "把自己的词藏进格子里",
+    "description": "输入自己的词语，生成找词格子，保存PNG、SVG和完整答案JSON。",
+    "scene": "creative",
+    "repo": "https://github.com/bunkat/wordfind",
+    "stars": 199,
+    "checkedAt": "2026-11-05",
+    "commit": "579ef5abb9e0e25f48f0fdb8fafda875296e692f",
+    "license": "MIT，保留BunKat2011根与2012原脚本通知",
+    "chinese": "平台中文有限本机封装，非上游完整游戏。",
+    "maintenance": "未归档，push2023-07-01；旧维护不称活跃，官方固定源码而非npm同名包。",
+    "limitations": [
+      "2–8词/每词2–6字/总≤40，BMP汉字或A–Z不混局，8–16格，PNG/SVG/JSON；至少出现一次，非唯一答案或打印保证。",
+      "原库生成和solve，平台穷举全部正横竖匹配；不分词、不含jQuery示例、无网络字典上传。"
+    ],
+    "status": "research",
+    "input": "用户每行给一个有限中文或英文词语",
+    "output": "本机找词预览和PNG/SVG/全部匹配JSON",
+    "integration": "固定原核心classic Worker，无模型收费API",
+    "toolPath": "/tools/word-search",
+    "readmeUrl": "https://github.com/bunkat/wordfind/blob/579ef5abb9e0e25f48f0fdb8fafda875296e692f/Readme.md",
+    "licenseUrl": "https://github.com/bunkat/wordfind/blob/579ef5abb9e0e25f48f0fdb8fafda875296e692f/LICENSE"
   }
 ];

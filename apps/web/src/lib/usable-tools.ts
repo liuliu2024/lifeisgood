@@ -52,9 +52,11 @@ export const usableTools = [
   {"key": "maze", "path": "/tools/maze", "title": "做张迷宫，换换脑筋", "description": "选择大小和种子，生成迷宫，保存图片和参考路线。", "repo": "https://github.com/bestguy/generate-maze", "accepted": true},
   {"key": "morse-note", "path": "/tools/morse-note", "title": "把一句话变成点划音码", "description": "标准字符转摩尔斯点划，主动试听并保存短音频和文字。", "repo": "https://github.com/hustcc/xmorse", "accepted": true},
   {"key": "pitch-check", "path": "/tools/pitch-check", "title": "看看这段单音大约多高", "description": "本机估算短WAV的单音频率与近似音名，保存CSV和JSON。", "repo": "https://github.com/ianprime0509/pitchy", "accepted": true},
+  {"key": "word-search", "path": "/tools/word-search", "title": "把自己的词藏进格子里", "description": "输入自己的词语，生成找词格子，保存PNG、SVG和完整答案JSON。", "repo": "https://github.com/bunkat/wordfind", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "word-search": {"version": "Wordfind.js固定源码579ef5a（原头0.0.1，非npm同名包）", "license": "MIT，保留BunKat2011根与2012原脚本通知", "source": "/vendor/wordfind/SOURCE.md", "scope": "2–8词/每词2–6字/总≤40，BMP汉字或A–Z不混局，8–16格，PNG/SVG/JSON；至少出现一次，非唯一答案或打印保证。"},
   "maze": {"version": "generate-maze1.1.0", "license": "MIT，附原Babel辅助MIT通知", "source": "/vendor/generate-maze/SOURCE.md", "scope": "行列5–25/有限seed，真实PNG/SVG/JSON与参考路；本批样本树结构独立核，非所有seed或打印保证。"},
   "morse-note": {"version": "xmorse1.0.0", "license": "MIT，附原Microsoft辅助0BSD通知", "source": "/vendor/xmorse/SOURCE.md", "scope": "1–40标准ASCII字符、10–20WPM、最多15秒700Hz WAV/TXT/JSON；无中文国际编码或应急通信保证。"},
   "pitch-check": {"version": "Pitchy4.1.0 + fft.js4.0.4", "license": "双MIT（固定4.1.0原许可及FFT原README完整许可）", "source": "/vendor/pitchy/SOURCE.md", "scope": "PCM16 WAV≤5s/1MiB、最多20窗4096帧，80–1200Hz和近似音名、CSV/JSON，非专业调音或身份判断。"},
