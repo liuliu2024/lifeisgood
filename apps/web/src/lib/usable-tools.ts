@@ -64,6 +64,12 @@ export const usableTools = [
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "notes": {"version": "markdown-it14.1.0", "license": "MIT（含原附带依赖声明）", "source": "/vendor/markdown-it/SOURCE.md", "scope": "最多20000字符Markdown便签，预览并保存MD/HTML；禁HTML和图片加载，普通链接需主动点击，非云笔记。"},
+  "zip": {"version": "JSZip3.10.1", "license": "选用MIT（上游MIT OR GPL3，含原附带依赖声明）", "source": "/vendor/jszip/SOURCE.md", "scope": "仅创建ZIP，最多50文件/单20MiB/总30MiB；不导入解压已有ZIP，不保证已压缩照片更小。"},
+  "compress": {"version": "browser-image-compression2.0.2", "license": "MIT（含原附带UPNG/UZIP/CanvasToBMP声明）", "source": "/vendor/image-compression/provenance.json", "scope": "JPEG/PNG≤10MiB/1600万像素，本机压缩；目标体积可能达不到，非无损保证，无远程Worker或上传。"},
+  "crop": {"version": "Cropper.js1.6.2", "license": "MIT（原JS/CSS及许可保留）", "source": "/vendor/cropper/provenance.json", "scope": "JPEG/PNG≤10MiB/1600万像素，本机裁剪旋转，最长边4096输出PNG/JPEG；无HEIC或动画。"},
+  "palette": {"version": "Color Thief3.5.0", "license": "MIT（原浏览器UMD与原许可保留）", "source": "/vendor/color-thief/SOURCE.md", "scope": "PNG/JPEG/静态WebP≤10MiB/1600万像素，最多5色PNG/JSON；透明不作底色，非专业色彩管理。"},
+  "avatar": {"version": "Jdenticon3.3.0", "license": "MIT（原文与原脚本通知保留）", "source": "/vendor/jdenticon/SOURCE.md", "scope": "最多200字符只作图案种子，256/512/1024像素PNG/SVG；不是把文字印上头像或完整头像编辑器。"},
   "link-extract": {"version": "Linkify4.4.0（两TLD生成常量移除）", "license": "双MIT（Nick Frasser和core-js Denis原文）", "source": "/vendor/linkify/SOURCE.md", "scope": "仅显式http/https/文字20kUTF16/64KiB、100处含重复；中文标点边界，无裸域/邮箱/电话/访问；TXTJSON。"},
   "text-art": {"version": "img2ascii固定670a0d8原Braille片段", "license": "MIT（原片段/适配差分完整保留）", "source": "/vendor/img2ascii/SOURCE.md", "scope": "PNG/JPEG5MiB/2048边/400万像素，白底预缩/32或64列/≤4096码点TXTJSON；字符画不是盲文翻译。"},
   "read-estimate": {"version": "reading-time1.5.0", "license": "MIT（Nicolas Gryman原文及原单函数）", "source": "/vendor/reading-time/SOURCE.md", "scope": "纯文本≤20000UTF16/64KiB，列明汉字ASCII标点与100–1000单位/分钟算术估时；非实际读速/能力或所有语言分词。"},
