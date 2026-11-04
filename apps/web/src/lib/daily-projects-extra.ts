@@ -1014,5 +1014,71 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "手填自己的六个有限联系字段",
     "output": "实际单卡VCF3 UTF8与JSON",
     "integration": "原开源库真实处理、平台限额与Worker终止，无上传模型API"
+  },
+  {
+    "id": "DAILY-088",
+    "title": "看看这篇文字大约读多久",
+    "description": "按明确的中英计数单位和自己选择的速度算术估时，保存TXT和JSON。",
+    "scene": "life",
+    "repo": "https://github.com/ngryman/reading-time",
+    "stars": 1428,
+    "checkedAt": "2026-11-05",
+    "commit": "b814bb1d7555a1e5a8146a763c7013fb8eb12202",
+    "license": "MIT（Nicolas Gryman原文及原单函数）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2025-04-22，固定稳定1.5非main2预版。",
+    "limitations": [
+      "纯文本≤20000UTF16/64KiB，列明汉字ASCII标点与100–1000单位/分钟算术估时；非实际读速/能力或所有语言分词。",
+      "所有语言/浏览器/真机未全验，输入不上传，不给专业认证或可达性保证。"
+    ],
+    "status": "research",
+    "toolPath": "/tools/read-estimate",
+    "input": "自己的有限汉字ASCII文字及速度",
+    "output": "计数与算术估时TXTJSON",
+    "integration": "原开源算法真实参与，平台有限安全边界与Worker终止，无模型API"
+  },
+  {
+    "id": "DAILY-089",
+    "title": "把图片变成字符点阵画",
+    "description": "自己的图片变成Unicode点阵字符画，保存TXT和JSON。",
+    "scene": "creative",
+    "repo": "https://github.com/SoufianoDev/img2ascii",
+    "stars": 0,
+    "checkedAt": "2026-11-05",
+    "commit": "670a0d8a368225ee8ea9e7c2fa52b7503e617fb5",
+    "license": "MIT（原片段/适配差分完整保留）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2026-05-27，0Stars如实保留，仅原算法片段非完整外部UI。",
+    "limitations": [
+      "PNG/JPEG5MiB/2048边/400万像素，白底预缩/32或64列/≤4096码点TXTJSON；字符画不是盲文翻译。",
+      "所有语言/浏览器/真机未全验，输入不上传，不给专业认证或可达性保证。"
+    ],
+    "status": "research",
+    "toolPath": "/tools/text-art",
+    "input": "自己的PNG/JPEG及点阵宽度",
+    "output": "Unicode字符画TXT与参数JSON",
+    "integration": "原开源算法真实参与，平台有限安全边界与Worker终止，无模型API"
+  },
+  {
+    "id": "DAILY-090",
+    "title": "整理文字里的完整网址",
+    "description": "只提取显式HTTP/S完整网址，去重保位置，保存TXT和JSON，不打开网页。",
+    "scene": "life",
+    "repo": "https://github.com/nfrasser/linkifyjs",
+    "stars": 2048,
+    "checkedAt": "2026-11-05",
+    "commit": "fea45722ebba902672a40a5585c9c958ecf7e14d",
+    "license": "双MIT（Nick Frasser和core-js Denis原文）",
+    "chinese": "平台中文有限本机封装，非完整上游应用。",
+    "maintenance": "未归档，push2026-10-31，已转nfrasser namespace；收窄不分发未清TLD数据。",
+    "limitations": [
+      "仅显式http/https/文字20kUTF16/64KiB、100处含重复；中文标点边界，无裸域/邮箱/电话/访问；TXTJSON。",
+      "所有语言/浏览器/真机未全验，输入不上传，不给专业认证或可达性保证。"
+    ],
+    "status": "research",
+    "toolPath": "/tools/link-extract",
+    "input": "自己的纯文本完整协议网址",
+    "output": "去重网址TXT和保原文UTF16位置JSON",
+    "integration": "原开源算法真实参与，平台有限安全边界与Worker终止，无模型API"
   }
 ];

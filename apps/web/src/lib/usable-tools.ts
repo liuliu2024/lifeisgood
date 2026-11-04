@@ -58,9 +58,15 @@ export const usableTools = [
   {"key": "pixel-grid", "path": "/tools/pixel-grid", "title": "把照片做成像素格小图", "description": "用有限颜色做32或64格草图，保存PNG与每格色号JSON。", "repo": "https://github.com/giventofly/pixelit", "accepted": true},
   {"key": "image-trace", "path": "/tools/image-trace", "title": "把自己的小图描成SVG", "description": "有限小图减色描摹成真正的可缩放路径，保存SVG和说明。", "repo": "https://github.com/jankovicsandras/imagetracerjs", "accepted": true},
   {"key": "contact-card", "path": "/tools/contact-card", "title": "做一张自己的联系卡", "description": "手填自己的单张联系卡，保存VCF和JSON，不发送或自动导入。", "repo": "https://github.com/joaocarmo/vcard-creator", "accepted": true},
+  {"key": "read-estimate", "path": "/tools/read-estimate", "title": "看看这篇文字大约读多久", "description": "按明确的中英计数单位和自己选择的速度算术估时，保存TXT和JSON。", "repo": "https://github.com/ngryman/reading-time", "accepted": true},
+  {"key": "text-art", "path": "/tools/text-art", "title": "把图片变成字符点阵画", "description": "自己的图片变成Unicode点阵字符画，保存TXT和JSON。", "repo": "https://github.com/SoufianoDev/img2ascii", "accepted": true},
+  {"key": "link-extract", "path": "/tools/link-extract", "title": "整理文字里的完整网址", "description": "只提取显式HTTP/S完整网址，去重保位置，保存TXT和JSON，不打开网页。", "repo": "https://github.com/nfrasser/linkifyjs", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "link-extract": {"version": "Linkify4.4.0（两TLD生成常量移除）", "license": "双MIT（Nick Frasser和core-js Denis原文）", "source": "/vendor/linkify/SOURCE.md", "scope": "仅显式http/https/文字20kUTF16/64KiB、100处含重复；中文标点边界，无裸域/邮箱/电话/访问；TXTJSON。"},
+  "text-art": {"version": "img2ascii固定670a0d8原Braille片段", "license": "MIT（原片段/适配差分完整保留）", "source": "/vendor/img2ascii/SOURCE.md", "scope": "PNG/JPEG5MiB/2048边/400万像素，白底预缩/32或64列/≤4096码点TXTJSON；字符画不是盲文翻译。"},
+  "read-estimate": {"version": "reading-time1.5.0", "license": "MIT（Nicolas Gryman原文及原单函数）", "source": "/vendor/reading-time/SOURCE.md", "scope": "纯文本≤20000UTF16/64KiB，列明汉字ASCII标点与100–1000单位/分钟算术估时；非实际读速/能力或所有语言分词。"},
   "contact-card": {"version": "vcard-creator1.0.0", "license": "双MIT（João Carmo及原PHP改编来源）", "source": "/vendor/vcard-creator/SOURCE.md", "scope": "自己的单卡姓名50/组织职务80/电话32/邮箱100/备注300，VCF3/JSON，不自动导入或发送，不验证可达性。"},
   "image-trace": {"version": "ImageTracer.js1.2.6", "license": "Unlicense（完整原文及原脚本通知保留）", "source": "/vendor/imagetracer/SOURCE.md", "scope": "静态PNG/JPEG≤2MiB/每边8–2048/100万像素，缩≤256边/2–8色，近似路径SVG/JSON，非无损或通用编辑器。"},
   "pixel-grid": {"version": "Pixelit固定源码e19053e（非npm语义版本）", "license": "双MIT（原Pixelit及based-on8bit原通知）", "source": "/vendor/pixelit/SOURCE.md", "scope": "PNG/JPEG≤5MiB/2048边/400万像素，先128平方再原像素与配色；32/64格4–16色、512PNG/色号JSON；透明先白底，原生编码不能强杀。"},

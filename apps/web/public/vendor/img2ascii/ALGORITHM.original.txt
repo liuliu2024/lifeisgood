@@ -1,0 +1,64 @@
+            const gamma = Math.pow((gammaAmt / 50), 1.5); 
+            let lums = [];
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i+3] > 10) lums.push(0.299 * pixels[i] + 0.587 * pixels[i+1] + 0.114 * pixels[i+2]);
+            }
+            lums.sort((a, b) => a - b);
+            
+            let minLum = lums[Math.floor(lums.length * 0.01)] || 0;
+            let maxLum = lums[Math.floor(lums.length * 0.99)] || 255;
+            if (minLum >= maxLum) { minLum = 0; maxLum = 255; }
+
+            const lumMap = new Float32Array(processW * processH);
+            for (let y = 0; y < processH; y++) {
+                for (let x = 0; x < processW; x++) {
+                    const i = (y * processW + x) * 4;
+                    let lum = 255; 
+                    if (pixels[i+3] > 10) {
+                        const rawLum = 0.299 * pixels[i] + 0.587 * pixels[i+1] + 0.114 * pixels[i+2];
+                        let normalized = (rawLum - minLum) / (maxLum - minLum);
+                        normalized = Math.max(0, Math.min(1, normalized));
+                        normalized = Math.pow(normalized, gamma);
+                        lum = normalized * 255;
+                    }
+                    lumMap[y * processW + x] = lum;
+                }
+            }
+
+            if (applyDither) {
+                for (let y = 0; y < processH; y++) {
+                    for (let x = 0; x < processW; x++) {
+                        const idx = y * processW + x;
+                        const oldVal = lumMap[idx];
+                        const newVal = oldVal < 128 ? 0 : 255;
+                        lumMap[idx] = newVal;
+                        const err = oldVal - newVal;
+                        if (x + 1 < processW) lumMap[idx + 1] += err * 7 / 16;
+                        if (y + 1 < processH) {
+                            if (x - 1 >= 0) lumMap[idx + processW - 1] += err * 3 / 16;
+                            lumMap[idx + processW] += err * 5 / 16;
+                            if (x + 1 < processW) lumMap[idx + processW + 1] += err * 1 / 16;
+                        }
+                    }
+                }
+            }
+
+            let asciiStr = "";
+            const bitMap = [[1, 8], [2, 16], [4, 32], [64, 128]];
+
+            for (let cy = 0; cy < targetCharH; cy++) {
+                for (let cx = 0; cx < targetCharW; cx++) {
+                    let dotValue = 0;
+                    for (let dy = 0; dy < 4; dy++) {
+                        for (let dx = 0; dx < 2; dx++) {
+                            const idx = (cy * 4 + dy) * processW + (cx * 2 + dx);
+                            let isDotOn = lumMap[idx] >= 128;
+                            if (invert) isDotOn = !isDotOn;
+                            if (isDotOn) dotValue += bitMap[dy][dx];
+                        }
+                    }
+                    asciiStr += String.fromCharCode(10240 + dotValue);
+                }
+                asciiStr += "\n";
+            }
+

@@ -1,0 +1,15 @@
+--- ALGORITHM.original.txt
++++ braille.mjs
+@@ -1,3 +1,6 @@
++// Platform wrapper; original brightness/gamma/dot loops retained below unchanged.
++export function braille(pixels,processW,processH,targetCharW,targetCharH,invert){
++const gammaAmt=50,applyDither=false;
+             const gamma = Math.pow((gammaAmt / 50), 1.5); 
+             let lums = [];
+             for (let i = 0; i < pixels.length; i += 4) {
+@@ -62,3 +65,5 @@
+                 asciiStr += "\n";
+             }
+ 
++return asciiStr;
++}

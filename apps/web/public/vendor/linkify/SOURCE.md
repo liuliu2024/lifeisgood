@@ -1,0 +1,11 @@
+# Linkify 4.4.0 — bounded explicit-URL extraction
+
+Official https://github.com/nfrasser/linkifyjs ; migrated from Hypercontext in November2024. Fixed npm gitHead fea45722ebba902672a40a5585c9c958ecf7e14d. 2048 GitHub Stars read2026-11-05; pushed2026-10-31, unarchived. Original npm browser IIFE68866B SHA256 45e66e99a64392142af541683b4bf357c11fa1ba7c8ce96d77a41b3e994b9bd5; original bundle remains in private audit only.
+
+Published linkify.js is a transparent minimal adaptation: exactly two generated constants encodedTlds and encodedUtlds were replaced with empty strings and explanatory comments. No scanner/tokenizer/find algorithm changes or added parser algorithm. Modified size62817B SHA256 be3183ff67ce9c5d9503a187fc4d62e482a60eb1009ba07e5677de95d91f9563. Original embedded TLD data was generated from IANA DNS TLD list; its data-specific terms were not resolved in this bounded review. No claim of infringement; the IANA Protocol Registry CC0 page is not claimed to license DNS data. Neither original data-bearing script nor full original-data diff is redistributed here. Reproduce from fixed npm original by replacing only those two quoted constant values with empty strings.
+
+Only explicit http:// and https:// inputs supported; bare domains/www, emails, phones not supported. Original find participates; platform then validates URL/limits and deduplicates while retaining source positions. Pure-text results only, no clickable target links or network fetches. Not a reachability/security/ownership check.
+
+Original MIT copyright2024Nick Frasser retained in LICENSE. Actual inlined stringToArray adaptation references core-js commit2d69cf5f99ab3ea3463c395df81e5a15b68f49d9; original MIT ©2014–2021Denis Pushkarev preserved in COREJS-LICENSE. No other runtime dependencies, no remote fonts/data/plugins/HTML interfaces. No build/clean/prepack/test script executed; official rollup configuration was read, not rebuilt. This source notice is not a claim that a modified artifact is byte-identical to upstream.
+
+Platform boundary policy: Chinese commas/full stops/question/exclamation/semicolon/list punctuation and full-width brackets delimit the extracted match; encode those characters if they are part of the intended URL. Original matching algorithm is unchanged; this explicit platform output boundary policy fixes prose being included in a URL.
