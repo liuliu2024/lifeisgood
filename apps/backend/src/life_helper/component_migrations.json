@@ -71,6 +71,30 @@
         "key": "barcode", "title": "做一张清楚的条形码", "path": "/tools/barcode",
         "item": {"id": "DAILY-038", "title": "做一张清楚的条形码", "description": "输入商品或资料编号，预览并下载条形码SVG和PNG。", "module_ids": ["work","life"], "sort_order": 142, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-039-qr-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "qr", "title": "做个清楚的二维码", "path": "/tools/qr",
+        "item": {"id": "DAILY-039", "title": "做个清楚的二维码", "description": "把文字或网址生成二维码，下载PNG或SVG。", "module_ids": ["work","life","creative"], "sort_order": 143, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-040-pdf-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "pdf", "title": "把PDF合起来或取出几页", "path": "/tools/pdf",
+        "item": {"id": "DAILY-040", "title": "把PDF合起来或取出几页", "description": "按原页合并PDF或保留指定页，保存新的文件。", "module_ids": ["work","life"], "sort_order": 144, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-041-charts-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "charts", "title": "把数字画成一张图", "path": "/tools/charts",
+        "item": {"id": "DAILY-041", "title": "把数字画成一张图", "description": "输入自己的数据，预览清楚的图表并保存PNG。", "module_ids": ["work","life"], "sort_order": 145, "hidden": false, "archived": false}
+      }]
     }
   ]
 }

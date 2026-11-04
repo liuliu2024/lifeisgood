@@ -15,6 +15,9 @@ export const usableTools = [
   { key: "wheel", path: "/tools/wheel", title: "今天选什么，转一下", description: "用自己的选项转动选择，保存落点与结果JSON。", repo: "https://github.com/buuing/lucky-canvas", accepted: true },
   { key: "csv", path: "/tools/csv", title: "把CSV表格整理清楚", description: "本机预览并选择保留列，保存CSV和二维JSON。", repo: "https://github.com/mholt/PapaParse", accepted: true },
   { key: "barcode", path: "/tools/barcode", title: "做一张清楚的条形码", description: "生成CODE128或EAN13，下载条形码SVG和PNG。", repo: "https://github.com/lindell/JsBarcode", accepted: true },
+  { key: "qr", path: "/tools/qr", title: "做个清楚的二维码", description: "本机生成文字或网址二维码，下载PNG与SVG。", repo: "https://github.com/soldair/node-qrcode", accepted: true },
+  { key: "pdf", path: "/tools/pdf", title: "把PDF合起来或取出几页", description: "合并两份PDF或按顺序取页，预览并保存新文件。", repo: "https://github.com/Hopding/pdf-lib", accepted: true },
+  { key: "charts", path: "/tools/charts", title: "把数字画成一张图", description: "输入自己的数字，制作柱状、折线或圆环图PNG。", repo: "https://github.com/chartjs/Chart.js", accepted: true },
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
@@ -26,6 +29,9 @@ export const toolRuntimeSources: Record<string, {version: string; license: strin
   wheel: {version: "lucky-canvas 1.7.26", license: "Apache-2.0（内嵌Microsoft辅助声明保留）", source: "/vendor/lucky-canvas/SOURCE.md", scope: "2–20个文字选项，本机生活小决定与结果JSON；不用于金钱奖品或营销开奖。"},
   csv: {version: "PapaParse 5.5.3", license: "MIT", source: "/vendor/papaparse/SOURCE.md", scope: "UTF-8 CSV、2MiB/10000行；位置选列，危险公式前缀导出为文本，JSON保留字符串。"},
   barcode: {version: "JsBarcode 3.12.1", license: "MIT；ZXing仅验收不随站点", source: "/vendor/jsbarcode/SOURCE.md", scope: "CODE128可打印ASCII或EAN13，PNG/SVG；独立回读已验，真机扫码和打印仍未验。"},
+  qr: {version: "node-qrcode 1.5.4", license: "MIT（含dijkstrajs1.0.3原文）", source: "/vendor/node-qrcode/SOURCE.md", scope: "1200 UTF-8字节、版本≤27、每模块≥4px的黑白二维码；PNG/SVG，真机和打印未验。"},
+  pdf: {version: "pdf-lib 1.17.1", license: "MIT；附Apache-2.0/Zlib/0BSD/字体度量声明", source: "/vendor/pdf-lib/SOURCE.md", scope: "两份原页合并/按序取页；每输入20MiB/200页，输出400页/60MiB，新窗口预览，不含OCR或新排字。"},
+  charts: {version: "Chart.js 4.5.1", license: "MIT（含kurkle/color0.3.2）", source: "/vendor/chartjs/SOURCE.md", scope: "2–12行数字，柱/线/圆环，1200×800或960×960 PNG；不提供自动商业分析。"},
 };
 
 export function acceptedTool(key?: string | null) { return usableTools.find(tool => tool.key === key && tool.accepted); }

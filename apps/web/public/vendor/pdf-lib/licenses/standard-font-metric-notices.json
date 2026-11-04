@@ -1,0 +1,58 @@
+[
+  {
+    "font": "Courier",
+    "notice": "Copyright (c) 1989, 1990, 1991, 1992, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved."
+  },
+  {
+    "font": "Courier-Bold",
+    "notice": "Copyright (c) 1989, 1990, 1991, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved."
+  },
+  {
+    "font": "Courier-Oblique",
+    "notice": "Copyright (c) 1989, 1990, 1991, 1992, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved."
+  },
+  {
+    "font": "Courier-BoldOblique",
+    "notice": "Copyright (c) 1989, 1990, 1991, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved."
+  },
+  {
+    "font": "Helvetica",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1997 Adobe Systems Incorporated.  All Rights Reserved.Helvetica is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Helvetica-Bold",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1997 Adobe Systems Incorporated.  All Rights Reserved.Helvetica is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Helvetica-Oblique",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1997 Adobe Systems Incorporated.  All Rights Reserved.Helvetica is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Helvetica-BoldOblique",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1997 Adobe Systems Incorporated.  All Rights Reserved.Helvetica is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Times-Roman",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved.Times is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Times-Bold",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved.Times is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Times-Italic",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved.Times is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Times-BoldItalic",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved.Times is a trademark of Linotype-Hell AG and/or its subsidiaries."
+  },
+  {
+    "font": "Symbol",
+    "notice": "Copyright (c) 1985, 1987, 1989, 1990, 1997 Adobe Systems Incorporated. All rights reserved."
+  },
+  {
+    "font": "ZapfDingbats",
+    "notice": "Copyright (c) 1985, 1987, 1988, 1989, 1997 Adobe Systems Incorporated. All Rights Reserved.ITC Zapf Dingbats is a registered trademark of International Typeface Corporation."
+  }
+]
