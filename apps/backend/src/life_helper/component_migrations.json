@@ -191,6 +191,75 @@
         "key": "celebrate", "title": "为小小的好事庆祝一下", "path": "/tools/celebrate",
         "item": {"id": "DAILY-053", "title": "为小小的好事庆祝一下", "description": "主动播放有限庆祝效果，保存自己的祝福静帧。", "module_ids": ["life","creative"], "sort_order": 157, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-054-date-span-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "date-span",
+          "title": "算算两个日期相隔几天",
+          "path": "/tools/date-span",
+          "item": {
+            "id": "DAILY-054",
+            "title": "算算两个日期相隔几天",
+            "description": "严格公历日期间隔与加减天数，保存结果。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 158,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-055-task-board-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "task-board",
+          "title": "把待办事情排到小看板",
+          "path": "/tools/task-board",
+          "item": {
+            "id": "DAILY-055",
+            "title": "把待办事情排到小看板",
+            "description": "本机三列整理短任务，拖动或按钮移动，保存清单。",
+            "module_ids": [
+              "life",
+              "work"
+            ],
+            "sort_order": 159,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-056-chess-v1",
+      "enabled": true,
+      "tools": [
+        {
+          "key": "chess",
+          "title": "一起下一盘国际象棋",
+          "path": "/tools/chess",
+          "item": {
+            "id": "DAILY-056",
+            "title": "一起下一盘国际象棋",
+            "description": "离线同屏双人下棋，保存本次棋谱。",
+            "module_ids": [
+              "life",
+              "creative"
+            ],
+            "sort_order": 160,
+            "hidden": false,
+            "archived": false
+          }
+        }
+      ]
     }
   ]
 }

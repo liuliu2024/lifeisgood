@@ -29,9 +29,16 @@ export const usableTools = [
   { key: "amount-words", path: "/tools/amount-words", title: "把数字写成中文金额", description: "有限数字转中文数字与金额大写，保存TXT和JSON。", repo: "https://github.com/digi3studio/number-to-chinese-words", accepted: true },
   { key: "world-time", path: "/tools/world-time", title: "看看不同时区的时间", description: "换算当地时间与UTC，明确夏令时缺失和重复候选。", repo: "https://github.com/moment/luxon", accepted: true },
   { key: "celebrate", path: "/tools/celebrate", title: "为小小的好事庆祝一下", description: "主动播放短暂庆祝效果，保存祝福PNG静帧。", repo: "https://github.com/catdad/canvas-confetti", accepted: true },
+  {"key": "date-span", "path": "/tools/date-span", "title": "算算两个日期相隔几天", "description": "严格公历日期间隔与加减天数，保存结果。", "repo": "https://github.com/iamkun/dayjs", "accepted": true},
+  {"key": "task-board", "path": "/tools/task-board", "title": "把待办事情排到小看板", "description": "本机三列整理短任务，拖动或按钮移动，保存清单。", "repo": "https://github.com/SortableJS/Sortable", "accepted": true},
+  {"key": "chess", "path": "/tools/chess", "title": "一起下一盘国际象棋", "description": "离线同屏双人下棋，保存本次棋谱。", "repo": "https://github.com/jhlywa/chess.js", "accepted": true},
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  "date-span": {"version": "Day.js 1.11.23 + UTC", "license": "MIT（同项目核心和UTC插件）", "source": "/vendor/dayjs/SOURCE.md", "scope": "1901–2099公历日期/±36500整数天；TXT/JSON，不计算工作日调休或法律期限。"},
+  "task-board": {"version": "SortableJS 1.15.6", "license": "MIT（含内联Babel原文）", "source": "/vendor/sortable/SOURCE.md", "scope": "三列最多50张120字符卡片，拖动/按钮移动与TXT/JSON；刷新离开丢失，非云协作。"},
+  "chess": {"version": "chess.js 1.4.0", "license": "BSD-2-Clause（含Peggy解析器MIT）", "source": "/vendor/chessjs/SOURCE.md", "scope": "离线同屏双人，最多400半回合、PGN/JSON；非AI或联网、非比赛裁判。"},
+
   "amount-words": {version: "number-to-chinese-words 1.0.20", license: "MIT（含内联Babel原声明；小型2018老项目）", source: "/vendor/number-to-chinese-words/SOURCE.md", scope: "12位整数/2小数，不默默舍入；中文数字/金额及TXT/JSON，不承诺银行票据合规。"},
   "world-time": {version: "Luxon 3.7.2", license: "MIT（含改编Moment原许可）", source: "/vendor/luxon/SOURCE.md", scope: "9地区、2000–2035当地时间，缺失时刻拒绝/重复须选UTC；依赖宿主Intl，未来政策未保证。"},
   celebrate: {version: "canvas-confetti 1.9.4", license: "ISC（无运行依赖）", source: "/vendor/canvas-confetti/SOURCE.md", scope: "960×640，主动单轮80粒/最多3秒，24字祝福和PNG；减少动态静态替代，非视频GIF导出。"},

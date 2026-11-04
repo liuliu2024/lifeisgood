@@ -385,5 +385,70 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "短祝福、有限配色与主动播放操作",
     "output": "真实庆祝动效与PNG静帧",
     "integration": "原始本机canvas-confetti，平台背景文字合成和资源清理"
+  },
+  {
+    "id": "DAILY-054",
+    "title": "算算两个日期相隔几天",
+    "description": "严格公历日期间隔与加减天数，保存结果。",
+    "scene": "life",
+    "repo": "https://github.com/iamkun/dayjs",
+    "stars": 48655,
+    "checkedAt": "2026-11-04",
+    "commit": "4549b8d03307891143e8a50d39fcdab1f16f77cf",
+    "license": "MIT（原核心及UTC插件，同一项目）",
+    "chinese": "平台中文公历日期工具，本机计算与TXT/JSON。",
+    "maintenance": "未归档，push2026-09-15；固定1.11.23，源manifest开发版与发布制品区分。",
+    "limitations": [
+      "严格1901–2099年真实公历日期，UTC零点；加减天数为±36500整数，结果仍须在范围内。",
+      "日期差和含首尾日期个数分别显示；不提供调休、工作日、农历或法律期限判断。"
+    ],
+    "status": "research",
+    "input": "两个公历日期或起点与有限整数偏移",
+    "output": "日期结果与TXT/JSON",
+    "integration": "固定Day.js核心及原UTC插件，本机无外部API"
+  },
+  {
+    "id": "DAILY-055",
+    "title": "把待办事情排到小看板",
+    "description": "本机三列整理短任务，拖动或按钮移动，保存清单。",
+    "scene": "life",
+    "repo": "https://github.com/SortableJS/Sortable",
+    "stars": 31208,
+    "checkedAt": "2026-11-04",
+    "commit": "63ecb31937d19fcb30aa924e82ee8a769ef34492",
+    "license": "MIT（Sortable及内联Babel原声明）",
+    "chinese": "中文三列卡片、真实拖动及按钮移动。",
+    "maintenance": "未归档，push2026-03-24；固定sortablejs1.15.6原始浏览器制品。",
+    "limitations": [
+      "最多50张卡、每张1–120 UTF16字符，三列；JSON/TXT各128KiB以内。",
+      "仅页面内临时状态，刷新离开丢失，需主动保存；没有导入、账号协作或云持久化。",
+      "浏览器仿真不等于全部真机触摸或辅助技术保证。"
+    ],
+    "status": "research",
+    "input": "自己的短任务和列/次序操作",
+    "output": "可用任务板与JSON/TXT",
+    "integration": "固定Sortable本地UMD，平台恢复DOM后更新React状态"
+  },
+  {
+    "id": "DAILY-056",
+    "title": "一起下一盘国际象棋",
+    "description": "离线同屏双人下棋，保存本次棋谱。",
+    "scene": "creative",
+    "repo": "https://github.com/jhlywa/chess.js",
+    "stars": 4447,
+    "checkedAt": "2026-11-04",
+    "commit": "ce1ff9e9fc342984ff75ca475ab39f37888cb28a",
+    "license": "BSD-2-Clause（含Peggy生成解析器MIT原文）",
+    "chinese": "中文同屏棋盘、合法着法、升变、撤销和棋谱导出。",
+    "maintenance": "未归档，push2026-08-11；固定chess.js1.4.0原始ESM。",
+    "limitations": [
+      "最多400半回合，刷新丢失；上限是受控模拟验证，不是真实400步压测。",
+      "离线同屏双人，无AI、联网、比赛计时、任意PGN/FEN导入或赛事裁判保证。",
+      "系统Unicode棋子字体因设备而异，真机与所有规则组合未穷尽。"
+    ],
+    "status": "research",
+    "input": "棋盘选格和合法落子操作",
+    "output": "本局状态、PGN/JSON",
+    "integration": "固定chess.js ESM本机执行，系统字体，无模型或网络对战"
   }
 ];
