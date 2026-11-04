@@ -119,6 +119,30 @@
         "key": "text-diff", "title": "看看两段文字哪里不同", "path": "/tools/text-diff",
         "item": {"id": "DAILY-044", "title": "看看两段文字哪里不同", "description": "对照两段文字的增删，保存比较结果。", "module_ids": ["work","life"], "sort_order": 148, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-045-calculator-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "calculator", "title": "把日常小账算清楚", "path": "/tools/calculator",
+        "item": {"id": "DAILY-045", "title": "把日常小账算清楚", "description": "精确计算折扣、单价或分摊，保存计算结果。", "module_ids": ["work","life"], "sort_order": 149, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-046-calendar-v1",
+      "enabled": false,
+      "tools": [{
+        "key": "calendar", "title": "看看农历日期与节气", "path": "/tools/calendar",
+        "item": {"id": "DAILY-046", "title": "看看农历日期与节气", "description": "在本机查看公农历对照，保存自己的月历。", "module_ids": ["life"], "sort_order": 150, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-047-daylight-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "daylight", "title": "看看日出日落的时间", "path": "/tools/daylight",
+        "item": {"id": "DAILY-047", "title": "看看日出日落的时间", "description": "输入日期与经纬度，估算当地的日光时段。", "module_ids": ["life","creative"], "sort_order": 151, "hidden": false, "archived": false}
+      }]
     }
   ]
 }

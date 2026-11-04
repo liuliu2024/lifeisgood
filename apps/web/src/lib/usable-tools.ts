@@ -21,9 +21,13 @@ export const usableTools = [
   { key: "signature", path: "/tools/signature", title: "写下自己的手写签名", description: "在本机手写板留下手迹，下载透明或白底PNG/SVG。", repo: "https://github.com/szimek/signature_pad", accepted: true },
   { key: "sketch-card", path: "/tools/sketch-card", title: "做一张手绘风小卡片", description: "用短文字和手绘形状制作生活卡片，保存PNG/SVG。", repo: "https://github.com/rough-stuff/rough", accepted: true },
   { key: "text-diff", path: "/tools/text-diff", title: "看看两段文字哪里不同", description: "在本机对照文字增删，保存纯文本和JSON结果。", repo: "https://github.com/kpdecker/jsdiff", accepted: true },
+  { key: "calculator", path: "/tools/calculator", title: "把日常小账算清楚", description: "精确计算折扣、单价或分摊，保存TXT和JSON。", repo: "https://github.com/MikeMcl/decimal.js", accepted: true },
+  { key: "daylight", path: "/tools/daylight", title: "看看日出日落的时间", description: "手填日期与经纬度，估算并保存本机日光时段。", repo: "https://github.com/mourner/suncalc", accepted: true },
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  calculator: {version: "decimal.js 10.6.0", license: "MIT（无运行依赖）", source: "/vendor/decimal/SOURCE.md", scope: "有限四则/折扣/单价/1–100人分摊；80有效位，除不尽有界近似，TXT/JSON，不提供税务或交易建议。"},
+  daylight: {version: "SunCalc 1.9.0", license: "BSD-2-Clause（无运行依赖）", source: "/vendor/suncalc/SOURCE.md", scope: "2000–2099手填经纬度/固定UTC偏移，近似日光时段TXT/JSON；无定位、地图或自动夏令时。"},
   signature: {version: "Signature Pad 5.1.3", license: "MIT（无运行依赖）", source: "/vendor/signature-pad/SOURCE.md", scope: "1000×500手迹PNG/SVG；100笔/每笔500点/总5000点，不提供身份验证或法律签章。"},
   "sketch-card": {version: "Rough.js 4.6.6", license: "MIT（内嵌四依赖原文分别保留）", source: "/vendor/rough/SOURCE.md", scope: "两种尺寸、四种形状、1–6装饰与短文字PNG/SVG，不导入照片或任意SVG。"},
   "text-diff": {version: "jsdiff 8.0.2", license: "BSD-3-Clause（字符ESM依赖闭包）", source: "/vendor/jsdiff/SOURCE.md", scope: "每段20000 UTF16/48KiB/1000行，本机Worker字符比较及TXT/JSON；过慢或差异过多终止。"},

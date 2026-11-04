@@ -206,5 +206,49 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "修改前与修改后的两段有限文字",
     "output": "安全增删对照、纯文本及可重建两版的JSON",
     "integration": "本地ModuleWorker导入字符ESM模块，无远程资源"
+  },
+  {
+    "id": "DAILY-045",
+    "title": "把日常小账算清楚",
+    "description": "精确计算折扣、单价或分摊，保存计算结果。",
+    "scene": "life",
+    "repo": "https://github.com/MikeMcl/decimal.js",
+    "stars": 7270,
+    "checkedAt": "2026-11-04",
+    "commit": "1a6e845004b29a3b7dcef78fe92b8d786634f4e2",
+    "license": "MIT（无运行依赖，原文保留）",
+    "chinese": "平台中文有限日常计算封装，不是完整表格或账本。",
+    "maintenance": "仓库未归档，最近push2026-08-30；固定10.6.0，npm gitHead与tag不同，实际源码仅行尾差异，SOURCE明确。",
+    "limitations": [
+      "输入最多24位整数与12位小数，内部80有效位；除不尽为有界近似，不承诺无限精确。",
+      "显示0–12小数，half-up/half-even；分摊限1–100人、总额最多2小数，整数分守恒。",
+      "仅四则、折扣、单价及分摊，不执行表达式、不提供金融税务或交易建议。"
+    ],
+    "status": "research",
+    "input": "有限普通十进制、运算模式与舍入参数",
+    "output": "本次结果预览及TXT/JSON",
+    "integration": "本机原始decimal.js，无服务器或模型调用"
+  },
+  {
+    "id": "DAILY-047",
+    "title": "看看日出日落的时间",
+    "description": "输入日期与经纬度，估算当地的日光时段。",
+    "scene": "life",
+    "repo": "https://github.com/mourner/suncalc",
+    "stars": 3511,
+    "checkedAt": "2026-11-04",
+    "commit": "6bc2757074c1e5eaa2389aa2ab36806f04c6d2a0",
+    "license": "BSD-2-Clause（无运行依赖，原文保留）",
+    "chinese": "中文手填经纬度与时区的本机日光时段封装。",
+    "maintenance": "未归档，最近push2026-10-05；运行固定1.9.0原始制品，不把新主分支说明当固定版全面保证。",
+    "limitations": [
+      "近似天文时刻，不含天气、实际山体遮挡或完整地形模型，不承诺摄影效果或导航用途。",
+      "时区由用户手填UTC偏移，不自动决定夏令时；注意跨日及极昼极夜时没有日出或日落。",
+      "未请求定位、摄像头或地图API；独立样本只说明所测范围，非所有位置日期精度保证。"
+    ],
+    "status": "research",
+    "input": "有限日期、经纬度与明确UTC偏移",
+    "output": "日光时段结果与真实下载",
+    "integration": "本地原始SunCalc计算，无外部定位或运行API"
   }
 ];
