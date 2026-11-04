@@ -18,9 +18,15 @@ export const usableTools = [
   { key: "qr", path: "/tools/qr", title: "做个清楚的二维码", description: "本机生成文字或网址二维码，下载PNG与SVG。", repo: "https://github.com/soldair/node-qrcode", accepted: true },
   { key: "pdf", path: "/tools/pdf", title: "把PDF合起来或取出几页", description: "合并两份PDF或按顺序取页，预览并保存新文件。", repo: "https://github.com/Hopding/pdf-lib", accepted: true },
   { key: "charts", path: "/tools/charts", title: "把数字画成一张图", description: "输入自己的数字，制作柱状、折线或圆环图PNG。", repo: "https://github.com/chartjs/Chart.js", accepted: true },
+  { key: "signature", path: "/tools/signature", title: "写下自己的手写签名", description: "在本机手写板留下手迹，下载透明或白底PNG/SVG。", repo: "https://github.com/szimek/signature_pad", accepted: true },
+  { key: "sketch-card", path: "/tools/sketch-card", title: "做一张手绘风小卡片", description: "用短文字和手绘形状制作生活卡片，保存PNG/SVG。", repo: "https://github.com/rough-stuff/rough", accepted: true },
+  { key: "text-diff", path: "/tools/text-diff", title: "看看两段文字哪里不同", description: "在本机对照文字增删，保存纯文本和JSON结果。", repo: "https://github.com/kpdecker/jsdiff", accepted: true },
 ] as const;
 
 export const toolRuntimeSources: Record<string, {version: string; license: string; source: string; scope?: string}> = {
+  signature: {version: "Signature Pad 5.1.3", license: "MIT（无运行依赖）", source: "/vendor/signature-pad/SOURCE.md", scope: "1000×500手迹PNG/SVG；100笔/每笔500点/总5000点，不提供身份验证或法律签章。"},
+  "sketch-card": {version: "Rough.js 4.6.6", license: "MIT（内嵌四依赖原文分别保留）", source: "/vendor/rough/SOURCE.md", scope: "两种尺寸、四种形状、1–6装饰与短文字PNG/SVG，不导入照片或任意SVG。"},
+  "text-diff": {version: "jsdiff 8.0.2", license: "BSD-3-Clause（字符ESM依赖闭包）", source: "/vendor/jsdiff/SOURCE.md", scope: "每段20000 UTF16/48KiB/1000行，本机Worker字符比较及TXT/JSON；过慢或差异过多终止。"},
   gallery: {version: "Viewer.js 1.11.7", license: "MIT", source: "/vendor/viewer/SOURCE.md"},
   gradient: {version: "chroma.js 3.2.0", license: "BSD-3-Clause AND Apache-2.0", source: "/vendor/chroma/SOURCE.md"},
   contrast: {version: "TinyColor 1.6.0", license: "MIT", source: "/vendor/tinycolor/SOURCE.md"},

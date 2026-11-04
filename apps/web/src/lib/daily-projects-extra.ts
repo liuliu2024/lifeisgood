@@ -139,5 +139,72 @@ export const dailyProjectsExtra: DailyProject[] = [
     "input": "自己的标题、标签数值及柱/线/圆环类型",
     "output": "当前数据图预览与真实PNG",
     "integration": "本地UMD与颜色依赖，无远程资源"
+  },
+  {
+    "id": "DAILY-042",
+    "title": "写下自己的手写签名",
+    "description": "用本机手写板留下手迹，保存透明或白底图片。",
+    "scene": "creative",
+    "repo": "https://github.com/szimek/signature_pad",
+    "stars": 12075,
+    "checkedAt": "2026-11-04",
+    "commit": "b392d1d417a7a2fa21a7f659eb76fddcc2be3fdb",
+    "license": "MIT（无运行依赖，原始许可保留）",
+    "chinese": "本平台中文本机手写板，不是完整签章系统。",
+    "maintenance": "未归档；最近推送2026-10-29；固定运行5.1.3。",
+    "limitations": [
+      "仅手迹图片，不提供身份验证或法律电子签章。",
+      "固定1000×500导出，最多100笔、每笔500点、总5000点；缩放保留已完成笔画，正在画的本笔取消。",
+      "PNG/SVG边缘可能有细微差异；真机触控、打印和全部设备未验。"
+    ],
+    "status": "research",
+    "input": "鼠标或触控合成手迹、有限背景选项",
+    "output": "手迹PNG/SVG预览与真实下载",
+    "integration": "本机固定UMD，不上传或服务器保存"
+  },
+  {
+    "id": "DAILY-043",
+    "title": "做一张手绘风小卡片",
+    "description": "把短文字和手绘形状组合成一张生活卡片。",
+    "scene": "creative",
+    "repo": "https://github.com/rough-stuff/rough",
+    "stars": 21344,
+    "checkedAt": "2026-11-04",
+    "commit": "56a2762171b1294d643501e8d14f120db6b27bd7",
+    "license": "MIT；内嵌hachure-fill/path-data-parser/points-on-curve/points-on-path原文分别保留",
+    "chinese": "本平台有限卡片模板中文封装，不是通用矢量编辑器。",
+    "maintenance": "未归档；最近推送2024-07-28；固定roughjs4.6.6，不称近期活跃。",
+    "limitations": [
+      "限定画布、几何形状、装饰数量和短文；不接任意SVG、HTML、外部图片或链接。",
+      "同一种子和参数可重复生成图形，字体使用本机系统字体，跨设备字形/边缘未保证一致。",
+      "仅生活卡片PNG/SVG，不提供照片拼贴、印刷色彩认证或完整上游编辑器。"
+    ],
+    "status": "research",
+    "input": "短文字、有限形状/配色/种子",
+    "output": "手绘风卡片PNG/SVG",
+    "integration": "本地原始IIFE与内嵌绘制依赖，不调用API"
+  },
+  {
+    "id": "DAILY-044",
+    "title": "看看两段文字哪里不同",
+    "description": "对照两段文字的增删，保存比较结果。",
+    "scene": "life",
+    "repo": "https://github.com/kpdecker/jsdiff",
+    "stars": 9221,
+    "checkedAt": "2026-11-04",
+    "commit": "4f5c473662bedd672809b689771037d5401bdcc6",
+    "license": "BSD-3-Clause；原始字符ESM模块及base依赖闭包",
+    "chinese": "中文本机字符比较界面，保留空格、大小写与换行。",
+    "maintenance": "未归档；最近推送2026-10-30；固定diff8.0.2。",
+    "limitations": [
+      "每段20000 UTF16单位、48KiB UTF8、1000行；差异过多或超时终止，不输出截断结果。",
+      "按Unicode码点比较，不是中文分词、组合字素或语义判断；粘贴行尾按浏览器规则统一。",
+      "Worker隔离，算法1000ms/2000编辑步，主线程2秒终止看门狗；后台计时器可能延迟。",
+      "仅纯文字增删及TXT/JSON，不解析Word/PDF格式或自动改写。"
+    ],
+    "status": "research",
+    "input": "修改前与修改后的两段有限文字",
+    "output": "安全增删对照、纯文本及可重建两版的JSON",
+    "integration": "本地ModuleWorker导入字符ESM模块，无远程资源"
   }
 ];

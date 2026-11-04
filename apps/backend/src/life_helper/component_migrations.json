@@ -95,6 +95,30 @@
         "key": "charts", "title": "把数字画成一张图", "path": "/tools/charts",
         "item": {"id": "DAILY-041", "title": "把数字画成一张图", "description": "输入自己的数据，预览清楚的图表并保存PNG。", "module_ids": ["work","life"], "sort_order": 145, "hidden": false, "archived": false}
       }]
+    },
+    {
+      "id": "daily-042-signature-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "signature", "title": "写下自己的手写签名", "path": "/tools/signature",
+        "item": {"id": "DAILY-042", "title": "写下自己的手写签名", "description": "在本机手写板画下手迹，预览并保存图片。", "module_ids": ["work","life","creative"], "sort_order": 146, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-043-sketch-card-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "sketch-card", "title": "做一张手绘风小卡片", "path": "/tools/sketch-card",
+        "item": {"id": "DAILY-043", "title": "做一张手绘风小卡片", "description": "用短文字和手绘形状制作自己的生活卡片。", "module_ids": ["life","creative"], "sort_order": 147, "hidden": false, "archived": false}
+      }]
+    },
+    {
+      "id": "daily-044-text-diff-v1",
+      "enabled": true,
+      "tools": [{
+        "key": "text-diff", "title": "看看两段文字哪里不同", "path": "/tools/text-diff",
+        "item": {"id": "DAILY-044", "title": "看看两段文字哪里不同", "description": "对照两段文字的增删，保存比较结果。", "module_ids": ["work","life"], "sort_order": 148, "hidden": false, "archived": false}
+      }]
     }
   ]
 }
